@@ -1,0 +1,232 @@
+<!-- ============================================================
+     1. HERO — 2 colonnes : éditorial + packshot bouteille + sceau
+     ============================================================ -->
+<section class="hp-hero">
+  <div class="hp-hero__grid">
+
+    <div class="hp-hero__body">
+      <span class="overline hp-hero__eyebrow reveal">{{ 'hp.hero.overline' | translate }}</span>
+      <h1 class="hp-hero__title reveal">{{ 'hp.hero.title' | translate }}</h1>
+      <p class="hp-hero__text reveal">{{ 'hp.hero.text' | translate }}</p>
+
+      <div class="hp-hero__features reveal">
+        @for (f of $any('hp.hero.features' | translate); track f.label; let i = $index) {
+          <div class="hp-feature">
+            <span class="hp-feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                @switch (f.icon) {
+                  @case ('leaf')    { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+                  @case ('harvest') { <rect x="6" y="8" width="20" height="18" rx="2"/><path d="M6 12h20M11 4v6M21 4v6"/> }
+                  @case ('cold')    { <path d="M16 4v24M6 10l20 12M6 22l20-12"/><path d="M13 6l3 3 3-3M13 26l3-3 3 3M4 13l3 3-3 3M28 13l-3 3 3 3"/> }
+                  @case ('bottle')  { <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/> }
+                }
+              </svg>
+            </span>
+            <span class="hp-feature__label">{{ f.label }}</span>
+          </div>
+        }
+      </div>
+
+      <a class="btn hp-hero__cta reveal" (click)="scrollTo('hp-product')">
+        {{ 'hp.hero.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="hp-hero__visual reveal">
+      <!-- Décor branche d'olivier en filigrane sur le fond blanc -->
+      <svg class="hp-hero__branch" viewBox="0 0 220 240" fill="none" aria-hidden="true">
+        <g stroke="#8A6F2E" stroke-width="1" stroke-linecap="round" opacity="0.35">
+          <path d="M20 220 Q60 160 100 120 T190 30"/>
+          <!-- Feuilles ovales le long de la tige -->
+          <ellipse cx="60"  cy="180" rx="12" ry="4" transform="rotate(-30 60 180)"/>
+          <ellipse cx="85"  cy="150" rx="14" ry="4.5" transform="rotate(-45 85 150)"/>
+          <ellipse cx="110" cy="115" rx="13" ry="4"  transform="rotate(-35 110 115)"/>
+          <ellipse cx="135" cy="85"  rx="15" ry="5"  transform="rotate(-45 135 85)"/>
+          <ellipse cx="160" cy="60"  rx="12" ry="4"  transform="rotate(-40 160 60)"/>
+          <ellipse cx="180" cy="40"  rx="13" ry="4"  transform="rotate(-50 180 40)"/>
+          <ellipse cx="75"  cy="165" rx="11" ry="3.5" transform="rotate(50 75 165)"/>
+          <ellipse cx="100" cy="130" rx="13" ry="4"   transform="rotate(45 100 130)"/>
+          <ellipse cx="125" cy="100" rx="12" ry="4"   transform="rotate(50 125 100)"/>
+          <ellipse cx="150" cy="70"  rx="11" ry="3.5" transform="rotate(45 150 70)"/>
+        </g>
+      </svg>
+
+      <img src="assets/images/Noshuiles/hprmvv.png" alt="Village 1800 High Polyphenols" loading="lazy" />
+
+      <span class="hp-hero__seal" aria-hidden="true">
+        <span class="hp-hero__seal-name">High<br/>Polyphenols</span>
+        <span class="hp-hero__seal-rule"></span>
+        <span class="hp-hero__seal-le">{{ 'hp.hero.badge' | translate }}</span>
+      </span>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ============================================================
+     3. POLYPHENOL PROFILE — fond crème, 3 stats
+     ============================================================ -->
+<section class="hp-profile" id="les-polyphenols">
+  <div class="hp-profile__grid">
+
+    <div class="hp-profile__intro reveal">
+      <span class="overline hp-profile__eyebrow">{{ 'hp.profile.overline' | translate }}</span>
+      <p class="hp-profile__text">{{ 'hp.profile.title' | translate }}</p>
+      <a class="btn hp-profile__cta" (click)="scrollTo('hp-product')">
+        {{ 'hp.profile.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="hp-profile__stats">
+      @for (s of $any('hp.profile.stats' | translate); track s.label; let i = $index) {
+        <article class="hp-stat reveal" [style.--delay]="(i * 100) + 'ms'">
+          <span class="hp-stat__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              @switch (s.icon) {
+                @case ('leaf')   { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+                @case ('atom')   { <circle cx="16" cy="16" r="3"/><ellipse cx="16" cy="16" rx="12" ry="5"/><ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(120 16 16)"/> }
+                @case ('shield') { <path d="M16 4l10 4v9c0 6-5 10-10 11-5-1-10-5-10-11V8l10-4z"/><path d="M11 16l4 4 6-8"/> }
+              }
+            </svg>
+          </span>
+          <div class="hp-stat__value-wrap">
+            <span class="hp-stat__value">{{ s.value }}</span>
+            @if (s.unit) { <span class="hp-stat__unit">{{ s.unit }}</span> }
+          </div>
+          <span class="hp-stat__label">{{ s.label }}</span>
+          <span class="hp-stat__note">{{ s.note }}</span>
+        </article>
+      }
+    </div>
+
+  </div>
+</section>
+ 
+<!-- ============================================================
+     2. WHY POLYPHENOLS ? — bandeau vert sombre, 2 blocs
+     ============================================================ -->
+<section class="hp-why" id="pourquoi-importants">
+  <div class="hp-why__grid">
+
+    <div class="hp-why__left reveal">
+      <h2 class="hp-why__title">{{ 'hp.why.title' | translate }}</h2>
+      <div class="hp-why__pillars">
+        @for (p of $any('hp.why.pillars' | translate); track p.title; let i = $index) {
+          <article class="hp-pillar" [style.--delay]="(i * 90) + 'ms'">
+            <span class="hp-pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                @switch (p.icon) {
+                  @case ('shield')    { <path d="M16 4l10 4v9c0 6-5 10-10 11-5-1-10-5-10-11V8l10-4z"/> }
+                  @case ('heart')     { <path d="M16 26s-8-5-8-12a5 5 0 019-3 5 5 0 019 3c0 7-8 12-8 12z"/><path d="M12 15h2l1-2 2 4 1-2h4"/> }
+                  @case ('hourglass') { <path d="M8 4h16M8 28h16M10 4v4c0 4 6 6 6 8s-6 4-6 8v4M22 4v4c0 4-6 6-6 8s6 4 6 8v4"/> }
+                  @case ('flask')     { <path d="M12 4v9L6 24a2 2 0 001.8 3h16.4a2 2 0 001.8-3L20 13V4"/><path d="M10 4h12M9 18h14"/> }
+                }
+              </svg>
+            </span>
+            <h3 class="hp-pillar__title">{{ p.title }}</h3>
+            <p class="hp-pillar__text">{{ p.text }}</p>
+          </article>
+        }
+        <p class="hp-why__disclaimer">
+          *Rituel quotidien de longévité • Prenez 1 cuillère à soupe par jour comme « dose phénolique » pour un soutien vasculaire à long terme
+        </p>
+      </div>
+    </div>
+
+    <div class="hp-why__right reveal">
+      <h2 class="hp-why__title">{{ 'hp.different.title' | translate }}</h2>
+      <ol class="hp-why__steps">
+        @for (s of $any('hp.different.steps' | translate); track s.num; let i = $index) {
+          <li class="hp-step" [style.--delay]="(i * 90) + 'ms'">
+            <span class="hp-step__num">{{ s.num }}</span>
+            <div class="hp-step__body">
+              <span class="hp-step__title">{{ s.title }}</span>
+              <span class="hp-step__text">{{ s.text }}</span>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!--  ============================================================
+     5. PRODUIT — packshot bouteille + fiche produit
+     ============================================================ -->
+<!-- <section class="hp-product" [id]="'hp-product'">
+  <div class="hp-product__grid">
+
+    <div class="hp-product__visual reveal">
+      <img src="assets/images/photos/hprmv.png" alt="Village 1800 High Polyphenols" loading="lazy" />
+    </div>
+
+    <div class="hp-product__body">
+      <span class="hp-product__brand reveal">
+        {{ 'hp.product.brand' | translate }}
+        <span class="hp-product__brand-rule" aria-hidden="true"></span>
+      </span>
+      <h2 class="hp-product__title reveal">{{ 'hp.product.title' | translate }}</h2>
+      <p class="hp-product__subtitle reveal">{{ 'hp.product.subtitle' | translate }}</p>
+      <p class="hp-product__text reveal">{{ 'hp.product.text' | translate }}</p>
+
+      <div class="hp-product__specs reveal">
+        @for (sp of $any('hp.product.specs' | translate); track sp.label) {
+          <div class="hp-spec">
+            <span class="hp-spec__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                @switch (sp.icon) {
+                  @case ('bottle') { <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/> }
+                  @case ('flag')   { <path d="M8 4v24M8 5h16l-3 5 3 5H8"/> }
+                  @case ('drop')   { <path d="M16 4c-4 6-6 10-6 14a6 6 0 0012 0c0-4-2-8-6-14z"/> }
+                }
+              </svg>
+            </span>
+            <span class="hp-spec__label">{{ sp.label }}</span>
+          </div>
+        }
+      </div>
+
+      <a class="btn hp-product__cta reveal" routerLink="/nos-cuvees">
+        {{ 'hp.product.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+  </div>
+</section>  -->
+
+<!-- ============================================================
+     6. DÉCOUVREZ NOS CUVÉES — 3 tuiles colorées
+     ============================================================ -->
+<section class="hp-cuvees" id="cuvees-hp">
+  <header class="hp-cuvees__head reveal">
+    <span class="hp-cuvees__rule" aria-hidden="true"></span>
+    <h2 class="hp-cuvees__title">{{ 'hp.cuvees.title' | translate }}</h2>
+    <span class="hp-cuvees__rule" aria-hidden="true"></span>
+  </header>
+
+  <div class="hp-cuvees__grid">
+    @for (c of $any('hp.cuvees.items' | translate); track c.slug; let i = $index) {
+      <article class="hp-cuvee reveal" [class]="'hp-cuvee--' + c.theme" [style.--delay]="(i * 120) + 'ms'">
+        <div class="hp-cuvee__visual">
+          <img [src]="cuveeImage(c.slug)" [alt]="c.name" loading="lazy" />
+        </div>
+        <div class="hp-cuvee__body">
+          <h3 class="hp-cuvee__name">{{ c.name }}</h3>
+          <span class="hp-cuvee__harvest">{{ c.harvest }}</span>
+          <p class="hp-cuvee__text">{{ c.text }}</p>
+          <a class="btn hp-cuvee__cta" [routerLink]="['/nos-cuvees', c.slug]">
+            {{ c.cta }} <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    }
+  </div>
+</section>

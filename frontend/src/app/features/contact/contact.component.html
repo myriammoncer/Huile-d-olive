@@ -1,0 +1,136 @@
+<!-- ============================================================
+     CONTACT — version minimaliste claire
+     Hero éditorial sobre + coordonnées + formulaire
+     ============================================================ -->
+<main class="ct">
+
+  <!-- ===== HERO — en-tête sobre centré ===== -->
+  <section class="ct-hero">
+    <div class="ct-hero__inner">
+      <span class="ct-hero__eyebrow reveal">{{ 'contact.overline' | translate }}</span>
+      <h1 class="ct-hero__title reveal">{{ 'contact.title' | translate }}</h1>
+      <span class="ct-hero__rule reveal" aria-hidden="true"></span>
+      <p class="ct-hero__text reveal">{{ 'contact.text' | translate }}</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTENU — coordonnées + formulaire ===== -->
+  <section class="ct-main">
+    <div class="ct-main__grid">
+
+      <!-- Colonne gauche : coordonnées -->
+      <aside class="ct-info reveal">
+        <h2 class="ct-info__title">{{ 'contact.infoTitle' | translate }}</h2>
+        <span class="ct-info__rule" aria-hidden="true"></span>
+
+        <ul class="ct-info__list">
+          <li class="ct-info-row">
+            <span class="ct-info-row__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4a8 8 0 018 8c0 6-8 16-8 16S8 18 8 12a8 8 0 018-8z"/><circle cx="16" cy="12" r="3"/>
+              </svg>
+            </span>
+            <div>
+              <span class="ct-info-row__label">{{ 'contact.addressLabel' | translate }}</span>
+              <span class="ct-info-row__value">{{ 'contact.address' | translate }}</span>
+            </div>
+          </li>
+
+          <li class="ct-info-row">
+            <span class="ct-info-row__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 10c0-2 2-4 4-4h1l3 6-3 2a12 12 0 006 6l2-3 6 3v1c0 2-2 4-4 4h-1C11 25 7 21 6 11z"/>
+              </svg>
+            </span>
+            <div>
+              <span class="ct-info-row__label">{{ 'contact.phoneLabel' | translate }}</span>
+              <span class="ct-info-row__value">
+                <a href="tel:{{ 'contact.phone1' | translate }}">{{ 'contact.phone1' | translate }}</a><br/>
+                <a href="tel:{{ 'contact.phone2' | translate }}">{{ 'contact.phone2' | translate }}</a>
+              </span>
+            </div>
+          </li>
+
+          <li class="ct-info-row">
+            <span class="ct-info-row__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 8h24v18H4z"/><path d="M4 8l12 10L28 8"/>
+              </svg>
+            </span>
+            <div>
+              <span class="ct-info-row__label">{{ 'contact.emailLabel' | translate }}</span>
+              <a class="ct-info-row__value" href="mailto:{{ 'contact.email' | translate }}">{{ 'contact.email' | translate }}</a>
+            </div>
+          </li>
+
+          <li class="ct-info-row">
+            <span class="ct-info-row__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="16" r="12"/><path d="M16 8v8l6 4"/>
+              </svg>
+            </span>
+            <div>
+              <span class="ct-info-row__label">{{ 'contact.hoursLabel' | translate }}</span>
+              <span class="ct-info-row__value" [innerText]="'contact.hoursValue' | translate"></span>
+            </div>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Colonne droite : formulaire -->
+      <form class="ct-form reveal" [formGroup]="form" (ngSubmit)="submit()" autocomplete="on">
+        <div class="ct-form__head">
+          <span class="ct-form__eyebrow">— {{ 'contact.headline' | translate }}</span>
+          <p class="ct-form__text">{{ 'contact.headlineText' | translate }}</p>
+        </div>
+
+        <div class="ct-form__fields">
+          <div class="ct-field">
+            <label for="name">{{ 'contact.form.name' | translate }} <span>*</span></label>
+            <input id="name" type="text" formControlName="name" [class.is-invalid]="invalid('name')" />
+          </div>
+
+          <div class="ct-field">
+            <label for="email">{{ 'contact.form.email' | translate }} <span>*</span></label>
+            <input id="email" type="email" formControlName="email" [class.is-invalid]="invalid('email')" autocomplete="email" />
+          </div>
+
+          <div class="ct-field ct-field--full">
+            <label for="subject">{{ 'contact.form.subject' | translate }}</label>
+            <input id="subject" type="text" formControlName="subject" />
+          </div>
+
+          <div class="ct-field ct-field--full">
+            <label for="message">{{ 'contact.form.message' | translate }} <span>*</span></label>
+            <textarea id="message" rows="5" formControlName="message" [class.is-invalid]="invalid('message')"></textarea>
+          </div>
+        </div>
+
+        <!-- Honeypot invisible pour anti-spam -->
+        <div class="ct-honeypot" aria-hidden="true">
+          <label for="website">Website</label>
+          <input id="website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="ct-form__foot">
+          <button class="ct-form__submit" type="submit" [disabled]="status() === 'sending'">
+            @if (status() === 'sending') {
+              {{ 'contact.form.sending' | translate }}
+            } @else {
+              {{ 'contact.form.send' | translate }}
+              <span aria-hidden="true">→</span>
+            }
+          </button>
+
+          @if (status() === 'success') {
+            <span class="ct-form__msg ct-form__msg--ok">✓ {{ 'contact.form.success' | translate }}</span>
+          } @else if (status() === 'error') {
+            <span class="ct-form__msg ct-form__msg--err">✕ {{ 'contact.form.error' | translate }}</span>
+          }
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+</main>

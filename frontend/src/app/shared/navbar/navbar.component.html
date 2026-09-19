@@ -1,0 +1,132 @@
+<header class="nav"
+        [class.nav--scrolled]="scrolled()"
+        [class.nav--transparent]="isTransparent()"
+        (mouseleave)="onLeave()">
+  <div class="nav__bar">
+
+    <!-- Logo à l'extrémité gauche -->
+    <a class="nav__logo" routerLink="/" aria-label="Village 1800" (click)="closeMobile()">
+      <img src="assets/images/logo-wordmark.svg" alt="Village 1800" />
+    </a>
+
+    <!-- Menu desktop au centre -->
+    <nav class="nav__menu" [class.nav__menu--any-open]="hovered() !== null">
+      <ul class="nav__list">
+        @for (item of items; track item.key) {
+          <li class="nav__item"
+              (mouseenter)="onEnter(item)"
+              (focusin)="onEnter(item)">
+            <a class="nav__link"
+               [routerLink]="item.link"
+               routerLinkActive="is-active"
+               [routerLinkActiveOptions]="{ exact: item.link === '/' }"
+               [class.is-hovered]="hovered()?.key === item.key">
+              {{ ('nav.' + item.key) | translate }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Cluster droit : Contact + FR/EN + Burger -->
+    <div class="nav__actions">
+      <a class="btn btn--solid nav__cta" routerLink="/contact">
+        {{ 'nav.contact' | translate }}
+      </a>
+
+      <div class="lang" role="group" [attr.aria-label]="'lang.switch' | translate">
+        <button type="button" class="lang__btn" [class.is-on]="lang.current() === 'fr'"
+                (click)="setLang('fr')">FR</button>
+        <span class="lang__sep" aria-hidden="true">/</span>
+        <button type="button" class="lang__btn" [class.is-on]="lang.current() === 'en'"
+                (click)="setLang('en')">EN</button>
+      </div>
+
+      <button type="button" class="burger" [class.is-open]="mobileOpen()"
+              (click)="toggleMobile()"
+              [attr.aria-label]="(mobileOpen() ? 'nav.close' : 'nav.menu') | translate"
+              [attr.aria-expanded]="mobileOpen()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ MEGA-MENU (descend du navbar) ============ -->
+  <div class="nav__mega"
+       [class.is-visible]="hovered() !== null && subitems().length > 0"
+       (mouseenter)="keepOpen()"
+       (mouseleave)="onLeave()">
+    @if (hovered(); as h) {
+      <div class="container nav__mega-inner">
+        <div class="nav__mega-head">
+          <span class="overline">{{ ('nav.' + h.key) | translate }}</span>
+          <span class="nav__mega-rule"></span>
+        </div>
+        <ul class="nav__mega-list">
+          @for (s of subitems(); track $index; let i = $index) {
+            @if (s.isHeading) {
+              <li class="nav__mega-heading" [style.--delay]="(i * 40) + 'ms'">
+                <a href="#" (click)="goToAnchor(h.link, s.anchor, $event)">
+                  <span class="nav__mega-heading-label">{{ s.label }}</span>
+                </a>
+              </li>
+            } @else if (s.child) {
+              <li class="nav__mega-item nav__mega-item--child" [style.--delay]="(i * 40) + 'ms'">
+                <a href="#" (click)="goToAnchor(h.link, s.anchor, $event)">
+                  <span class="nav__mega-dot" aria-hidden="true">·</span>
+                  <span class="nav__mega-label">{{ s.label }}</span>
+                  <span class="nav__mega-arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            } @else {
+              <li class="nav__mega-item" [style.--delay]="(i * 40) + 'ms'">
+                <a href="#" (click)="goToAnchor(h.link, s.anchor, $event)">
+                  <span class="nav__mega-index">0{{ i + 1 }}</span>
+                  <span class="nav__mega-label">{{ s.label }}</span>
+                  <span class="nav__mega-arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            }
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" [class.is-open]="mobileOpen()">
+  <ul class="mobile-menu__list">
+    @for (item of items; track item.key) {
+      <li class="mobile-menu__item">
+        <button type="button" class="mobile-menu__row" (click)="toggleMobileItem(item.key)">
+          <span>{{ ('nav.' + item.key) | translate }}</span>
+          <span class="mobile-menu__chev" [class.is-open]="mobileOpenItem() === item.key">+</span>
+        </button>
+        <ul class="mobile-menu__sub" [class.is-open]="mobileOpenItem() === item.key">
+          <li>
+            <a [routerLink]="item.link" (click)="closeMobile()">
+              {{ ('nav.' + item.key) | translate }} — {{ 'common.discover' | translate }}
+            </a>
+          </li>
+          @for (s of submenuFor(item.key); track s.anchor) {
+            <li>
+              <a href="#" (click)="goToAnchor(item.link, s.anchor, $event)">{{ s.label }}</a>
+            </li>
+          }
+        </ul>
+      </li>
+    }
+    <li class="mobile-menu__item">
+      <a class="mobile-menu__cta btn btn--solid" routerLink="/contact" (click)="closeMobile()">
+        {{ 'nav.contact' | translate }}
+      </a>
+    </li>
+  </ul>
+
+  <div class="mobile-menu__lang" role="group">
+    <button type="button" [class.is-on]="lang.current() === 'fr'" (click)="setLang('fr')">FR</button>
+    <span aria-hidden="true">/</span>
+    <button type="button" [class.is-on]="lang.current() === 'en'" (click)="setLang('en')">EN</button>
+  </div>
+</div>

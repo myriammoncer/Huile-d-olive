@@ -1,0 +1,361 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host { display: block; }
+
+// ===== HERO : bandeau éditorial =====
+.stats-hero {
+  background: $white;
+  border: 1px solid $ink-line;
+  border-radius: $radius-md;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: 1.6rem;
+  box-shadow: $shadow-soft;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid $ink-line;
+  }
+
+  &__eyebrow {
+    font-family: $font-sans;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: $olive-deep;
+    margin-bottom: 0.6rem;
+  }
+
+  &__num {
+    font-family: $font-serif;
+    font-size: clamp(4rem, 9vw, 6.5rem);
+    font-weight: 500;
+    color: $ink;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  &__label {
+    font-family: $font-serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: $ink-mute;
+    margin-top: 0.3rem;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    padding-top: 1.6rem;
+    flex-wrap: wrap;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 90px;
+  }
+
+  &__stat-num {
+    font-family: $font-serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 500;
+    color: $olive-dark;
+    line-height: 1;
+  }
+
+  &__stat-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: $ink-mute;
+    margin-top: 0.5rem;
+  }
+
+  &__sep {
+    width: 1px;
+    height: 42px;
+    background: $ink-line;
+    @include until($bp-tablet) { display: none; }
+  }
+}
+
+// ===== Blocs de section =====
+.stats-block {
+  background: $white;
+  border: 1px solid $ink-line;
+  border-radius: $radius-md;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  margin-bottom: 1.6rem;
+  box-shadow: $shadow-soft;
+
+  &__head {
+    margin-bottom: 1.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $ink-line;
+  }
+
+  &__eyebrow {
+    display: block;
+    font-family: $font-sans;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: $olive-deep;
+    margin-bottom: 0.4rem;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    font-weight: 500;
+    color: $ink;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+}
+
+// ===== Grille éditoriale 2 colonnes =====
+.stats-grid {
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: 1fr;
+  @include from($bp-tablet) { grid-template-columns: 1fr 1fr; }
+
+  .stats-block { margin-bottom: 0; }
+}
+
+// ===== Classement (menu style éditorial) =====
+.stats-rank {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  &__item {
+    display: grid;
+    grid-template-columns: 1.8rem 1fr auto auto;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.7rem 0.2rem;
+    border-bottom: 1px dashed rgba($ink-line, 0.6);
+    transition: background 0.15s ease;
+    &:hover { background: rgba($ivory, 0.5); }
+    &:last-child { border-bottom: 0; }
+  }
+
+  &__pos {
+    font-family: $font-serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: $olive-deep;
+    text-align: right;
+  }
+
+  &__label {
+    font-family: $font-sans;
+    font-size: 0.98rem;
+    color: $ink;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__sub {
+    font-style: italic;
+    color: $ink-mute;
+    font-size: 0.82rem;
+  }
+
+  &__dots {
+    display: block;
+    border-bottom: 1px dotted $ink-line;
+    min-width: 20px;
+    align-self: end;
+    margin-bottom: 0.35rem;
+  }
+
+  &__val {
+    font-family: $font-serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: $olive-dark;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+}
+
+// ===== Sparkline redessiné =====
+.stats-spark {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 200px;
+  padding: 0.5rem 0.2rem 0;
+  overflow-x: auto;
+
+  &__col {
+    flex: 1 0 26px;
+    min-width: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+
+    &:hover .stats-spark__bar {
+      background: $olive-dark;
+    }
+    &:hover .stats-spark__val {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__val {
+    font-family: $font-serif;
+    font-size: 0.85rem;
+    color: $olive-dark;
+    font-variant-numeric: tabular-nums;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    line-height: 1;
+  }
+
+  &__bar {
+    width: 100%;
+    min-height: 3px;
+    background: linear-gradient(180deg, $olive-light, $olive);
+    border-radius: 2px 2px 0 0;
+    transition: background 0.2s ease;
+  }
+
+  &__day {
+    font-size: 0.66rem;
+    color: $ink-mute;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+}
+
+// ===== Appareil / navigateur — chips =====
+.stats-donut {
+  margin-bottom: 1.6rem;
+  &:last-child { margin-bottom: 0; }
+
+  &__title {
+    display: block;
+    font-family: $font-sans;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: $ink-mute;
+    margin-bottom: 0.9rem;
+  }
+}
+
+.stats-chips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.stats-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid $ink-line;
+  border-radius: $radius-pill;
+  background: $white;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: $olive;
+    background: rgba($olive-mist, 0.35);
+  }
+
+  &__label {
+    font-family: $font-sans;
+    font-size: 0.88rem;
+    color: $ink-soft;
+  }
+
+  &__val {
+    font-family: $font-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: $olive-dark;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// ===== Journal (table) =====
+.stats-log {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $font-sans;
+
+  thead th {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: $ink-mute;
+    font-weight: 500;
+    border-bottom: 1px solid $ink-line;
+  }
+
+  tbody tr {
+    transition: background 0.15s ease;
+    &:hover { background: rgba($ivory, 0.5); }
+  }
+
+  tbody td {
+    padding: 0.9rem 0.8rem;
+    font-size: 0.9rem;
+    color: $ink-soft;
+    border-bottom: 1px dashed rgba($ink-line, 0.6);
+    vertical-align: top;
+  }
+
+  &__date {
+    font-variant-numeric: tabular-nums;
+    color: $ink;
+    white-space: nowrap;
+    font-size: 0.85rem;
+  }
+
+  &__place {
+    display: block;
+    font-family: $font-serif;
+    font-size: 1rem;
+    color: $ink;
+    line-height: 1.2;
+  }
+
+  &__country {
+    display: block;
+    font-size: 0.78rem;
+    color: $ink-mute;
+    font-style: italic;
+    margin-top: 0.15rem;
+  }
+}

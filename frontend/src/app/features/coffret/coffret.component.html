@@ -1,0 +1,78 @@
+<!-- ============================================================
+     COFFRET CADEAU — Refonte v3 (éditorial statique, sans animation)
+     Hero + 3 coffrets : Signature · Curubis · Neapolis
+     ============================================================ -->
+<main class="cf">
+
+  <!-- ===== 1. HERO — split éditorial + photo (style aligné aux autres pages) ===== -->
+  <section class="cf-hero" aria-labelledby="cf-hero-title">
+    <div class="cf-hero__grid">
+
+      <div class="cf-hero__body">
+        <span class="cf-hero__eyebrow">{{ 'coffret.eyebrow' | translate }} —</span>
+        <h1 class="cf-hero__title" id="cf-hero-title">{{ 'coffret.title' | translate }}</h1>
+        <div class="cf-hero__lead" [innerHTML]="'coffret.lead' | translate"></div>
+      </div>
+
+      <div class="cf-hero__visual">
+        <img [src]="heroImage" [alt]="'coffret.title' | translate" loading="lazy" />
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== 2. LES 3 COFFRETS — grille éditoriale ===== -->
+  <section class="cf-boxes" aria-label="Nos coffrets">
+    <div class="cf-boxes__inner">
+
+      @for (b of $any('coffret.boxes' | translate); track b.slug) {
+        <article class="cf-card" [attr.data-slug]="b.slug">
+
+          <div class="cf-card__media">
+            <img [src]="coffretImage(b.slug)" [alt]="b.name" loading="lazy" />
+            <span class="cf-card__chip">{{ b.chip }}</span>
+          </div>
+
+          <div class="cf-card__body">
+            <span class="cf-card__eyebrow">{{ b.eyebrow }}</span>
+            <h2 class="cf-card__name">{{ b.name }}</h2>
+            <span class="cf-card__rule" aria-hidden="true"></span>
+            <p class="cf-card__text">{{ b.text }}</p>
+
+            <dl class="cf-card__specs">
+              <div class="cf-card__spec">
+                <dt>{{ 'coffret.contentLabel' | translate }}</dt>
+                <dd>{{ b.content }}</dd>
+              </div>
+              @if (b.variants) {
+                <div class="cf-card__spec">
+                  <dt>{{ 'coffret.variantsLabel' | translate }}</dt>
+                  <dd class="cf-card__variants">{{ b.variants }}</dd>
+                </div>
+              }
+            </dl>
+          </div>
+
+        </article>
+      }
+
+    </div>
+  </section>
+
+
+  <!-- ===== 3. CTA — bande horizontale compacte ===== -->
+  <section class="cf-cta" aria-labelledby="cf-cta-title">
+    <div class="cf-cta__inner">
+      <div class="cf-cta__text">
+        <span class="cf-cta__eyebrow">{{ 'coffret.cta.eyebrow' | translate }}</span>
+        <h2 class="cf-cta__title" id="cf-cta-title">{{ 'coffret.cta.title' | translate }}</h2>
+      </div>
+      <a class="cf-cta__btn" routerLink="/contact">
+        {{ 'coffret.cta.button' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+</main>

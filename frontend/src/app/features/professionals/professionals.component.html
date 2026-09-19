@@ -1,0 +1,190 @@
+<!-- ============================================================
+     1. HERO — bandeau navy sombre : éditorial + photo bidons
+     ============================================================ -->
+<section class="pr-hero">
+  <div class="pr-hero__grid">
+
+    <div class="pr-hero__body">
+      <span class="pr-hero__eyebrow reveal">{{ 'pro.hero.overline' | translate }} —</span>
+      <h1 class="pr-hero__title reveal">{{ 'pro.hero.title' | translate }}</h1>
+      <p class="pr-hero__text reveal">{{ 'pro.hero.text' | translate }}</p>
+
+      <div class="pr-hero__badges reveal">
+        @for (b of $any('pro.hero.badges' | translate); track b.label) {
+          <div class="pr-badge">
+            <span class="pr-badge__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                @switch (b.icon) {
+                  @case ('chef')     { <path d="M10 12a5 5 0 0112 0M11 12v8h10v-8M13 20v6h6v-6"/><path d="M9 12a3 3 0 010-6"/> }
+                  @case ('shop')     { <path d="M6 8h20l-2 6H8zM6 14v12h20V14M11 20h4M17 20h4"/> }
+                  @case ('building') { <rect x="6" y="6" width="20" height="22" rx="1"/><path d="M11 10h2M11 14h2M11 18h2M19 10h2M19 14h2M19 18h2M14 28v-6h4v6"/> }
+                  @case ('hotel')    { <path d="M4 26h24M8 12h16M6 26V10M26 26V10M12 26v-4h8v4M12 15h3M17 15h3"/> }
+                }
+              </svg>
+            </span>
+            <span class="pr-badge__label" [innerText]="b.label"></span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="pr-hero__visual reveal">
+      <img [src]="heroImage" alt="Bidons 3L et 5L Village 1800" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. FORMATS — 3L (vert) et 5L (bordeaux) en 2 colonnes
+     ============================================================ -->
+<section class="pr-formats" id="nos-formats">
+  <header class="pr-formats__head reveal">
+    <span class="pr-formats__rule" aria-hidden="true"></span>
+    <h2 class="pr-formats__title">{{ 'pro.formats.title' | translate }}</h2>
+    <span class="pr-formats__rule" aria-hidden="true"></span>
+  </header>
+
+  <!-- Layout : photo 3L · 4 points communs au centre · photo 5L -->
+  <div class="pr-formats__grid">
+    <div class="pr-formats__can pr-formats__can--left">
+      <img [src]="formatImage('3L')" alt="Bidon 3L" loading="lazy" />
+      <span class="pr-formats__size pr-formats__size--green"></span>
+    </div>
+
+    <ul class="pr-formats__shared reveal">
+      @for (item of $any('pro.formats.sharedFeatures' | translate); track item) {
+        <li>
+          <span class="pr-formats__check" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12l6 6L20 6"/>
+            </svg>
+          </span>
+          <span>{{ item }}</span>
+        </li>
+      }
+    </ul>
+
+    <div class="pr-formats__can pr-formats__can--right">
+      <img [src]="formatImage('5L')" alt="Bidon 5L" loading="lazy" />
+      <span class="pr-formats__size pr-formats__size--bordeaux"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2 bis. DISTRIBUTEURS & PARTENAIRES — split : photo + éditorial + CTA
+     ============================================================ -->
+<section class="pr-partners" id="distributeurs">
+  <div class="pr-partners__grid">
+    <div class="pr-partners__visual reveal">
+      <img [src]="partnersImage" alt="Partenariat VILLAGE 1800" loading="lazy" />
+    </div>
+
+    <div class="pr-partners__body">
+      <span class="pr-partners__eyebrow reveal">— {{ 'pro.partners.overline' | translate }}</span>
+      <h2 class="pr-partners__title reveal">{{ 'pro.partners.title' | translate }}</h2>
+      <span class="pr-partners__rule" aria-hidden="true"></span>
+      <p class="pr-partners__text reveal">{{ 'pro.partners.text' | translate }}</p>
+
+      <div class="pr-partners__actions reveal">
+        <a class="pr-partners__cta pr-partners__cta--primary" routerLink="/contact">
+          Prendre rendez-vous
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="pr-partners__cta pr-partners__cta--secondary" href="mailto:contact@village-1800.com">
+          Nous contacter
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. PILIERS — bandeau vert sombre, 4 colonnes
+     ============================================================ -->
+<section class="pr-pillars">
+  <div class="pr-pillars__grid">
+    @for (p of $any('pro.pillars' | translate); track p.title; let i = $index) {
+      <article class="pr-pillar reveal" [style.--delay]="(i * 100) + 'ms'">
+        <span class="pr-pillar__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            @switch (p.icon) {
+              @case ('shield')      { <path d="M16 4l10 4v9c0 6-5 10-10 11-5-1-10-5-10-11V8l10-4z"/><path d="M11 16l4 4 6-8"/> }
+              @case ('drop')        { <path d="M16 4c-4 6-6 10-6 14a6 6 0 0012 0c0-4-2-8-6-14z"/> }
+              @case ('thermometer') { <path d="M14 6a2 2 0 014 0v14a4 4 0 11-4 0z"/><circle cx="16" cy="22" r="2.5"/> }
+              @case ('handshake')   { <path d="M4 16l6-6 4 4M28 16l-6-6-4 4"/><path d="M4 16l6 6 4-4M28 16l-6 6-4-4"/> }
+            }
+          </svg>
+        </span>
+        <h3 class="pr-pillar__title">{{ p.title }}</h3>
+        <p class="pr-pillar__text">{{ p.text }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     4. OFFRE — split : intro + photo lifestyle chef
+     ============================================================ -->
+<section class="pr-offer" id="un-choix">
+  <div class="pr-offer__grid">
+    <div class="pr-offer__body">
+      <span class="pr-offer__eyebrow reveal">{{ 'pro.offer.overline' | translate }} —</span>
+      <h2 class="pr-offer__title reveal">{{ 'pro.offer.title' | translate }}</h2>
+      <p class="pr-offer__text reveal">{{ 'pro.offer.text' | translate }}</p>
+      <a class="pr-offer__cta reveal" routerLink="/contact">
+        {{ 'pro.offer.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <!-- <div class="pr-offer__visual reveal">
+      <img [src]="offerImage" alt="Chef en cuisine" loading="lazy" />
+    </div> -->
+  </div>
+</section>
+
+<!-- ============================================================
+     5. CONTACT — bandeau cream avec 3 blocs + CTA
+     ============================================================ -->
+<section class="pr-contact">
+  <div class="pr-contact__grid">
+
+    <div class="pr-contact__intro reveal">
+      <span class="pr-contact__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8h24v18H4z"/><path d="M4 8l12 10L28 8"/>
+        </svg>
+      </span>
+      <div>
+        <h3 class="pr-contact__title">{{ 'pro.contact.title' | translate }}</h3>
+        <p class="pr-contact__text">{{ 'pro.contact.text' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="pr-contact__info reveal">
+      <span class="pr-contact__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 10c0-2 2-4 4-4h1l3 6-3 2a12 12 0 006 6l2-3 6 3v1c0 2-2 4-4 4h-1C11 25 7 21 6 11z"/>
+        </svg>
+      </span>
+      <span class="pr-contact__value" [innerText]="'pro.contact.phones' | translate"></span>
+    </div>
+
+    <div class="pr-contact__info reveal">
+      <span class="pr-contact__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8h24v18H4z"/><path d="M4 8l12 10L28 8"/>
+        </svg>
+      </span>
+      <a class="pr-contact__value" href="mailto:contact@village-1800.com">{{ 'pro.contact.email' | translate }}</a>
+    </div>
+
+    <a class="pr-contact__cta reveal" routerLink="/contact">
+      {{ 'pro.contact.cta' | translate }}
+      <span aria-hidden="true">→</span>
+    </a>
+
+  </div>
+</section>

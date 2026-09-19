@@ -1,0 +1,729 @@
+// ============================================================
+//  VILLAGE 1800 — Styles globaux (REDESIGN v2)
+//  Fond blanc · tons terre · vert olive accent · UI premium claire
+// ============================================================
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+@use 'styles/admin';
+
+// --- Variables CSS runtime (theming par gamme via --accent) ---
+:root {
+  --white:        #{$white};
+  --paper:        #{$paper};
+  --ivory:        #{$ivory};
+  --sand:         #{$sand};
+  --stone:        #{$stone};
+
+  --beige:        #{$beige};
+  --ocre-light:   #{$ocre-light};
+  --ocre:         #{$ocre};
+  --ocre-deep:    #{$ocre-deep};
+  --brown-soft:   #{$brown-soft};
+  --brown:        #{$brown};
+
+  --olive-mist:   #{$olive-mist};
+  --olive-light:  #{$olive-light};
+  --olive:        #{$olive};
+  --olive-deep:   #{$olive-deep};
+  --olive-dark:   #{$olive-dark};
+
+  --ink:          #{$ink};
+  --ink-soft:     #{$ink-soft};
+  --ink-mute:     #{$ink-mute};
+  --ink-line:     #{$ink-line};
+
+  // Accent principal — surchargé par les classes .theme-*
+  --accent:        #{$olive};
+  --accent-soft:   #{$olive-mist};
+  --accent-deep:   #{$olive-deep};
+  --accent-glow:   rgba(#{red($olive)}, #{green($olive)}, #{blue($olive)}, 0.35);
+
+  --font-serif:   #{$font-serif};
+  --font-sans:    #{$font-sans};
+  --nav-height:   #{$nav-height};
+
+  --shadow-soft:   #{$shadow-soft};
+  --shadow-medium: #{$shadow-medium};
+  --shadow-deep:   #{$shadow-deep};
+  --shadow-olive:  #{$shadow-olive};
+
+  // Legacy aliases (compat composants existants)
+  --cream:       var(--paper);
+  --cream-soft:  var(--ivory);
+  --cream-warm:  var(--stone);
+  --gold-light:  var(--ocre-light);
+  --gold-mid:    var(--ocre);
+  --gold-deep:   var(--ocre-deep);
+  --gold-rich:   var(--brown-soft);
+  --black-deep:  var(--ink);
+  --black-soft:  var(--ink-soft);
+  --shadow-gold: var(--shadow-olive);
+}
+
+// --- Thèmes par CUVÉE (halo signature derrière la bouteille) ---
+// Palette finale : Olive Green · Deep Navy · Deep Burgundy
+.theme-intense  { --accent: #{$accent-intense}; --accent-glow: rgba(32, 58, 29, 0.28); }
+.theme-medium   { --accent: #{$accent-medium};  --accent-glow: rgba(22, 38, 55, 0.28); }
+.theme-mild     { --accent: #{$accent-mild};    --accent-glow: rgba(75, 30, 30, 0.28); }
+.theme-hp       { --accent: #{$accent-hp};      --accent-glow: rgba(32, 58, 29, 0.30); }
+// Legacy aliases
+.theme-douce    { --accent: #{$accent-mild};    --accent-glow: rgba(75, 30, 30, 0.28); }
+.theme-legere   { --accent: #{$accent-mild}; }
+.theme-ultra    { --accent: #{$accent-hp}; }
+
+// --- Reset ---
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  // Le smooth-scroll natif est désactivé : Lenis gère le comportement fluide global
+  scroll-behavior: auto;
+  scroll-padding-top: $header-total;
+  -webkit-text-size-adjust: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: $olive transparent;
+}
+
+// ============ LENIS smooth scroll integration ============
+// Classes ajoutées automatiquement par Lenis sur <html> quand actif
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--white); // ★ Fond blanc principal
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+// --- Scrollbar Webkit ---
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba($ink, 0.04); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, $olive-light, $olive-deep);
+  border-radius: 10px;
+  border: 2px solid $white;
+  &:hover { background: linear-gradient(180deg, $olive, $olive-dark); }
+}
+
+// --- Sélection de texte ---
+::selection {
+  background: rgba($olive, 0.24);
+  color: $ink;
+}
+
+// ============================================================
+//  TYPOGRAPHIE — Jost uniforme (style Kalios / Pamako)
+//  La hiérarchie repose sur POIDS + TAILLE + LETTER-SPACING,
+//  pas sur un mélange serif/sans. Un seul rythme visuel.
+//  Weights disponibles : 200 · 300 · 400 · 500 · 600 · 700
+// ============================================================
+h1, h2, h3, h4, h5, h6,
+p, li, blockquote {
+  font-family: 'Jost', 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.9rem, 6.4vw, 5.5rem) !important;    // 46 → 88px
+  font-weight: 300 !important;                            // Light — allure haute couture
+  line-height: 1.02 !important;
+  letter-spacing: -0.02em !important;                     // Tight (habillage Kalios)
+  margin: 0 0 0.45em;
+}
+
+h2 {
+  font-size: clamp(2.3rem, 5vw, 4.25rem) !important;     // 37 → 68px
+  font-weight: 300 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.018em !important;
+  margin: 0 0 0.45em;
+}
+
+h3 {
+  font-size: clamp(1.35rem, 1.9vw, 1.75rem) !important;  // 21.6 → 28px
+  font-weight: 400 !important;
+  line-height: 1.22 !important;
+  letter-spacing: -0.005em !important;
+  margin: 0 0 0.5em;
+}
+
+h4 {
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem) !important;  // 18.4 → 21.6px
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
+  margin: 0 0 0.5em;
+}
+
+h5, h6 {
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.01em !important;
+  margin: 0 0 0.4em;
+}
+
+// Corps de texte — poids fin, interlignage généreux (feel éditorial)
+p, li {
+  font-size: clamp(1rem, 1.1vw, 1.1rem) !important;      // 16 → 17.6px
+  font-weight: 300 !important;
+  line-height: 1.72 !important;
+  letter-spacing: 0.003em !important;
+  text-wrap: pretty;
+  color: var(--ink-soft);
+}
+p { margin: 0 0 1.1em; }
+
+// Lead paragraph (intro éditoriale) — plus grand, plus aéré
+.lead {
+  font-size: clamp(1.15rem, 1.35vw, 1.35rem) !important;
+  font-weight: 300 !important;
+  line-height: 1.6 !important;
+  color: var(--ink) !important;
+}
+
+// Exceptions — éléments UI qui doivent rester en sans-serif compact
+// (overline, boutons, badges, labels — pas du corps de contenu)
+.overline,
+.btn,
+.nav__link,
+.lang__btn,
+.hero-slide__cta,
+.announce,
+.announce__msg,
+.footer__col-title,
+.highlight-card__badge,
+.recipe-card__badge .overline {
+  font-family: 'Jost', 'Inter', sans-serif !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+.overline { font-size: 0.7rem !important; font-weight: 500 !important; }
+.btn      { font-size: 0.78rem !important; font-weight: 500 !important; }
+.nav__link { font-size: 12px !important; font-weight: 400 !important; letter-spacing: 0.05em !important; }
+.lang__btn { font-size: 0.75rem !important; font-weight: 400 !important; letter-spacing: 0.14em !important; }
+.announce, .announce__msg { font-size: 0.74rem !important; font-weight: 400 !important; letter-spacing: 0.14em !important; }
+.footer__col-title { font-size: 0.7rem !important; font-weight: 500 !important; letter-spacing: 0.28em !important; }
+
+a { color: inherit; text-decoration: none; }
+
+img { display: block; max-width: 100%; height: auto; }
+
+button { font-family: inherit; cursor: pointer; }
+
+// ============================================================
+//  UTILITAIRES
+// ============================================================
+.overline { @include overline; color: var(--olive-deep); }
+
+.container { @include container; }
+
+// Spec V4 — densité éditoriale : moins d'espace entre les sections
+.section       { padding: clamp(2.5rem, 4vw, 3.5rem) 0; }
+.section--tight { padding: clamp(1.75rem, 3vw, 2.5rem) 0; }
+.section--wide  { padding: clamp(4rem, 6vw, 5.5rem) 0; }
+
+// Fond alterné blanc/papier
+.bg-paper { background: var(--paper); }
+.bg-ivory { background: var(--ivory); }
+.bg-sand  { background: var(--sand); }
+
+// Filet olive décoratif (à utiliser sous les overlines)
+.olive-rule,
+.gold-rule {
+  display: inline-block;
+  width: 46px;
+  height: 1px;
+  background: var(--olive);
+  vertical-align: middle;
+  margin-inline: 0.6rem;
+  opacity: 0.7;
+}
+
+// Écriture dorée / olive (petit texte marquant)
+.accent-text {
+  color: var(--olive-deep);
+  font-weight: 500;
+}
+
+// ============================================================
+//  BOUTONS
+// ============================================================
+.btn {
+  --btn-fg:     var(--accent);
+  --btn-bg:     transparent;
+  --btn-border: var(--accent);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border-radius: $radius-pill;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color $dur-base $ease-lux,
+    border-color $dur-base $ease-lux,
+    transform $dur-base $ease-lux,
+    box-shadow $dur-base $ease-lux;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.55s $ease-lux;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(115deg, transparent 30%, rgba(#fff, 0.35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.9s $ease-lux;
+    pointer-events: none;
+  }
+
+  &:hover {
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-olive);
+    &::before { transform: scaleX(1); }
+    &::after  { transform: translateX(120%); }
+  }
+  &:active { transform: translateY(0); }
+
+  &--solid {
+    --btn-bg: var(--accent);
+    --btn-fg: var(--white);
+    background: var(--accent);
+    color: var(--white);
+    &::before { background: var(--olive-dark); }
+  }
+
+  &--olive {
+    background: $grad-olive;
+    color: $white;
+    border-color: transparent;
+    &::before { background: var(--olive-dark); }
+    &:hover { color: $white; }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink-line);
+    &:hover { color: var(--white); }
+  }
+
+  // Legacy
+  &--gold { @extend .btn, .btn--olive; }
+  &--cream {
+    color: $white;
+    border-color: rgba(#fff, 0.5);
+    &::before { background: $white; }
+    &:hover { color: $ink; border-color: $white; }
+  }
+}
+
+// ============================================================
+//  ANIMATIONS — Apparition, hover, scroll
+// ============================================================
+
+// Directive [appReveal]
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s $ease-lux, transform 0.9s $ease-lux;
+  will-change: opacity, transform;
+  &.is-revealed { opacity: 1; transform: none; }
+}
+
+// Ambient olive halo (voile lumineux animé)
+.ambient-olive,
+.ambient-gold {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 55vmax;
+    height: 55vmax;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.18;
+    animation: ambient-drift 20s ease-in-out infinite alternate;
+  }
+  &::before {
+    top: -20%; left: -10%;
+    background: radial-gradient(circle, $olive-light 0%, transparent 60%);
+  }
+  &::after {
+    bottom: -20%; right: -10%;
+    background: radial-gradient(circle, $ocre-light 0%, transparent 60%);
+    animation-delay: -8s;
+    animation-duration: 26s;
+  }
+}
+@keyframes ambient-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(4%, -6%, 0) scale(1.12); }
+}
+
+// Marquee (ruban défilant)
+.marquee {
+  display: flex;
+  overflow: hidden;
+  gap: 3rem;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  &__track {
+    display: flex;
+    gap: 3rem;
+    flex-shrink: 0;
+    animation: marquee-scroll 40s linear infinite;
+    will-change: transform;
+  }
+  &:hover &__track { animation-play-state: paused; }
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+// Ken Burns lent sur images
+@keyframes ken-burns {
+  0%   { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1%, -1.5%); }
+}
+
+// Flottement doux (illustrations, bouteilles)
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.float-y { animation: float-y 6s ease-in-out infinite; }
+
+// Rotation subtile (badges, sceau)
+@keyframes slow-spin {
+  from { transform: rotate(0); }
+  to   { transform: rotate(360deg); }
+}
+
+// Shimmer (halos)
+@keyframes shimmer-title {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+// ============================================================
+//  IMAGE — zoom hover et cadres élégants
+// ============================================================
+.img-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  isolation: isolate;
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.1s $ease-lux, filter 0.6s $ease-lux;
+  }
+  &:hover > img { transform: scale(1.06); filter: saturate(1.08); }
+}
+
+// Glow subtil par cuvée (halo signature derrière la bouteille)
+// Spec brief : box-shadow diffuse circulaire, opacité 0.15 → 0.25 au hover
+.product-glow {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 8% 12% 4%;
+    z-index: -1;
+    border-radius: 50%;
+    background: var(--accent, #{$olive});
+    filter: blur(60px);
+    opacity: 0.15;
+    transition: opacity 0.7s $ease-lux, transform 0.7s $ease-lux;
+    pointer-events: none;
+  }
+  &:hover::before,
+  &:focus-within::before { opacity: 0.28; transform: scale(1.08); }
+}
+
+// ============================================================
+//  SIGNATURE — HUILE QUI COULE, GOUTTE, SPLASH (SVG/CSS pur)
+// ============================================================
+
+// Goutte d'huile qui tombe en boucle — parfait en overlay hero
+// Usage : <span class="oil-drop" style="--drop-color: var(--olive-deep);"></span>
+.oil-drop {
+  position: absolute;
+  width: 14px;
+  height: 20px;
+  pointer-events: none;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 40% 30%, rgba(#fff, 0.5) 0%, transparent 40%),
+                var(--drop-color, #{$olive-deep});
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform-origin: center 30%;
+    animation: oil-drop-fall 3.2s $ease-lux infinite;
+    box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.25);
+  }
+}
+@keyframes oil-drop-fall {
+  0%   { transform: translateY(-30px) scaleY(0.6); opacity: 0; }
+  15%  { transform: translateY(0) scaleY(1.05) scaleX(0.9); opacity: 1; }
+  55%  { transform: translateY(60vh) scaleY(1.6) scaleX(0.72); opacity: 1; }
+  75%  { transform: translateY(70vh) scaleY(0.5) scaleX(1.6); opacity: 0.6; }
+  100% { transform: translateY(72vh) scaleY(0.2) scaleX(2.2); opacity: 0; }
+}
+
+// Filet d'huile qui s'écoule (stripe qui grandit)
+// Usage : <span class="oil-pour"></span>
+.oil-pour {
+  position: absolute;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg,
+    var(--accent, #{$olive}) 0%,
+    rgba($ocre, 0.9) 60%,
+    rgba($ocre-deep, 0) 100%);
+  border-radius: 999px;
+  transform-origin: top;
+  animation: oil-pour-stream 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba($ocre, 0.4));
+  pointer-events: none;
+}
+@keyframes oil-pour-stream {
+  0%   { height: 0; opacity: 0; }
+  20%  { height: 240px; opacity: 1; }
+  70%  { height: 260px; opacity: 1; }
+  90%  { height: 280px; opacity: 0.4; }
+  100% { height: 300px; opacity: 0; }
+}
+
+// Splash / ondulation à la base d'une goutte
+// Usage : <span class="oil-ripple"></span>
+.oil-ripple {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent, #{$olive});
+  opacity: 0;
+  pointer-events: none;
+  animation: oil-ripple-out 3.2s ease-out infinite;
+}
+@keyframes oil-ripple-out {
+  0%   { transform: scale(0.2); opacity: 0.9; }
+  60%  { transform: scale(1.4); opacity: 0.4; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+// Voile d'huile qui glisse (pour hero background) — noble
+.oil-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(1200px 400px at 30% 40%,
+    rgba($ocre, 0.14),
+    transparent 60%);
+  mix-blend-mode: multiply;
+  animation: oil-sheen-drift 16s ease-in-out infinite alternate;
+}
+@keyframes oil-sheen-drift {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  100% { transform: translate(6%, -3%) scale(1.15); opacity: 1; }
+}
+
+// Scroll indicator pulsant (hero)
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  z-index: 5;
+  opacity: 0.72;
+
+  &__mouse {
+    width: 22px;
+    height: 34px;
+    border: 1.2px solid currentColor;
+    border-radius: 12px;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 6px;
+      width: 2px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 2px;
+      transform: translateX(-50%);
+      animation: scroll-wheel 1.8s $ease-lux infinite;
+    }
+  }
+}
+@keyframes scroll-wheel {
+  0%   { transform: translate(-50%, 0);   opacity: 1; }
+  70%  { transform: translate(-50%, 14px); opacity: 0; }
+  100% { transform: translate(-50%, 14px); opacity: 0; }
+}
+
+// ============================================================
+//  PAGE LOADER (splash logo initial)
+// ============================================================
+.app-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--white);
+  display: grid;
+  place-items: center;
+  animation: loader-out 0.7s $ease-lux 1.8s forwards;
+  pointer-events: none;
+
+  &__mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    animation: loader-in 0.9s $ease-lux both;
+  }
+  &__leaf {
+    width: 54px;
+    height: 54px;
+    fill: none;
+    stroke: var(--olive);
+    stroke-width: 1.4;
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: leaf-draw 1.6s $ease-lux 0.15s forwards;
+  }
+  &__word {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    letter-spacing: 0.4em;
+    color: var(--ink);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: word-fade 0.6s $ease-lux 0.9s forwards;
+  }
+  &__bar {
+    width: 120px;
+    height: 1px;
+    background: rgba($olive, 0.2);
+    overflow: hidden;
+    &::after {
+      content: '';
+      display: block;
+      height: 100%;
+      background: var(--olive);
+      transform: translateX(-100%);
+      animation: loader-bar 1.4s $ease-lux 0.3s forwards;
+    }
+  }
+}
+@keyframes loader-in   { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes leaf-draw   { to { stroke-dashoffset: 0; } }
+@keyframes word-fade   { to { opacity: 0.9; } }
+@keyframes loader-bar  { to { transform: translateX(0); } }
+@keyframes loader-out  { to { opacity: 0; visibility: hidden; } }
+
+// ============================================================
+//  TRANSITION LOADER — court flash de logo entre les pages
+// ============================================================
+.app-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba($white, 0.94);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  animation: transition-in 0.28s $ease-lux, transition-out 0.5s $ease-lux 0.55s forwards;
+
+  &__logo {
+    width: auto;
+    height: clamp(96px, 14vw, 140px);
+    animation: transition-logo 1s $ease-lux;
+    opacity: 0.92;
+    filter: drop-shadow(0 6px 22px rgba($olive-deep, 0.12));
+  }
+}
+@keyframes transition-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes transition-out { to { opacity: 0; visibility: hidden; } }
+@keyframes transition-logo {
+  from { opacity: 0; transform: scale(0.94); }
+  60%  { opacity: 1; transform: scale(1); }
+  to   { opacity: 0.92; transform: scale(1); }
+}
+
+// ============================================================
+//  FOCUS accessible
+// ============================================================
+:focus-visible {
+  outline: 2px solid $olive;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+// ============================================================
+//  Préférence mouvement réduit
+// ============================================================
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

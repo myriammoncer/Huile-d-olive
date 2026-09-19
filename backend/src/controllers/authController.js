@@ -1,52 +1,40 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
-require('dotenv').config();
+const asyncHandler = require('../middleware/asyncHandler');
 
-// Login admin
-const login = async (req, res) => {
+const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
-    try {
-        // Vérifier si l'utilisateur existe
-        const [rows] = await db.query(
-            'SELECT * FROM users WHERE email = ?', 
-            [email]
-        );
+    const [rows] = await db.query(
+        'SELECT id, email, password, role FROM users WHERE email = ? LIMIT 1',
+        [email.toLowerCase().trim()],
+    );
 
-        if (rows.length === 0) {
-            return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
-        }
+    // Réponse générique volontairement (évite l'énumération d'emails)
+    const genericFail = { message: 'Email ou mot de passe incorrect' };
+    if (rows.length === 0) return res.status(401).json(genericFail);
 
-        const user = rows[0];
+    const user = rows[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).json(genericFail);
 
-        // Vérifier le mot de passe
-        const isMatch = await bcrypt.compare(password, user.password);
+    const token = jwt.sign(
+        { id: user.id, email: user.email, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN || '7d' },
+    );
 
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
-        }
+    res.json({
+        message: 'Connexion réussie',
+        token,
+        user: { id: user.id, email: user.email, role: user.role },
+    });
+});
 
-        // Générer le token JWT
-        const token = jwt.sign(
-            { id: user.id, email: user.email, role: user.role },
-            process.env.JWT_SECRET,
-            { expiresIn: process.env.JWT_EXPIRES_IN }
-        );
+// Retourne le profil courant (pour /me après login)
+const me = asyncHandler(async (req, res) => {
+    res.json({ user: req.user });
+});
 
-        res.json({
-            message: 'Connexion réussie',
-            token,
-            user: {
-                id: user.id,
-                email: user.email,
-                role: user.role
-            }
-        });
-
-    } catch (err) {
-        res.status(500).json({ message: 'Erreur serveur', error: err.message });
-    }
-};
-
-module.exports = { login };
+module.exports = { login, me };

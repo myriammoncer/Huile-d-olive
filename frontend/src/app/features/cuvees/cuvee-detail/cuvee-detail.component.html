@@ -1,0 +1,261 @@
+@if (loading()) {
+  <div class="cd-loading">{{ 'common.loading' | translate }}</div>
+} @else if (errorMsg()) {
+  <div class="cd-loading cd-loading--error">{{ errorMsg() }}</div>
+} @else if (cuvee()) {
+  <article class="cd" [class]="'cd--' + slug()">
+
+    <!-- ============================================================
+         1. HERO — split éditorial : cream (contenu) + colored (bouteille)
+         ============================================================ -->
+    <section class="cd-hero">
+
+      <!-- ─── LEFT : contenu éditorial sur cream ────────────────── -->
+      <div class="cd-hero__editor">
+        <a class="cd-hero__back" routerLink="/nos-cuvees">
+          <span aria-hidden="true">←</span>
+          <span>{{ 'common.backTo' | translate }} {{ 'nav.cuvees' | translate }}</span>
+        </a>
+
+        <div class="cd-hero__meta reveal">
+          <span class="cd-hero__num">{{ cuveeNum() }}</span>
+          <span class="cd-hero__brand">— {{ 'cuvees.detail.brandEyebrow' | translate }}</span>
+        </div>
+
+        <h1 class="cd-hero__name reveal">{{ cuveeName() }}</h1>
+        @if (cuveeSubtitle()) {
+          <p class="cd-hero__tagline reveal">{{ cuveeSubtitle() }}</p>
+        }
+
+        @if (cuveeHarvest()) {
+          <div class="cd-hero__harvest reveal">
+            <span class="cd-hero__harvest-mark" aria-hidden="true"></span>
+            <span>{{ cuveeHarvest() }}</span>
+          </div>
+        }
+
+        <p class="cd-hero__desc reveal">{{ cuveeDescription() }}</p>
+      </div>
+
+      <!-- ─── RIGHT : panneau couleur + bouteille + jacquard ──── -->
+      <div class="cd-hero__stage">
+        <div class="cd-hero__pattern" aria-hidden="true"></div>
+        <div class="cd-hero__glow" aria-hidden="true"></div>
+        <img class="cd-hero__bottle reveal" [src]="image()" [alt]="cuveeName()" />
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. FICHE TECHNIQUE — bandeau cream-card : 4 specs en ligne
+         ============================================================ -->
+    <section class="cd-specs">
+      <div class="cd-specs__grid">
+        <div class="cd-spec reveal">
+          <span class="cd-spec__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="7" width="22" height="20" rx="1"/><path d="M5 13h22M11 3v6M21 3v6"/>
+            </svg>
+          </span>
+          <div>
+            <span class="cd-spec__label">{{ 'cuvees.detail.specHarvest' | translate }}</span>
+            <span class="cd-spec__value">{{ cuveeHarvest() || '—' }}</span>
+          </div>
+        </div>
+
+        <div class="cd-spec reveal">
+          <span class="cd-spec__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/>
+            </svg>
+          </span>
+          <div>
+            <span class="cd-spec__label">{{ 'cuvees.detail.specVariete' | translate }}</span>
+            <span class="cd-spec__value">{{ cuveeVariete() || 'Chaïbi' }}</span>
+          </div>
+        </div>
+
+        <div class="cd-spec reveal">
+          <span class="cd-spec__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/>
+            </svg>
+          </span>
+          <div>
+            <span class="cd-spec__label">{{ 'cuvees.detail.specFormat' | translate }}</span>
+            <span class="cd-spec__value">{{ cuveeFormat() || '500 ml' }}</span>
+          </div>
+        </div>
+
+        <div class="cd-spec reveal">
+          <span class="cd-spec__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4a8 8 0 018 8c0 6-8 16-8 16S8 18 8 12a8 8 0 018-8z"/><circle cx="16" cy="12" r="3"/>
+            </svg>
+          </span>
+          <div>
+            <span class="cd-spec__label">{{ 'cuvees.detail.specOrigine' | translate }}</span>
+            <span class="cd-spec__value">{{ 'cuvees.detail.specOrigineValue' | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. PROFIL AROMATIQUE — cream, centré, pull-quote élégant
+         ============================================================ -->
+    @if (cuveeProfile()) {
+      <section class="cd-profile">
+        <div class="cd-profile__inner reveal">
+          <span class="cd-profile__eyebrow">— {{ 'cuvees.detail.profileEyebrow' | translate }}</span>
+          <span class="cd-profile__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 30c0-14 10-22 24-22-1 14-10 22-24 22z"/>
+              <path d="M8 30c7-7 14-10 20-14"/>
+            </svg>
+          </span>
+          <p class="cd-profile__text">{{ cuveeProfile() }}</p>
+          <span class="cd-profile__signature">— {{ 'cuvees.detail.profileSignature' | translate }}</span>
+        </div>
+      </section>
+    }
+
+    <!-- ============================================================
+         4. NOTRE MÉTHODE — 4 étapes clés de production
+         ============================================================ -->
+    <section class="cd-method">
+      <div class="cd-method__inner">
+        <header class="cd-method__head reveal">
+          <span class="cd-method__rule" aria-hidden="true"></span>
+          <h2 class="cd-method__title">{{ 'cuvees.detail.methodTitle' | translate }}</h2>
+          <span class="cd-method__rule" aria-hidden="true"></span>
+        </header>
+
+        <div class="cd-method__timeline">
+          <span class="cd-method__line" aria-hidden="true"></span>
+
+          <article class="cd-step reveal" [style.--delay]="'0ms'">
+            <span class="cd-step__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 26V14M16 14c-4-2-8-1-8-6 5 0 8 3 8 6zM16 14c4-2 8-1 8-6-5 0-8 3-8 6z"/>
+              </svg>
+            </span>
+            <span class="cd-step__num">01</span>
+            <h3 class="cd-step__title">{{ 'cuvees.detail.step1Title' | translate }}</h3>
+            <p class="cd-step__text">{{ 'cuvees.detail.step1Text' | translate }}</p>
+          </article>
+
+          <article class="cd-step reveal" [style.--delay]="'100ms'">
+            <span class="cd-step__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 20V10a2 2 0 114 0v6M14 16V8a2 2 0 114 0v8M18 16v-4a2 2 0 114 0v10a6 6 0 01-12 0v-2"/>
+              </svg>
+            </span>
+            <span class="cd-step__num">02</span>
+            <h3 class="cd-step__title">{{ 'cuvees.detail.step2Title' | translate }}</h3>
+            <p class="cd-step__text">{{ 'cuvees.detail.step2Text' | translate }}</p>
+          </article>
+
+          <article class="cd-step reveal" [style.--delay]="'200ms'">
+            <span class="cd-step__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4c-4 6-6 10-6 14a6 6 0 0012 0c0-4-2-8-6-14z"/>
+              </svg>
+            </span>
+            <span class="cd-step__num">03</span>
+            <h3 class="cd-step__title">{{ 'cuvees.detail.step3Title' | translate }}</h3>
+            <p class="cd-step__text">{{ 'cuvees.detail.step3Text' | translate }}</p>
+          </article>
+
+          <article class="cd-step reveal" [style.--delay]="'300ms'">
+            <span class="cd-step__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/>
+              </svg>
+            </span>
+            <span class="cd-step__num">04</span>
+            <h3 class="cd-step__title">{{ 'cuvees.detail.step4Title' | translate }}</h3>
+            <p class="cd-step__text">{{ 'cuvees.detail.step4Text' | translate }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. ACCORDS CULINAIRES — chip cloud élégant, sans numérotation
+         ============================================================ -->
+    @if (pairings().length) {
+      <section class="cd-pairings">
+        <div class="cd-pairings__inner">
+          <header class="cd-pairings__head reveal">
+            <span class="cd-pairings__eyebrow">— {{ 'cuvees.detail.pairingsEyebrow' | translate }}</span>
+            <h2 class="cd-pairings__title">{{ 'cuvees.detail.pairingsTitle' | translate }}</h2>
+            <p class="cd-pairings__lead">{{ 'cuvees.detail.pairingsLead' | translate }}</p>
+          </header>
+
+          <div class="cd-pairings__cloud">
+            @for (item of pairings(); track item; let i = $index) {
+              <span class="cd-chip reveal" [style.--delay]="(i * 60) + 'ms'">
+                <span class="cd-chip__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                    @switch (pairingIcon(item)) {
+                      @case ('leaf')    { <path d="M4 20c0-10 6-16 16-16-1 10-6 16-16 16z"/><path d="M4 20c5-5 10-6 14-10"/> }
+                      @case ('tomato')  { <circle cx="12" cy="14" r="7"/><path d="M9 7l3-3 3 3M11 4v3"/> }
+                      @case ('fish')    { <path d="M3 12c4-4 8-4 12-2s6 4 6 4-2 2-6 4-8 2-12-2z"/><circle cx="7" cy="12" r="0.6" fill="currentColor"/><path d="M21 14l2 2M21 10l2-2"/> }
+                      @case ('meat')    { <path d="M6 12a6 6 0 0112 0v6a4 4 0 01-4 4h-4a4 4 0 01-4-4z"/><circle cx="9" cy="15" r="1"/> }
+                      @case ('poultry') { <path d="M6 18c0-6 4-10 10-10 2 4 0 10-6 12l-4 4M18 8V4M14 8h4"/> }
+                      @case ('bread')   { <path d="M4 12c0-4 4-6 8-6s8 2 8 6v6c0 2-2 4-4 4H8c-2 0-4-2-4-4z"/><path d="M8 14h8M8 18h8"/> }
+                      @case ('cheese')  { <path d="M4 14l16-6v10H4z"/><circle cx="10" cy="13" r="1"/><circle cx="15" cy="15" r="1"/> }
+                      @case ('sweet')   { <circle cx="12" cy="14" r="6"/><path d="M12 8c-1-1-2-3 0-4 2 1 1 3 0 4M8 14l4-2M16 14l-4-2"/> }
+                      @case ('soup')    { <path d="M4 12h16v4a6 6 0 01-6 6h-4a6 6 0 01-6-6zM8 12V8c0-2 2-4 4-4M14 12V8c0-2 1-3 2-3"/> }
+                      @case ('pasta')   { <ellipse cx="12" cy="14" rx="8" ry="4"/><path d="M6 14c0-2 6-4 6-4M18 14c0-2-6-4-6-4M9 15c1-1 3-1 4 0M11 17c1-1 3-1 4 0"/> }
+                      @default          { <circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/> }
+                    }
+                  </svg>
+                </span>
+                <span class="cd-chip__label">{{ item }}</span>
+              </span>
+            }
+          </div>
+        </div>
+      </section>
+    }
+
+    <!-- ============================================================
+         6. AUTRES CUVÉES — 2 tuiles couleur
+         ============================================================ -->
+    @if (others().length) {
+      <section class="cd-others">
+        <div class="cd-others__inner">
+          <header class="cd-others__head reveal">
+            <span class="cd-others__eyebrow">— {{ 'cuvees.detail.rangeEyebrow' | translate }}</span>
+            <h2 class="cd-others__title">{{ 'cuvees.detail.othersTitle' | translate }}</h2>
+          </header>
+
+          <div class="cd-others__grid">
+            @for (o of others(); track o.slug; let i = $index) {
+              <a class="cd-other reveal" [class]="'cd-other--' + o.slug"
+                 [routerLink]="['/nos-cuvees', o.slug]"
+                 [style.--delay]="(i * 120) + 'ms'">
+                <div class="cd-other__pattern" aria-hidden="true"></div>
+                <div class="cd-other__visual">
+                  <img [src]="o.image" [alt]="o.name" loading="lazy" />
+                </div>
+                <div class="cd-other__body">
+                  <span class="cd-other__eyebrow">— {{ 'cuvees.detail.brandEyebrow' | translate }}</span>
+                  <h3 class="cd-other__name">{{ o.name }}</h3>
+                  @if (o.subtitle) {
+                    <span class="cd-other__tagline">{{ o.subtitle }}</span>
+                  }
+                  <span class="cd-other__cta">
+                    {{ 'cuvees.detail.otherCta' | translate }} <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </section>
+    }
+
+  </article>
+}

@@ -1,0 +1,37 @@
+<header class="ahead">
+  <div>
+    <h1 class="ahead__title">Messages</h1>
+    <p class="ahead__sub">
+      {{ messages().length }} message(s)
+      @if (unread() > 0) { · <strong>{{ unread() }} non lu(s)</strong> }
+    </p>
+  </div>
+</header>
+
+@if (loading()) {
+  <p class="amuted">Chargement…</p>
+} @else if (messages().length === 0) {
+  <p class="amuted">Aucun message reçu pour l'instant.</p>
+} @else {
+  @for (m of messages(); track m.id) {
+    <article class="amsg" [class.amsg--unread]="!m.lu">
+      <div class="amsg__head">
+        <span>
+          <span class="amsg__from">{{ m.nom }}</span>
+          — <a class="amsg__mail" [href]="'mailto:' + m.email">{{ m.email }}</a>
+        </span>
+        <span class="amsg__date">{{ formatDate(m.created_at) }}</span>
+      </div>
+      @if (m.sujet) { <p class="amsg__subject"><strong>Sujet :</strong> {{ m.sujet }}</p> }
+      <p class="amsg__body">{{ m.message }}</p>
+      <div class="amsg__actions">
+        @if (!m.lu) {
+          <button type="button" class="alink" (click)="markRead(m)">Marquer comme lu</button>
+        } @else {
+          <span class="atag">Lu</span>
+        }
+        <button type="button" class="alink alink--danger" (click)="deleteMessage(m)">Supprimer</button>
+      </div>
+    </article>
+  }
+}

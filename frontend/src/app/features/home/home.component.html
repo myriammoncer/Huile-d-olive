@@ -1,0 +1,354 @@
+<!-- ============================================================
+     1. HERO CAROUSEL — 1 slide visible à la fois, 3 slides
+        Slide HP (cream) · Slide Products (navy) · Slide Coffrets (burgundy)
+     ============================================================ -->
+<section class="hero-carousel"
+         (mouseenter)="pauseAuto()" (mouseleave)="resumeAuto()">
+  <button type="button" class="hero-carousel__arrow hero-carousel__arrow--prev"
+          (click)="prev()" aria-label="Slide précédent">
+    <span aria-hidden="true">←</span>
+  </button>
+
+  <div class="hero-carousel__viewport">
+    <div class="hero-carousel__track"
+         [style.transform]="'translateX(-' + (activeIndex() * 100) + '%)'">
+      @for (slide of slides(); track slide.id; let i = $index) {
+        <article class="hero-slide hero-tile"
+                 [class]="'hero-tile--' + slide.id"
+                 [class.is-active]="activeIndex() === i"
+                 [attr.data-slide-id]="slide.id"
+                 [attr.aria-hidden]="activeIndex() !== i">
+
+          <!-- Bloc contenu texte -->
+          <div class="hero-tile__body">
+            <span class="hero-tile__eyebrow">{{ slide.eyebrow }}</span>
+            <h1 class="hero-tile__title">{{ slide.title }}</h1>
+            @if (slide.text) {
+              <p class="hero-tile__text">{{ slide.text }}</p>
+            }
+            <a class="hero-tile__cta"
+               [routerLink]="linkPath(slide.ctaLink)"
+               [fragment]="linkFragment(slide.ctaLink)">
+              {{ slide.ctaLabel }}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <!-- Bloc visuel produit -->
+          <div class="hero-tile__visual">
+            @if ($any(slide).badge) {
+              <span class="hero-tile__seal">
+                <span class="hero-tile__seal-inner">{{ $any(slide).badge }}</span>
+              </span>
+            }
+            <img class="hero-tile__product" [src]="slideImage(slide.id)" [alt]="slide.title" />
+            <!-- Piédestal sous la bouteille (subtile ellipse d'ombre) -->
+            <span class="hero-tile__pedestal" aria-hidden="true"></span>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+
+  <button type="button" class="hero-carousel__arrow hero-carousel__arrow--next"
+          (click)="next()" aria-label="Slide suivant">
+    <span aria-hidden="true">→</span>
+  </button>
+
+  <!-- Dots indicateur de slide -->
+  <div class="hero-carousel__dots" role="tablist" aria-label="Slides">
+    @for (slide of slides(); track slide.id; let i = $index) {
+      <button type="button" class="hero-carousel__dot"
+              [class.is-active]="activeIndex() === i"
+              (click)="goTo(i)"
+              [attr.aria-label]="'Slide ' + (i + 1)">
+      </button>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     2. HISTOIRE MÉDITERRANÉENNE + TUNISIE EN CHIFFRES (3 colonnes)
+     ============================================================ -->
+<section class="med-heritage" [id]="'notre-heritage'">
+  <div class="med-heritage__grid">
+
+    <div class="med-heritage__text">
+      <span class="overline med-heritage__eyebrow reveal">{{ 'home.mediterranean.overline' | translate }}</span>
+      <h2 class="med-heritage__title reveal">{{ 'home.mediterranean.title' | translate }}</h2>
+      @for (p of $any('home.mediterranean.paragraphs' | translate); track $index) {
+        <p class="med-heritage__para reveal">{{ p }}</p>
+      }
+      <a class="btn med-heritage__cta reveal" routerLink="/notre-histoire">
+        {{ 'home.mediterranean.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="med-heritage__image reveal">
+      <img src="assets/images/Notre_Hist/olivv.jpg"
+           alt="Paysage olivier méditerranéen" loading="lazy" />
+    </div>
+
+    <aside class="stats-panel reveal">
+      <span class="overline stats-panel__eyebrow">{{ 'home.stats.title' | translate }}</span>
+      <div class="stats-panel__list">
+        @for (s of $any('home.stats.items' | translate); track $index) {
+          <div class="stat-row">
+            <span class="stat-row__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3c-2 3-2 6 0 9 2-3 2-6 0-9z"/>
+                <path d="M12 12v9"/>
+              </svg>
+            </span>
+            <div class="stat-row__body">
+              <span class="stat-row__value" [attr.data-raw]="s.value">{{ s.value }}</span>
+              <span class="stat-row__label">{{ s.label }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     3. HERITAGE 1800 — big serif number + text (horizontal band cream)
+     ============================================================ -->
+<section class="heritage-1800" [id]="'heritage-1800'">
+  <div class="heritage-1800__inner">
+    <div class="heritage-1800__number reveal">{{ 'home.heritage1800.number' | translate }}</div>
+    <span class="heritage-1800__divider" aria-hidden="true"></span>
+    <div class="heritage-1800__body">
+      <span class="overline reveal">{{ 'home.heritage1800.eyebrow' | translate }}</span>
+      <p class="heritage-1800__text reveal">{{ 'home.heritage1800.text' | translate }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. HIGH POLYPHENOLS FEATURED — dark navy full-width
+     ============================================================ -->
+<section class="hp-featured" [id]="'hp-featured'">
+  <div class="hp-featured__grid">
+
+    <div class="hp-featured__visual reveal">
+      <img src="assets/images/Noshuiles/hprmvv.png" alt="High Polyphenols" loading="lazy" />
+    </div>
+
+    <div class="hp-featured__body">
+      <span class="overline hp-featured__eyebrow reveal">{{ 'home.hpFeatured.eyebrow' | translate }}</span>
+      <h2 class="hp-featured__title reveal">{{ 'home.hpFeatured.title' | translate }}</h2>
+      <p class="hp-featured__text reveal">{{ 'home.hpFeatured.text' | translate }}</p>
+      <a class="btn btn--ghost hp-featured__cta reveal" routerLink="/high-polyphenol">
+        {{ 'home.hpFeatured.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="hp-featured__features">
+      @for (f of $any('home.hpFeatured.features' | translate); track f.label; let i = $index) {
+        <div class="hp-feature reveal" [style.--delay]="(i * 100) + 'ms'">
+          <span class="hp-feature__icon" aria-hidden="true">
+            @switch (f.icon) {
+              @case ('leaf') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/>
+                  <path d="M6 26c6-6 12-8 18-12"/>
+                </svg>
+              }
+              @case ('harvest') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="6" y="8" width="20" height="18" rx="2"/>
+                  <path d="M6 12h20M11 4v6M21 4v6"/>
+                </svg>
+              }
+              @case ('cold') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4v24M6 10l20 12M6 22l20-12"/>
+                  <path d="M13 6l3 3 3-3M13 26l3-3 3 3M4 13l3 3-3 3M28 13l-3 3 3 3"/>
+                </svg>
+              }
+              @case ('bottle') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/>
+                </svg>
+              }
+            }
+          </span>
+          <span class="hp-feature__label">{{ f.label }}</span>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     5. UNE VARIÉTÉ. TROIS EXPRESSIONS. — 3 tiles colorées collées
+     ============================================================ -->
+<section class="cuvees-showcase" [id]="'cuvees-showcase'">
+  <header class="cuvees-showcase__head">
+    <h2 class="cuvees-showcase__title reveal">{{ 'home.cuveesShowcase.title' | translate }}</h2>
+    <p class="cuvees-showcase__subtitle reveal">{{ 'home.cuveesShowcase.subtitle' | translate }}</p>
+  </header>
+
+  <div class="cuvees-showcase__grid">
+    @for (c of $any('home.cuveesShowcase.items' | translate); track c.slug; let i = $index) {
+      <article class="cuvee-mini reveal" [class]="c.theme" [style.--delay]="(i * 120) + 'ms'">
+        <div class="cuvee-mini__visual">
+          <img [src]="cuveeImage(c.slug)" [alt]="c.name" loading="lazy" />
+        </div>
+        <div class="cuvee-mini__body">
+          <span class="cuvee-mini__name">{{ c.name }}</span>
+          <span class="cuvee-mini__harvest">{{ c.harvest }}</span>
+          <div class="cuvee-mini__notes">
+            @for (n of c.notes; track n) {
+              <span class="cuvee-mini__note">{{ n }}</span>
+            }
+          </div>
+          <a class="cuvee-mini__cta" [routerLink]="['/nos-cuvees', c.slug]">
+            {{ c.cta }}
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     6. PROCESS TIMELINE — 6 steps (Cultiver → Embouteiller)
+     ============================================================ -->
+<section class="process section" [id]="'process'">
+  <div class="container">
+    <header class="process__head reveal">
+      <h2 class="process__title">{{ 'home.process.title' | translate }}</h2>
+    </header>
+
+    <div class="process__timeline reveal">
+      <span class="process__line" aria-hidden="true"></span>
+
+      @for (step of $any('home.process.steps' | translate); track step.num; let i = $index) {
+        <article class="process-step" [style.--delay]="(i * 100) + 'ms'">
+          <span class="process-step__num">{{ step.num }}</span>
+          <span class="process-step__icon" aria-hidden="true">
+            @switch (step.num) {
+              @case ('01') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 6c-4 4-4 10 0 14 4-4 4-10 0-14z"/>
+                  <path d="M16 20v6M8 26h16"/>
+                </svg>
+              }
+              @case ('02') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="14" r="3"/><circle cx="20" cy="18" r="3"/><circle cx="14" cy="22" r="2.5"/>
+                  <path d="M8 6l6 4M24 6l-4 6"/>
+                </svg>
+              }
+              @case ('03') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4c-4 6-6 10-6 14a6 6 0 0012 0c0-4-2-8-6-14z"/>
+                </svg>
+              }
+              @case ('04') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="14" cy="14" r="8"/><path d="M20 20l6 6"/>
+                </svg>
+              }
+              @case ('05') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 8h16v18a2 2 0 01-2 2H10a2 2 0 01-2-2V8z"/>
+                  <path d="M8 8c0-2 4-4 8-4s8 2 8 4"/>
+                  <path d="M12 14h8M12 20h8"/>
+                </svg>
+              }
+              @case ('06') {
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/>
+                </svg>
+              }
+            }
+          </span>
+          <h3 class="process-step__title">{{ step.title }}</h3>
+          <p class="process-step__text">{{ step.text }}</p>
+        </article>
+      }
+    </div>
+
+    <div class="process__cta-wrap reveal">
+      <a class="btn" routerLink="/tracabilite">
+        {{ 'home.process.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. PROFESSIONNELS (green) + PRIVATE LABEL (navy) — 2 colonnes
+     ============================================================ -->
+<section class="pro-block" [id]="'pro-block'">
+  <div class="pro-block__grid">
+
+    <div class="pro-block__col pro-block__col--pro">
+      <div class="pro-block__visual reveal">
+        <img src="assets/images/Noshuiles/3l5lrmv.png"
+             onerror="this.onerror=null; this.src='assets/images/accueil/pro2.png'"
+             alt="Bidons 3L et 5L" loading="lazy" />
+      </div>
+      <div class="pro-block__body">
+        <span class="overline reveal">{{ 'home.proOffer.eyebrow' | translate }}</span>
+        <h2 class="pro-block__title reveal">{{ 'home.proOffer.title' | translate }}</h2>
+        <p class="pro-block__text reveal">{{ 'home.proOffer.text' | translate }}</p>
+        <a class="btn btn--ghost reveal" routerLink="/professionnels">
+          {{ 'home.proOffer.cta' | translate }}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="pro-block__col pro-block__col--pl">
+      <div class="pro-block__visual pro-block__visual--pl reveal">
+        <img src="assets/images/Noshuiles/PLrmvv.png" alt="Private Label" loading="lazy" />
+      </div>
+      <div class="pro-block__body">
+        <span class="overline reveal">{{ 'home.privateLabelPromo.eyebrow' | translate }}</span>
+        <h2 class="pro-block__title reveal">{{ 'home.privateLabelPromo.title' | translate }}</h2>
+        <p class="pro-block__text reveal">{{ 'home.privateLabelPromo.text' | translate }}</p>
+        <a class="btn btn--ghost reveal" routerLink="/private-label">
+          {{ 'home.privateLabelPromo.cta' | translate }}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     8. COFFRETS SHOWCASE — Le cadeau méditerranéen
+     ============================================================ -->
+<section class="coffrets-showcase" [id]="'coffrets-showcase'">
+  <div class="coffrets-showcase__inner">
+    <div class="coffrets-showcase__body">
+      <span class="overline reveal">{{ 'home.coffretsPromo.eyebrow' | translate }}</span>
+      <h2 class="coffrets-showcase__title reveal">{{ 'home.coffretsPromo.title' | translate }}</h2>
+      <p class="coffrets-showcase__text reveal">{{ 'home.coffretsPromo.text' | translate }}</p>
+      <a class="btn reveal" routerLink="/coffrets">
+        {{ 'home.coffretsPromo.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="coffrets-showcase__visuals reveal">
+      <!-- 3 boîtes coffret rendues comme les packshots du mockup :
+           fond couleur cuvée + wordmark VILLAGE 1800 en or centré -->
+      <div class="coffret-box coffret-box--burgundy" aria-label="Coffret Signature">
+        <img src="assets/images/accueil/cadeau.jpg" alt="Village 1800"  />
+      </div>
+      
+    </div>
+  </div>
+</section>

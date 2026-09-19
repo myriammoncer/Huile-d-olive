@@ -1,0 +1,1160 @@
+@use 'variables' as *;
+@use 'mixins'    as *;
+
+:host { display: block; overflow-x: hidden; background: var(--white); }
+
+// ═══════════════════════════════════════════════════════════════
+//  SÉPARATEURS — trait fin blanc
+// ═══════════════════════════════════════════════════════════════
+
+// Entre les sections
+section + section {
+  border-top: 2px solid rgba(#fff, 0.22);
+}
+
+// ─── À l’intérieur des sections ───────────────────────────────
+
+// 5. Cuvées (3 tiles collées) — exactement comme la photo
+.cuvees-showcase__grid {
+  .cuvee-mini + .cuvee-mini {
+    border-left: 2px solid rgba(#fff, 0.28);
+  }
+}
+
+// 7. Pro + Private Label (2 colonnes)
+.pro-block__grid {
+  .pro-block__col + .pro-block__col {
+    border-left: 2px solid rgba(#fff, 0.22);
+  }
+}
+
+// 2. Mediterranean Heritage (texte | image | stats)
+.med-heritage__grid {
+  > * + * {
+    border-left: 2px solid rgba(#fff, 0.18);
+  }
+
+  @include until($bp-tablet) {
+    > * + * {
+      border-left: none;
+      border-top: 2px solid rgba(#fff, 0.18);
+    }
+  }
+}
+
+// 8. Coffrets (3 boîtes)
+.coffrets-showcase__visuals {
+  .coffret-box + .coffret-box {
+    border-left: 2px solid rgba(#E9C877, 0.35); // or doux pour coller au thème
+  }
+
+  @include until($bp-mobile) {
+    .coffret-box + .coffret-box {
+      border-left: none;
+      border-top: 2px solid rgba(#E9C877, 0.35);
+    }
+  }
+}
+// ═══════════════════════════════════════════════════════════════
+//  1. HERO CAROUSEL — 1 SLIDE VISIBLE À LA FOIS (3 slides)
+//     Design : trois univers produits (HP · Products · Coffrets),
+//     chacun sa slide plein écran avec son fond signature.
+//     Défilement horizontal via translateX sur le track.
+// ═══════════════════════════════════════════════════════════════
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: clamp(500px, 70vh, 660px);
+  padding-top: $header-total;
+  background: var(--white);
+  overflow: visible;      // permet à la bouteille de dépasser vers le bas
+  z-index: 2;             // la bouteille passe au-dessus de la section suivante
+
+  &__viewport {
+    width: 100%;
+    height: 100%;
+    // Clip horizontal (carousel) + haut, mais 200px de débordement autorisé en bas.
+    overflow: visible;
+    clip-path: inset(0px 0px -200px 0px);
+  }
+
+  // Rail horizontal : chaque slide occupe 100% de la largeur.
+  &__track {
+    display: flex;
+    height: 100%;
+    will-change: transform;
+    transition: transform 0.9s $ease-lux;
+  }
+
+  // Flèches de navigation — visibles sur tous les écrans
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(#fff, 0.9);
+    border: 1px solid rgba($ink, 0.15);
+    color: $ink;
+    font-size: 1.05rem;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.35);
+    transition: background $dur-base $ease-lux, transform $dur-base $ease-lux;
+
+    &:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+    &--prev { left: clamp(0.75rem, 2vw, 1.5rem); }
+    &--next { right: clamp(0.75rem, 2vw, 1.5rem); }
+  }
+
+  &__dots {
+    position: absolute;
+    bottom: 1.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 5;
+    padding: 0.35rem 0.8rem;
+    background: rgba(#000, 0.22);
+    backdrop-filter: blur(6px);
+    border-radius: 999px;
+  }
+
+  &__dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: rgba(#fff, 0.45);
+    transition: background 0.3s ease, transform 0.3s ease;
+    &.is-active { background: #fff; transform: scale(1.35); }
+  }
+}
+
+// ─── SLIDE HERO — plein écran, layout interne body | visual ──────
+.hero-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  height: 100%;
+}
+
+.hero-tile {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.9fr 1.3fr;   // body | visual (visual + large pour agrandir la photo)
+  gap: clamp(0.6rem, 1.6vw, 1.4rem);
+  padding: clamp(1rem, 2.4vw, 2rem) clamp(1.4rem, 4vw, 3.6rem);
+  overflow: visible;                // la bouteille peut dépasser du cadre
+  isolation: isolate;
+  min-height: 100%;
+  color: inherit;
+
+  // Sur écran étroit (mobile carousel), tuile pleine largeur avec visual dominant
+  @include until($bp-tablet) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 1.5rem 1.2rem;
+  }
+
+  // Body texte à gauche, centré verticalement
+  &__body {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.65rem;
+    max-width: 100%;
+  }
+
+  &__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  &__title {
+    font-family: var(--font-sans) !important;
+    font-size: clamp(2rem, 4vw, 3.2rem) !important;
+    font-weight: 300 !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.01em !important;
+    color: inherit !important;
+    margin: 0 !important;
+    text-wrap: balance;
+    max-width: 16ch;
+  }
+
+  &__text {
+    font-family: var(--font-sans) !important;
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem) !important;
+    font-weight: 300 !important;
+    line-height: 1.55 !important;
+    color: inherit !important;
+    opacity: 0.85;
+    margin: 0 !important;
+    max-width: 28ch;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.7rem;
+    padding: 0.85rem 1.8rem;
+    background: transparent;
+    color: inherit;
+    border: 1px solid currentColor;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: $radius-pill;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition: gap 0.3s $ease-lux;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: currentColor;
+      opacity: 0;
+      transition: opacity 0.4s $ease-lux;
+    }
+
+    &:hover {
+      gap: 0.85rem;
+      &::before { opacity: 0.15; }
+    }
+  }
+
+  // ─── Visuel : bouteille au centre, sort du cadre ─────────
+  &__visual {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    min-height: 380px;
+    height: 100%;
+  }
+
+  &__product {
+    height: 100%;
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 0;
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.4));
+    position: relative;
+    z-index: 2;
+    animation: hero-tile-product-in 1.2s $ease-lux both;
+  }
+
+  // Piedestal / ombre elliptique subtile sous la bouteille
+  &__pedestal {
+    position: absolute;
+    bottom: -2%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 20px;
+    background: radial-gradient(50% 100% at 50% 50%, rgba(0, 0, 0, 0.35), transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  // Sceau LIMITED EDITION (rond)
+  &__seal {
+    position: absolute;
+    top: 8%;
+    right: 8%;
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: rotate(-12deg);
+    opacity: 0.8;
+    z-index: 4;
+    animation: hero-tile-seal-in 0.9s $ease-lux 0.6s both;
+
+    @include until($bp-tablet) { width: 62px; height: 62px; }
+  }
+  &__seal-inner {
+    font-family: var(--font-sans);
+    font-size: 0.52rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.15;
+    padding: 0.4rem;
+  }
+
+  // ─── Thèmes par tuile ────────────────────────────────────
+ // ─── Thèmes par tuile ────────────────────────────────────
+&--high-polyphenol {
+  background: linear-gradient(180deg, #F8F5EE 0%, #EDE7D9 100%);
+  color: $ink;
+
+  // Piedestal doré
+  .hero-tile__pedestal {
+    background: radial-gradient(50% 100% at 50% 50%, rgba(#8A6F2E, 0.4), transparent 70%);
+  }
+
+  // Bouteille centrée (comme les autres slides)
+  .hero-tile__visual {
+    align-items: center;          // ← centre verticalement
+    justify-content: center;
+  }
+
+  .hero-tile__product {
+    height: 100%;                 // ← même logique que les autres slides
+    max-height: 100%;
+    margin-bottom: 0;             // ← plus de dépassement forcé vers le bas
+  }
+
+  // Sur mobile on garde un léger dépassement si besoin
+  @include until($bp-tablet) {
+    .hero-tile__product {
+      height: 108%;
+      margin-bottom: clamp(-30px, -5vw, -18px);
+    }
+  }
+}
+
+&--cuvees {
+  background: #162637;
+  color: #fff;
+}
+
+&--coffrets {
+  background: #4B1E1E;
+  color: #fff;
+}
+}
+
+@keyframes hero-tile-product-in {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes hero-tile-seal-in {
+  from { opacity: 0; transform: rotate(-25deg) scale(0.85); }
+  to   { opacity: 0.8; transform: rotate(-12deg) scale(1); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  2. MEDITERRANEAN HERITAGE — full-width, hauteur compacte
+// ═══════════════════════════════════════════════════════════════
+.med-heritage {
+  padding: 0;
+  background: var(--white);
+  border-top: 1px solid rgba($ink, 0.05);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 0;
+    width: 100%;
+    min-height: 220px;
+
+    @include until($bp-desktop) { grid-template-columns: 1fr 1fr; }
+    @include until($bp-tablet)  { grid-template-columns: 1fr; }
+  }
+
+  &__text {
+    padding: clamp(1.2rem, 2vw, 1.75rem) clamp(1.5rem, 2.5vw, 2.25rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+    align-items: flex-start;
+    .overline { color: var(--olive-deep); }
+  }
+
+  &__title {
+    font-family: var(--font-sans) !important;
+    font-size: clamp(1.8rem, 3vw, 2.5rem) !important;
+    font-weight: 300 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.015em !important;
+    color: var(--ink) !important;
+    margin: 0.3rem 0 0.4rem !important;
+    text-wrap: balance;
+  }
+
+  &__para {
+    font-family: var(--font-sans) !important;
+    font-size: 0.92rem !important;
+    line-height: 1.65 !important;
+    color: var(--ink-soft) !important;
+    margin: 0 !important;
+  }
+
+  &__cta { margin-top: 1rem; align-self: flex-start; }
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @include until($bp-tablet) { min-height: 180px; }
+  }
+}
+
+// Bloc stats dark olive
+.stats-panel {
+  background: #203A1D;
+  color: #fff;
+  padding: clamp(1.1rem, 2vw, 1.6rem) clamp(1.2rem, 2vw, 1.8rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &__eyebrow {
+    color: rgba(#fff, 0.75) !important;
+    font-size: 0.66rem !important;
+    letter-spacing: 0.3em !important;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 0.9rem;
+  align-items: center;
+
+  &__icon {
+    width: 26px; height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(#fff, 0.85);
+    svg { width: 20px; height: 20px; }
+  }
+
+  &__body { display: flex; flex-direction: column; gap: 0.05rem; }
+
+  &__value {
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  &__label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: rgba(#fff, 0.75);
+    line-height: 1.4;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  3. HERITAGE 1800 — horizontal band, connectée à med-heritage
+// ═══════════════════════════════════════════════════════════════
+.heritage-1800 {
+  background: linear-gradient(180deg, #F8F5EE 0%, #F2ECDF 100%);
+  padding: clamp(1.1rem, 2vw, 1.6rem) 0;
+  border-top: 1px solid rgba($ink, 0.05);
+
+  &__inner {
+    display: grid;
+    grid-template-columns: auto 1px auto; // ← auto au lieu de 1fr
+    gap: clamp(1.2rem, 3.5vw, 3rem);
+    align-items: center;
+    justify-content: center;              // ← centre tout le groupe
+    padding: 0 clamp(2rem, 5vw, 5rem);
+    max-width: 1100px;                    // optionnel, pour éviter qu’il s’étire trop
+    margin-inline: auto;
+
+    @include until($bp-tablet) {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+  }
+
+  &__number {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(3.4rem, 7vw, 5.5rem);
+    font-weight: 300;
+    color: #B8963E;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  &__divider {
+    display: block;
+    width: 1px;
+    height: 60%;
+    background: rgba($ink, 0.2);
+    @include until($bp-tablet) { display: none; }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 540px;
+    .overline { color: var(--olive-deep); }
+  }
+
+  &__text {
+    font-family: var(--font-sans) !important;
+    font-size: 0.92rem !important;
+    line-height: 1.65 !important;
+    color: var(--ink-soft) !important;
+    margin: 0 !important;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  4. HP FEATURED — dark navy full-width, bouteille + 4 icônes
+// ═══════════════════════════════════════════════════════════════
+
+.hp-featured {
+  // Vert signature (remplace l'ancien navy #162637) — identité "olive / nature"
+  background: linear-gradient(165deg, #23412A 0%, #1B3220 55%, #142611 100%);
+  color: #fff;
+  padding: 0.5rem 0;                       // ← ultra serré : plus d'espaces vides
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 220px 1fr auto;
+    gap: clamp(1.6rem, 3vw, 2.8rem);         // ← un peu plus serré
+    align-items: center;
+    padding: 0 clamp(2rem, 5vw, 5rem);
+
+    @include until($bp-desktop) {
+      grid-template-columns: 200px 1fr;
+      .hp-featured__features {
+        grid-column: 1 / -1;
+        margin-top: 1.2rem;
+        padding-top: 1.4rem;
+        border-top: 1px solid rgba(#fff, 0.15);
+      }
+    }
+    @include until($bp-tablet) {
+      grid-template-columns: 1fr;
+      text-align: center;
+      .hp-featured__body { align-items: center; }
+    }
+  }
+
+  &__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    position: relative;
+    z-index: 3;
+
+    // Photo affichée telle quelle : PAS de crop, PAS de resize, PAS de filtre
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;                            // ← un peu plus serré
+    align-items: flex-start;
+    max-width: 460px;
+  }
+
+  &__eyebrow {
+    color: rgba(#fff, 0.65) !important;
+    letter-spacing: 0.32em !important;
+    font-size: 0.66rem !important;
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.8rem, 3vw, 2.5rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.01em !important;
+    color: #fff !important;
+    margin: 0 !important;
+    text-wrap: balance;
+  }
+
+  &__text {
+    font-family: var(--font-sans) !important;
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    color: rgba(#fff, 0.75) !important;
+    margin: 0 !important;
+    max-width: 42ch;
+  }
+
+  &__cta {
+    color: #fff;
+    border-color: rgba(#fff, 0.65);
+    padding: 0.7rem 1.4rem;
+    font-size: 0.68rem;
+    &:hover { color: $ink; }
+  }
+
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 0;
+    align-items: center;
+
+    > * + * {
+      border-left: 1px solid rgba(#fff, 0.15);
+      padding-left: clamp(1rem, 2vw, 2rem);
+    }
+    > * {
+      padding-right: clamp(1rem, 2vw, 2rem);
+    }
+
+    @include until($bp-mobile) {
+      grid-template-columns: repeat(2, 1fr);
+      > * + * { border-left: none; padding-left: 0; }
+      > *      { padding: 1rem; text-align: center; }
+    }
+  }
+}
+
+.hp-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  animation: hp-feature-in 0.7s $ease-lux both;
+  animation-delay: var(--delay, 0ms);
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    color: rgba(#fff, 0.85);
+    svg { width: 32px; height: 32px; }
+  }
+
+  &__label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(#fff, 0.9);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+}
+@keyframes hp-feature-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  5. CUVEES SHOWCASE — 3 tuiles colorées collées (full-width)
+// ═══════════════════════════════════════════════════════════════
+.cuvees-showcase {
+  padding: clamp(1.3rem, 2.2vw, 2rem) 0 0;
+  background: var(--white);
+  border-top: 1px solid rgba($ink, 0.05);
+
+  &__head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(1rem, 1.8vw, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0 1.5rem;
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.5rem, 2.4vw, 2rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    color: var(--ink) !important;
+    margin: 0 !important;
+  }
+
+  &__subtitle {
+    font-family: var(--font-sans) !important;
+    font-size: 0.85rem !important;
+    font-weight: 300 !important;
+    line-height: 1.5 !important;
+    color: var(--ink-mute) !important;
+    margin: 0 !important;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+
+    @include until($bp-tablet) { grid-template-columns: 1fr; }
+  }
+}
+
+.cuvee-mini {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: clamp(1.2rem, 2.2vw, 1.8rem) clamp(1.2rem, 2vw, 1.8rem);
+  background: var(--accent, #{$olive});
+  color: #fff;
+  min-height: 210px;
+  position: relative;
+  overflow: visible;
+  animation: cuvee-mini-in 0.7s $ease-lux both;
+  animation-delay: var(--delay, 0ms);
+
+  &__visual {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    // La bouteille dépasse légèrement du haut de son bloc coloré.
+    img {
+      height: clamp(230px, 20vw, 275px);
+      max-height: none;
+      max-width: 100%;
+      width: auto;
+      margin-top: clamp(-55px, -4.5vw, -34px);
+      filter: drop-shadow(0 22px 32px rgba(0, 0, 0, 0.42));
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+    color: #fff;
+    line-height: 1;
+  }
+
+  &__harvest {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: rgba(#fff, 0.75);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  &__notes { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 0.8rem; }
+
+  &__note {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 300;
+    line-height: 1.45;
+    color: rgba(#fff, 0.85);
+  }
+
+  &__cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.6rem;
+    margin-top: 0.3rem;
+    border-top: 1px solid rgba(#fff, 0.25);
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    transition: gap $dur-base $ease-lux;
+
+    &:hover { gap: 0.9rem; }
+  }
+}
+@keyframes cuvee-mini-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  6. PROCESS TIMELINE — 6 steps (bloc dense)
+// ═══════════════════════════════════════════════════════════════
+.process {
+  padding-block: clamp(1.2rem, 2vw, 1.8rem);          // ← réduit
+  background: var(--white);
+  border-top: 1px solid rgba($ink, 0.05);
+
+  &__head {
+    text-align: center;
+    margin-bottom: clamp(1rem, 1.6vw, 1.4rem);        // ← réduit
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem) !important; // ← un peu plus petit
+    font-weight: 400 !important;
+    letter-spacing: 0.005em !important;
+    color: var(--ink) !important;
+    margin: 0 !important;
+  }
+
+  &__timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem;                                     // ← plus serré
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    @include until($bp-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem 0.8rem;
+    }
+    @include until($bp-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__line {
+    position: absolute;
+    top: 36px;                                        // ← ajusté avec l’icône plus petite
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba($olive, 0.35) 8%, rgba($olive, 0.35) 92%, transparent);
+    z-index: 0;
+    @include until($bp-desktop) { display: none; }
+  }
+
+  &__cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(1.1rem, 1.8vw, 1.5rem);         // ← réduit
+  }
+}
+
+.process-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.45rem;                                       // ← plus serré
+  padding: 0 0.4rem;
+  animation: process-step-in 0.7s $ease-lux both;
+  animation-delay: var(--delay, 0ms);
+
+  &__num {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    color: var(--olive-deep);
+    background: var(--white);
+    padding: 0 0.4rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;                                      // ← plus petit (était 52px)
+    height: 44px;
+    border: 1px solid rgba($olive, 0.35);
+    border-radius: 50%;
+    color: var(--olive-deep);
+    background: var(--white);
+    z-index: 1;
+    position: relative;
+    transition: transform $dur-base $ease-lux, background $dur-base $ease-lux, color $dur-base $ease-lux;
+    svg { width: 20px; height: 20px; }
+  }
+
+  &__title {
+    font-family: var(--font-sans) !important;
+    font-size: 0.72rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+    color: var(--ink) !important;
+    margin: 0.2rem 0 0.1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  &__text {
+    font-family: var(--font-sans) !important;
+    font-size: 0.72rem !important;
+    font-weight: 300 !important;
+    line-height: 1.5 !important;
+    color: var(--ink-mute) !important;
+    margin: 0 !important;
+    max-width: 20ch;
+  }
+
+  &:hover .process-step__icon {
+    transform: scale(1.06);
+    background: var(--olive-deep);
+    color: #fff;
+  }
+}
+@keyframes process-step-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  7. PRO BLOCK — 2 colonnes full-width (Pro green + PL navy)
+// ═══════════════════════════════════════════════════════════════
+.pro-block {
+  border-top: 1px solid rgba($ink, 0.05);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    width: 100%;
+
+    @include until($bp-tablet) { grid-template-columns: 1fr; }
+  }
+
+  &__col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 320px;
+    padding: clamp(1.3rem, 2.4vw, 2rem);
+
+    @include until($bp-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__col--pro {
+    background: #203A1D;
+    color: #fff;
+    .overline { color: rgba(#fff, 0.75); }
+  }
+
+  &__col--pl {
+    background: #162637;
+    color: #fff;
+    .overline { color: rgba(#fff, 0.75); }
+  }
+
+  &__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: 100%;
+
+    img {
+      max-height: 260px;
+      max-width: 100%;
+      width: auto;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+    }
+
+    &--pl img { max-height: 220px; }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding: 1rem 0.5rem;
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.5rem, 2.4vw, 1.9rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.005em !important;
+    line-height: 1.1 !important;
+    color: inherit !important;
+    margin: 0 !important;
+    text-wrap: balance;
+  }
+
+  &__text {
+    font-family: var(--font-sans) !important;
+    font-size: 0.86rem !important;
+    line-height: 1.6 !important;
+    color: inherit !important;
+    opacity: 0.82;
+    margin: 0 !important;
+    max-width: 32ch;
+  }
+
+  // Reusable btn ghost sur fond sombre
+  .btn.btn--ghost {
+    color: #fff;
+    border-color: rgba(#fff, 0.6);
+    &:hover { color: $ink; }
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  8. COFFRETS SHOWCASE — text + 1 grande image
+// ═══════════════════════════════════════════════════════════════
+.coffrets-showcase {
+  padding: clamp(1.2rem, 2vw, 1.8rem) 0;          // ← réduit
+  background: linear-gradient(160deg, #4A1D22 0%, #3A1518 60%, #2E1013 100%);
+  color: #fff;
+  border-top: 1px solid rgba(#000, 0.15);
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(1.6rem, 3vw, 2.8rem);              // ← un peu plus serré
+    align-items: center;
+    padding: 0 clamp(2rem, 5vw, 5rem);
+
+    @include until($bp-tablet) {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;                                 // ← un peu plus serré
+    align-items: flex-start;
+
+    .overline { color: #D8B15E; }
+
+    .btn {
+      background: #E9C877;
+      color: #3A1518;
+      border-color: #E9C877;
+      &:hover {
+        background: #fff;
+        border-color: #fff;
+        color: #3A1518;
+      }
+    }
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem) !important;  // ← légèrement plus petit
+    font-weight: 400 !important;
+    letter-spacing: 0.005em !important;
+    color: #F6EBD8 !important;
+    line-height: 1.08 !important;
+    margin: 0 !important;
+  }
+
+  &__text {
+    font-family: var(--font-sans) !important;
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+    color: rgba(#F6EBD8, 0.82) !important;
+    margin: 0 !important;
+    max-width: 38ch;
+  }
+
+  // ─── Image un peu plus contenue ────────────────────────────
+  &__visuals {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    img {
+      width: 100%;
+      max-width: 520px;                            // ← réduit (était 640px)
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid rgba(#E9C877, 0.35);
+      box-shadow:
+        0 20px 40px -18px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(#E9C877, 0.12);
+      transition: transform 0.5s $ease-lux, box-shadow 0.5s $ease-lux;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 28px 50px -16px rgba(0, 0, 0, 0.55),
+          0 0 0 1px rgba(#E9C877, 0.25);
+      }
+    }
+
+    @include until($bp-tablet) {
+      img { max-width: 100%; }
+    }
+  }
+}

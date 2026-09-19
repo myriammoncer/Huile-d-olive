@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Village 1800 — Aperçu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =============================================================
+   VILLAGE 1800 — Aperçu client (single file)
+   Design system : Cormorant Garamond + palette olive/terre
+   ============================================================= */
+:root{
+  --white:#fff; --paper:#FAF7F1; --ivory:#F4EEE3; --sand:#EFE4D3;
+  --ink:#1F1B15; --ink-soft:#2A241C; --ink-mute:#4B4437; --ink-line:#D9CFBD;
+  --olive-mist:#E4E4C5; --olive-light:#B8C084; --olive:#7A8B3F;
+  --olive-deep:#5C6B2E; --olive-dark:#3F4A1D; --olive-ink:#2A3312;
+  --ocre-light:#D4A76A; --ocre:#C89A5D; --ocre-deep:#A97B3C;
+  --brown:#6B4E2E;
+  --hp-deep:#0A3A1C;
+  --nav-h:100px; --announce-h:38px;
+  --serif:'Cormorant Garamond', Georgia, serif;
+  --sans:'Jost', 'Helvetica Neue', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + var(--announce-h))}
+body{
+  margin:0;font-family:var(--serif);font-size:22px;line-height:1.55;
+  color:var(--ink-soft);background:var(--white);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--ink);margin:0 0 .5em;letter-spacing:.005em;line-height:1.1}
+h1,h2{font-size:44px;font-weight:400}
+h3,h4{font-size:21px;font-weight:500}
+p,li{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink-soft);line-height:1.55;margin:0 0 1em}
+.container{max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,2.5vw,2.5rem)}
+.overline{font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--olive-deep)}
+.olive-rule{display:inline-block;width:60px;height:1px;background:var(--olive);opacity:.7;margin:.6rem 0 1.2rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.95rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--olive);color:var(--olive);border-radius:999px;transition:all .3s;cursor:pointer;background:transparent}
+.btn:hover{background:var(--olive);color:#fff;transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(92,107,46,.4)}
+.btn--solid{background:var(--olive);color:#fff}
+.btn--solid:hover{background:var(--olive-dark);border-color:var(--olive-dark)}
+section{padding:clamp(3rem,6vw,5rem) 0}
+.bg-paper{background:var(--paper)}
+
+/* Bandeau annonce */
+.announce{position:fixed;top:0;left:0;right:0;z-index:1001;height:var(--announce-h);
+  background:linear-gradient(90deg,var(--olive-dark),var(--olive-deep),var(--olive-dark));
+  color:rgba(255,255,255,.94);font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center}
+
+/* Navbar */
+.nav{position:fixed;top:var(--announce-h);left:0;right:0;z-index:1000;background:#fff;border-bottom:1px solid rgba(217,207,189,.4)}
+.nav__bar{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);padding:0 clamp(1.25rem,2.5vw,2.5rem);max-width:100vw}
+.nav__logo{font-family:var(--serif);font-size:1.75rem;color:var(--ink);font-weight:500;letter-spacing:.02em}
+.nav__logo small{display:block;font-size:.65rem;font-family:var(--sans);letter-spacing:.3em;color:var(--olive-deep);text-transform:uppercase;margin-top:.2rem}
+.nav__menu{flex:1;display:flex;justify-content:center;gap:clamp(.6rem,1.6vw,1.6rem)}
+.nav__link{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);padding:.6rem .4rem;position:relative;transition:color .3s}
+.nav__link:hover,.nav__link.is-active{color:var(--olive-dark)}
+.nav__link::after{content:'';position:absolute;left:50%;right:50%;bottom:4px;height:1.5px;background:var(--olive);transition:all .3s}
+.nav__link:hover::after,.nav__link.is-active::after{left:0;right:0}
+.nav__actions{display:flex;align-items:center;gap:1rem}
+.lang{font-family:var(--sans);font-size:.75rem;color:var(--ink-mute);display:inline-flex;gap:.35rem}
+.lang button{background:none;border:none;color:inherit;font:inherit;letter-spacing:.14em;cursor:pointer;padding:.35rem .4rem}
+.lang button.is-on{color:var(--olive-dark)}
+
+/* Hero carousel */
+.hero{position:relative;height:68vh;min-height:540px;max-height:720px;overflow:hidden;background:var(--paper);margin-top:calc(var(--announce-h) + var(--nav-h))}
+.hero-slide{position:absolute;inset:0;display:grid;place-items:center;padding:0 0 5rem 0;opacity:0;transition:opacity .9s cubic-bezier(0.16,1,0.3,1)}
+.hero-slide.is-active{opacity:1;z-index:2}
+.hero-slide__image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-slide__overlay{position:absolute;inset:0;z-index:1;
+  background:radial-gradient(90% 80% at 50% 60%,rgba(0,0,0,.55) 0%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.15) 75%,transparent 100%),
+             linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.5) 100%)}
+.hero-slide__content{position:relative;z-index:2;text-align:center;max-width:780px;padding:0 clamp(1rem,4vw,2rem)}
+.hero-slide__title{font-family:var(--serif);font-size:clamp(2.4rem,5.4vw,4.4rem)!important;font-weight:400!important;color:#fff!important;line-height:1.06;margin:0 0 1rem;
+  text-shadow:0 2px 4px rgba(0,0,0,.8),0 6px 18px rgba(0,0,0,.7),0 0 40px rgba(0,0,0,.55),0 0 90px rgba(0,0,0,.35)}
+.hero-slide__cta{padding:1.05rem 2.4rem;font-size:.82rem;letter-spacing:.22em;background:var(--olive);color:#fff;border-color:var(--olive);
+  box-shadow:0 18px 36px -14px rgba(0,0,0,.45)}
+.hero-dots{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);display:flex;gap:.55rem;z-index:5;
+  padding:.5rem .9rem;background:rgba(0,0,0,.18);backdrop-filter:blur(6px);border-radius:999px}
+.hero-dot{width:9px;height:9px;background:rgba(255,255,255,.45);border:none;padding:0;cursor:pointer;border-radius:50%;transition:all .4s}
+.hero-dot:hover{background:rgba(255,255,255,.75)}
+.hero-dot.is-active{background:#fff;transform:scale(1.25)}
+
+/* Produits phares */
+.highlights{background:var(--paper);padding:clamp(3.5rem,6vw,5.5rem) 0}
+.highlights__head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.6rem;margin-bottom:3rem}
+.highlights__title{font-family:var(--serif);font-size:44px!important;font-weight:400!important}
+.highlights__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.highlight-card{background:#fff;border:1px solid var(--ink-line);border-radius:20px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column}
+.highlight-card:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 30px 60px -30px rgba(92,107,46,.35)}
+.highlight-card__media{position:relative;aspect-ratio:3/4;background:radial-gradient(70% 60% at 50% 55%,rgba(228,228,197,.55) 0%,transparent 72%),linear-gradient(180deg,var(--ivory) 0%,var(--paper) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.highlight-card__media svg{max-width:60%;max-height:82%;filter:drop-shadow(0 14px 28px rgba(31,27,21,.22));transition:transform 1s}
+.highlight-card:hover .highlight-card__media svg{transform:translateY(-6px) scale(1.05)}
+.highlight-card__badge{position:absolute;top:.9rem;left:.9rem;padding:.35rem .75rem;background:var(--olive-dark);color:#fff;font-family:var(--sans);font-size:.6rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;border-radius:999px}
+.highlight-card__body{padding:1.4rem 1.5rem 1.6rem;flex:1;display:flex;flex-direction:column;gap:.4rem;text-align:left}
+.highlight-card__eyebrow{color:var(--olive-deep);letter-spacing:.28em;font-size:.62rem;font-family:var(--sans);text-transform:uppercase;font-weight:500}
+.highlight-card__title{font-family:var(--serif);font-size:21px!important;font-weight:500!important;margin:.15rem 0 .2rem;color:var(--ink)}
+.highlight-card__text{color:var(--ink-mute);font-size:19px!important;line-height:1.5;flex:1}
+.highlight-card__foot{margin-top:.9rem;padding-top:.85rem;border-top:1px solid var(--ink-line);display:flex;align-items:center;justify-content:space-between}
+.highlight-card__format{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--ink-soft)}
+.highlight-card__cta{font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--olive-dark)}
+
+/* Stats */
+.stats__head{text-align:center;margin-bottom:2rem}
+.stats__row{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);gap:1.5rem 0}
+.stats__sep{width:1px;align-self:stretch;background:linear-gradient(180deg,transparent,var(--ink-line) 30%,var(--ink-line) 70%,transparent);opacity:.7}
+.stat{flex:1 1 0;min-width:180px;padding:.5rem 1rem;text-align:center;display:flex;flex-direction:column;gap:.6rem;align-items:center}
+.stat__value{font-family:var(--serif);font-weight:400;font-size:clamp(2.8rem,5vw,4.4rem);color:var(--olive-dark);line-height:1}
+.stat__label{color:var(--ink-soft);font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.4;max-width:200px}
+.stats__awards{text-align:center;color:var(--ink-mute);font-style:italic;margin-top:2rem;max-width:720px;margin-inline:auto}
+
+/* Section intro */
+.intro{background:#fff;text-align:center}
+.intro__inner{max-width:880px;margin:0 auto}
+
+/* Notre Histoire section preview */
+.hist{padding:clamp(3rem,6vw,5rem) 0}
+.hist__hero{position:relative;height:60vh;min-height:480px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.55)),linear-gradient(135deg,var(--brown) 0%,var(--olive-dark) 100%)}
+.hist__hero-title{color:#fff!important;font-size:clamp(4rem,10vw,8.5rem)!important;font-weight:400!important;text-shadow:0 8px 40px rgba(0,0,0,.5);letter-spacing:.005em}
+.hist__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;margin-top:3rem}
+@media(max-width:900px){.hist__grid{grid-template-columns:1fr}}
+.hist__visual{aspect-ratio:4/3;border-radius:20px;background:linear-gradient(135deg,var(--olive) 0%,var(--olive-dark) 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-style:italic;font-size:1.5rem;padding:2rem;text-align:center}
+
+/* Cuvées preview */
+.cuvees__grid{display:flex;flex-direction:column;gap:clamp(4rem,9vw,7rem);margin-top:3rem}
+.cuvee-item{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;padding:clamp(2rem,4vw,3rem) 0}
+.cuvee-item.reversed .cuvee-item__visual{order:2}
+@media(max-width:900px){.cuvee-item,.cuvee-item.reversed{grid-template-columns:1fr;text-align:center}
+.cuvee-item.reversed .cuvee-item__visual{order:0}}
+.cuvee-item__visual{position:relative;display:flex;align-items:flex-end;justify-content:center;height:520px;max-width:360px;margin:0 auto}
+.cuvee-item__visual::before{content:'';position:absolute;inset:15% 15% 8%;z-index:-1;border-radius:50%;filter:blur(60px);opacity:.4}
+.cuvee-item.intense .cuvee-item__visual::before{background:#293423}
+.cuvee-item.medium .cuvee-item__visual::before{background:#1D2936}
+.cuvee-item.douce .cuvee-item__visual::before{background:#4E2422}
+.cuvee-item__bottle{width:180px;height:400px;border-radius:20px 20px 12px 12px}
+.cuvee-item.intense .cuvee-item__bottle{background:linear-gradient(180deg,#2a3020 0%,#4a5240 100%)}
+.cuvee-item.medium .cuvee-item__bottle{background:linear-gradient(180deg,#1a2634 0%,#3a4658 100%)}
+.cuvee-item.douce .cuvee-item__bottle{background:linear-gradient(180deg,#3a1c1a 0%,#5e3a36 100%)}
+
+/* HP preview */
+.hp{background:linear-gradient(180deg,#fff 0%,var(--paper) 100%);padding:clamp(3rem,6vw,5rem) 0}
+.hp__intro{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+@media(max-width:900px){.hp__intro{grid-template-columns:1fr;text-align:center}}
+.hp__visual{aspect-ratio:3/4;background:radial-gradient(60% 60% at 50% 55%,rgba(10,58,28,.28),transparent 65%);display:flex;align-items:center;justify-content:center}
+.hp__bottle{width:160px;height:340px;background:linear-gradient(180deg,#0a3a1c 0%,#14522a 100%);border-radius:20px 20px 12px 12px;filter:drop-shadow(0 30px 40px rgba(0,0,0,.18))}
+.hp__annot{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:center;max-width:1200px;margin:3rem auto 0}
+@media(max-width:900px){.hp__annot{grid-template-columns:1fr;text-align:center}}
+.hp__annot-col{display:flex;flex-direction:column;justify-content:space-around;gap:3rem;min-height:520px}
+.hp__annot-col--right{align-items:flex-start}
+.hp__annot-col--left{align-items:flex-end}
+.hp__annot-item{position:relative;max-width:280px;padding:.9rem .4rem}
+.hp__annot-item p{font-size:19px!important;margin:0;color:var(--ink)}
+.hp__annot-item::after{content:'';position:absolute;top:50%;width:clamp(2rem,5vw,5rem);height:1px}
+.hp__annot-item--right::after{left:100%;background:linear-gradient(90deg,var(--hp-deep) 0%,rgba(10,58,28,.4) 60%,transparent 100%)}
+.hp__annot-item--left::after{right:100%;background:linear-gradient(-90deg,var(--hp-deep) 0%,rgba(10,58,28,.4) 60%,transparent 100%)}
+.hp__dot{position:absolute;top:50%;width:10px;height:10px;border-radius:50%;background:var(--hp-deep);transform:translateY(-50%);box-shadow:0 0 0 3px rgba(10,58,28,.15);z-index:2}
+.hp__annot-item--right .hp__dot{right:-5px}
+.hp__annot-item--left .hp__dot{left:-5px}
+.hp__annot-bottle{position:relative;display:flex;align-items:center;justify-content:center;width:clamp(240px,28vw,340px)}
+.hp__annot-bottle::before{content:'';position:absolute;inset:-15% -25%;z-index:-1;
+  background:radial-gradient(60% 60% at 50% 55%,rgba(10,58,28,.35) 0%,transparent 65%);filter:blur(30px)}
+.hp__factors-grid{display:grid;grid-template-columns:repeat(3,1fr);max-width:1100px;margin:3rem auto 0;border-top:1px solid rgba(10,58,28,.14);border-left:1px solid rgba(10,58,28,.14)}
+@media(max-width:900px){.hp__factors-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.hp__factors-grid{grid-template-columns:1fr;border-left:none}}
+.hp__factor{padding:1.6rem 1.4rem 1.8rem;border-right:1px solid rgba(10,58,28,.14);border-bottom:1px solid rgba(10,58,28,.14)}
+.hp__factor-leaf{width:40px;height:40px;color:var(--hp-deep);margin-bottom:.4rem;display:inline-flex;align-items:center;justify-content:center}
+.hp__factor h3{font-family:var(--serif)!important;font-size:21px!important;font-weight:500!important;color:var(--ink)!important;margin:0!important;line-height:1.2!important}
+.hp__factor p{font-family:var(--serif)!important;font-size:22px!important;font-weight:400!important;color:var(--ink-soft)!important;line-height:1.5!important;margin:.4rem 0 0!important}
+
+/* Recettes preview */
+.recettes__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:3rem}
+.recette{background:#fff;border:1px solid var(--ink-line);border-radius:20px;overflow:hidden;transition:all .3s}
+.recette:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 24px 50px rgba(0,0,0,.09)}
+.recette__visual{aspect-ratio:3/4;background:linear-gradient(135deg,var(--olive-light) 0%,var(--olive) 100%);position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-style:italic;font-size:1.3rem}
+.recette__badge{position:absolute;left:1.2rem;bottom:1.2rem;padding:.6rem 1rem;background:rgba(255,255,255,.94);border-radius:999px;font-family:var(--sans);color:var(--olive);font-weight:500;font-size:.75rem}
+.recette__body{padding:1.4rem}
+.recette__title{font-family:var(--serif);font-size:21px!important;font-weight:500!important;margin:0 0 .3rem;color:var(--ink)}
+.recette__subtitle{font-family:var(--serif);font-style:italic;color:var(--olive);font-size:1rem;margin:0 0 .8rem}
+
+/* Réassurance */
+.reassure{background:var(--paper);border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);padding:3rem 0}
+.reassure__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem 3rem}
+.reassure__item{display:flex;align-items:flex-start;gap:1rem;position:relative}
+.reassure__item:not(:last-child)::after{content:'';position:absolute;right:-1.5rem;top:.4rem;bottom:.4rem;width:1px;background:linear-gradient(180deg,transparent,var(--ink-line) 30%,var(--ink-line) 70%,transparent)}
+@media(max-width:768px){.reassure__item::after{display:none}}
+.reassure__icon{flex-shrink:0;width:52px;height:52px;border-radius:50%;background:#fff;color:var(--olive-deep);border:1px solid rgba(122,139,63,.2);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 4px 12px -6px rgba(92,107,46,.25)}
+.reassure__title{font-family:var(--serif);font-size:21px!important;font-weight:500!important;color:var(--ink);margin:0!important}
+.reassure__text{font-family:var(--sans)!important;font-size:.85rem!important;line-height:1.55;color:var(--ink-mute)!important;margin:.2rem 0 0!important}
+
+/* Footer */
+.footer{background:#fff;color:var(--ink-soft);padding:4rem 0 2rem;border-top:1px solid var(--ink-line);position:relative}
+.footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(92,107,46,.4) 30%,rgba(92,107,46,.6) 50%,rgba(92,107,46,.4) 70%,transparent 100%)}
+.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:3rem;align-items:start}
+@media(max-width:900px){.footer__grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.footer__grid{grid-template-columns:1fr}}
+.footer__name{font-family:var(--serif);font-size:2.2rem;color:var(--ink);letter-spacing:.02em}
+.footer__tag{color:var(--olive-deep);letter-spacing:.3em;font-size:.7rem;font-family:var(--sans);text-transform:uppercase;font-weight:500;margin-top:1rem;display:block}
+.footer__col-title{font-family:var(--sans);text-transform:uppercase;letter-spacing:.28em;font-size:.7rem;font-weight:500;color:var(--olive-deep);margin:0 0 .8rem}
+.footer__col a{display:block;color:var(--ink);font-family:var(--serif);font-size:1.05rem;padding:.15rem 0;transition:color .3s}
+.footer__col a:hover{color:var(--olive-dark)}
+.footer__bottom{margin-top:4rem;padding-top:1.8rem;border-top:1px solid var(--ink-line);text-align:center;color:var(--ink-mute);font-size:.75rem;letter-spacing:.08em}
+
+/* Section dividers (aperçu) */
+.demo-divider{background:var(--ink);color:#fff;padding:2rem 0;text-align:center}
+.demo-divider__eyebrow{font-family:var(--sans);font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--olive-light);margin-bottom:.5rem}
+.demo-divider__title{color:#fff!important;font-size:2.6rem!important;margin:0!important}
+
+/* Section-title */
+.section-head{text-align:center;max-width:720px;margin:0 auto 3rem}
+
+/* Utilities pour placeholder images */
+.img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,var(--paper) 0%,var(--olive-mist) 100%);display:flex;align-items:center;justify-content:center;color:var(--olive-deep);font-family:var(--serif);font-style:italic}
+
+/* SVG bouteille simple */
+.svg-bottle{width:80%;height:auto}
+</style>
+</head>
+<body>
+
+<!-- Bandeau annonce -->
+<div class="announce">-10% sur votre première commande avec le code BIENVENUE</div>
+
+<!-- Navbar -->
+<header class="nav">
+  <div class="nav__bar">
+    <a href="#accueil" class="nav__logo">
+      Village 1800
+      <small>Huile d'olive de Korba</small>
+    </a>
+    <nav class="nav__menu">
+      <a href="#accueil" class="nav__link is-active">Accueil</a>
+      <a href="#notre-monde" class="nav__link">Notre Monde</a>
+      <a href="#hp" class="nav__link">Evoo High Polyphenols</a>
+      <a href="#cuvees" class="nav__link">Nos Cuvées</a>
+      <a href="#tracabilite" class="nav__link">Traçabilité</a>
+      <a href="#recettes" class="nav__link">Recettes</a>
+      <a href="#pro" class="nav__link">Professionnels</a>
+    </nav>
+    <div class="nav__actions">
+      <a href="#contact" class="btn btn--solid" style="padding:.6rem 1.4rem;font-size:.72rem">Contact</a>
+      <div class="lang">
+        <button class="is-on">FR</button>
+        <span style="color:var(--ink-line)">/</span>
+        <button>EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO CARROUSEL ============ -->
+<section id="accueil" class="hero">
+  <div class="hero-slide is-active" data-slide="0">
+    <div class="hero-slide__overlay"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#3a2818 0%,#5c4028 60%,#78502a 100%)"></div>
+    <div class="hero-slide__content">
+      <h1 class="hero-slide__title">Une lignée, une terre, un héritage</h1>
+      <a href="#notre-monde" class="btn hero-slide__cta">Découvrir →</a>
+    </div>
+  </div>
+  <div class="hero-slide" data-slide="1">
+    <div class="hero-slide__overlay"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a3a1c 0%,#14522a 100%)"></div>
+    <div class="hero-slide__content">
+      <h1 class="hero-slide__title">L'alliance de la nature et de la science</h1>
+      <a href="#hp" class="btn hero-slide__cta">Découvrir →</a>
+    </div>
+  </div>
+  <div class="hero-slide" data-slide="2">
+    <div class="hero-slide__overlay"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#2a3020 0%,#4a5240 60%,#7A8B3F 100%)"></div>
+    <div class="hero-slide__content">
+      <h1 class="hero-slide__title">Une seule variété « Chaïbi », trois expressions</h1>
+      <a href="#cuvees" class="btn hero-slide__cta">Découvrir →</a>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <button class="hero-dot is-active" data-dot="0"></button>
+    <button class="hero-dot" data-dot="1"></button>
+    <button class="hero-dot" data-dot="2"></button>
+  </div>
+</section>
+
+<!-- ============ PRODUITS PHARES ============ -->
+<section class="highlights">
+  <div class="container">
+    <div class="highlights__head">
+      <span class="overline">Nos produits phares</span>
+      <h2 class="highlights__title">Un terroir, trois expressions</h2>
+      <span class="olive-rule"></span>
+    </div>
+    <div class="highlights__grid">
+      <a href="#cuvees" class="highlight-card">
+        <div class="highlight-card__media">
+          <span class="highlight-card__badge">Bestseller</span>
+          <svg class="svg-bottle" viewBox="0 0 100 240"><rect x="35" y="30" width="30" height="30" fill="#293423" rx="2"/><rect x="30" y="60" width="40" height="170" fill="#293423" rx="4"/><rect x="35" y="90" width="30" height="90" fill="#fff" opacity=".9"/><text x="50" y="140" text-anchor="middle" font-family="serif" font-size="10" fill="#293423">INTENSE</text></svg>
+        </div>
+        <div class="highlight-card__body">
+          <span class="highlight-card__eyebrow">Cuvée Intense</span>
+          <h3 class="highlight-card__title">Un caractère ardent</h3>
+          <p class="highlight-card__text">Récolte précoce, notes herbacées puissantes, amertume noble.</p>
+          <div class="highlight-card__foot">
+            <span class="highlight-card__format">500 ml</span>
+            <span class="highlight-card__cta">Découvrir →</span>
+          </div>
+        </div>
+      </a>
+      <a href="#cuvees" class="highlight-card">
+        <div class="highlight-card__media">
+          <svg class="svg-bottle" viewBox="0 0 100 240"><rect x="35" y="30" width="30" height="30" fill="#1D2936" rx="2"/><rect x="30" y="60" width="40" height="170" fill="#1D2936" rx="4"/><rect x="35" y="90" width="30" height="90" fill="#fff" opacity=".9"/><text x="50" y="140" text-anchor="middle" font-family="serif" font-size="10" fill="#1D2936">BALANCED</text></svg>
+        </div>
+        <div class="highlight-card__body">
+          <span class="highlight-card__eyebrow">Cuvée Balanced</span>
+          <h3 class="highlight-card__title">L'équilibre parfait</h3>
+          <p class="highlight-card__text">Récolte de mi-saison, rondeur et fruité, l'huile de tous les jours.</p>
+          <div class="highlight-card__foot">
+            <span class="highlight-card__format">500 ml</span>
+            <span class="highlight-card__cta">Découvrir →</span>
+          </div>
+        </div>
+      </a>
+      <a href="#cuvees" class="highlight-card">
+        <div class="highlight-card__media">
+          <span class="highlight-card__badge">Nouveauté</span>
+          <svg class="svg-bottle" viewBox="0 0 100 240"><rect x="35" y="30" width="30" height="30" fill="#4E2422" rx="2"/><rect x="30" y="60" width="40" height="170" fill="#4E2422" rx="4"/><rect x="35" y="90" width="30" height="90" fill="#fff" opacity=".9"/><text x="50" y="140" text-anchor="middle" font-family="serif" font-size="10" fill="#4E2422">DÉLICATE</text></svg>
+        </div>
+        <div class="highlight-card__body">
+          <span class="highlight-card__eyebrow">Cuvée Délicate</span>
+          <h3 class="highlight-card__title">La douceur du terroir</h3>
+          <p class="highlight-card__text">Récolte tardive, olive mûre, notes rondes et légèrement beurrées.</p>
+          <div class="highlight-card__foot">
+            <span class="highlight-card__format">500 ml</span>
+            <span class="highlight-card__cta">Découvrir →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="container intro__inner">
+    <span class="overline">Village 1800 — Korba, Terre de Curubis</span>
+    <h2 style="margin-top:.6rem">L'or vert d'un héritage millénaire</h2>
+    <p>En Tunisie, l'olivier fait partie de notre histoire depuis plus de 3 000 ans. Introduit par les Phéniciens, développé par les Carthaginois puis sublimé sous l'Empire romain, il est l'un des plus précieux héritages de notre terre.</p>
+    <p>À Curubis, l'actuelle Korba, des navires quittaient autrefois nos côtes chargés d'amphores d'huile d'olive à destination de Rome.</p>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="bg-paper">
+  <div class="container">
+    <div class="stats__head"><span class="overline">La Tunisie en chiffres</span></div>
+    <div class="stats__row">
+      <div class="stat"><span class="stat__value">+107M</span><span class="stat__label">d'oliviers en Tunisie</span></div>
+      <span class="stats__sep"></span>
+      <div class="stat"><span class="stat__value">2,2M</span><span class="stat__label">d'hectares d'oliveraies</span></div>
+      <span class="stats__sep"></span>
+      <div class="stat"><span class="stat__value">2ᵉ</span><span class="stat__label">exportateur mondial d'huile d'olive</span></div>
+      <span class="stats__sep"></span>
+      <div class="stat"><span class="stat__value">1ᵉʳ</span><span class="stat__label">exportateur mondial d'huile d'olive biologique</span></div>
+    </div>
+    <p class="stats__awards">Récompensée chaque année aux compétitions mondiales d'huile d'olive à New York, Londres, Tokyo…</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<div class="demo-divider">
+  <div class="demo-divider__eyebrow">Aperçu — Interface 2</div>
+  <h2 class="demo-divider__title">Notre Monde</h2>
+</div>
+<!-- ================================================================ -->
+
+<!-- ============ NOTRE MONDE ============ -->
+<section id="notre-monde" style="padding:0">
+  <div class="hist__hero">
+    <div style="position:relative;z-index:1;text-align:center">
+      <h1 class="hist__hero-title">Notre Histoire</h1>
+    </div>
+  </div>
+  <div class="container hist">
+    <div class="hist__grid">
+      <div>
+        <h2>Notre Histoire</h2>
+        <span class="olive-rule"></span>
+        <p>Si notre huile porte le nom Village 1800, c'est en hommage à nos origines. Vers l'an 1800, nos arrière-grands-parents se sont installés dans la vallée de Korba, au cœur de l'ancienne Curubis.</p>
+        <p>Situé sur la côte du Cap Bon, au nord-est de la Tunisie, notre domaine bénéficie d'un climat méditerranéen unique.</p>
+      </div>
+      <div class="hist__visual">Oliveraie centenaire<br/>de Korba</div>
+    </div>
+    <div class="hist__grid" style="margin-top:5rem">
+      <div class="hist__visual" style="background:linear-gradient(135deg,var(--ocre) 0%,var(--brown) 100%)">Ghassen & Chiraz<br/>Atallah-Mokaddem</div>
+      <div>
+        <h2>Héritage, nature et science</h2>
+        <span class="olive-rule"></span>
+        <p>Depuis 2017, notre rêve est devenu une réalité. Nous sommes Ghassen Atallah et Chiraz Mokaddem, un couple uni par la même passion pour notre terre et notre héritage familial.</p>
+        <p>Chiraz, docteur en biologie, apporte la précision scientifique à notre travail. Du suivi de la récolte aux analyses en laboratoire, elle veille à préserver toute la richesse naturelle de notre huile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<div class="demo-divider">
+  <div class="demo-divider__eyebrow">Aperçu — Interface 3</div>
+  <h2 class="demo-divider__title">Nos Cuvées</h2>
+</div>
+<!-- ================================================================ -->
+
+<!-- ============ CUVÉES ============ -->
+<section id="cuvees" class="bg-paper">
+  <div class="container">
+    <div class="section-head">
+      <span class="overline">Nos Cuvées</span>
+      <h2>Trois expressions d'une même variété</h2>
+      <span class="olive-rule"></span>
+      <p>Intense, Balanced, Délicate — toutes nos huiles d'olive extra vierges monovariétales sont issues de la variété Chaïbi. C'est la période de la récolte qui fait toute la différence.</p>
+    </div>
+    <div class="cuvees__grid">
+      <div class="cuvee-item intense">
+        <div class="cuvee-item__visual"><div class="cuvee-item__bottle"></div></div>
+        <div>
+          <span class="overline" style="color:#293423">Récolte précoce</span>
+          <h2 style="margin-top:.4rem">Cuvée Intense</h2>
+          <span class="olive-rule" style="background:#293423"></span>
+          <p><em>Un caractère ardent, l'huile des connaisseurs.</em></p>
+          <p><strong>Récolte :</strong> Fin octobre — olives vertes</p>
+          <p><strong>Profil :</strong> Fruité puissant, artichaut sauvage, amertume noble</p>
+          <a href="#" class="btn btn--solid">Découvrir cette cuvée →</a>
+        </div>
+      </div>
+      <div class="cuvee-item medium reversed">
+        <div class="cuvee-item__visual"><div class="cuvee-item__bottle"></div></div>
+        <div>
+          <span class="overline" style="color:#1D2936">Récolte mi-saison</span>
+          <h2 style="margin-top:.4rem">Cuvée Balanced</h2>
+          <span class="olive-rule" style="background:#1D2936"></span>
+          <p><em>L'équilibre absolu — l'huile de tous les jours.</em></p>
+          <p><strong>Récolte :</strong> Fin novembre — olives vertes et violettes</p>
+          <p><strong>Profil :</strong> Fruité rond, notes douces, herbes fraîches</p>
+          <a href="#" class="btn btn--solid">Découvrir cette cuvée →</a>
+        </div>
+      </div>
+      <div class="cuvee-item douce">
+        <div class="cuvee-item__visual"><div class="cuvee-item__bottle"></div></div>
+        <div>
+          <span class="overline" style="color:#4E2422">Récolte tardive</span>
+          <h2 style="margin-top:.4rem">Cuvée Délicate</h2>
+          <span class="olive-rule" style="background:#4E2422"></span>
+          <p><em>La sérénité florale — la douceur du terroir.</em></p>
+          <p><strong>Récolte :</strong> Fin décembre — olives violettes</p>
+          <p><strong>Profil :</strong> Fruité mûr, floral, notes beurrées</p>
+          <a href="#" class="btn btn--solid">Découvrir cette cuvée →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<div class="demo-divider">
+  <div class="demo-divider__eyebrow">Aperçu — Interface 4</div>
+  <h2 class="demo-divider__title">Evoo High Polyphenols</h2>
+</div>
+<!-- ================================================================ -->
+
+<!-- ============ HP ============ -->
+<section id="hp" class="hp">
+  <div class="container">
+    <div class="hp__intro">
+      <div>
+        <h1 style="color:var(--ink)">High Polyphenols</h1>
+        <span class="olive-rule" style="background:var(--hp-deep)"></span>
+        <p><em>Riche en hydroxytyrosol · Santé cardiovasculaire & longévité · 500 ml</em></p>
+        <p>Fruit de l'alliance entre la nature et la science, notre gamme High Polyphenols est issue de la variété autochtone Chaïbi du Cap Bon.</p>
+        <a href="#cuvees" class="btn btn--solid">Découvrir la gamme →</a>
+      </div>
+      <div class="hp__visual"><div class="hp__bottle"></div></div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:5rem">
+    <div class="section-head">
+      <h2>Pourquoi sont-ils si importants ?</h2>
+      <span class="olive-rule" style="background:var(--hp-deep)"></span>
+      <p>Les polyphénols contribuent à :</p>
+    </div>
+    <div class="hp__annot">
+      <div class="hp__annot-col hp__annot-col--left">
+        <article class="hp__annot-item hp__annot-item--right">
+          <span class="hp__dot"></span>
+          <p>Protéger les cellules contre le stress oxydatif.</p>
+        </article>
+        <article class="hp__annot-item hp__annot-item--right">
+          <span class="hp__dot"></span>
+          <p>Réduire l'inflammation.</p>
+        </article>
+        <article class="hp__annot-item hp__annot-item--right">
+          <span class="hp__dot"></span>
+          <p>Neutraliser les radicaux libres.</p>
+        </article>
+      </div>
+      <div class="hp__annot-bottle"><div class="hp__bottle" style="width:180px;height:380px"></div></div>
+      <div class="hp__annot-col hp__annot-col--right">
+        <article class="hp__annot-item hp__annot-item--left">
+          <span class="hp__dot"></span>
+          <p>Préserver la santé cardiovasculaire.</p>
+        </article>
+        <article class="hp__annot-item hp__annot-item--left">
+          <span class="hp__dot"></span>
+          <p>Soutenir le vieillissement en bonne santé.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:5rem">
+    <div class="section-head">
+      <h2>Qu'est-ce qui détermine leur teneur ?</h2>
+      <span class="olive-rule" style="background:var(--hp-deep)"></span>
+      <p>Plusieurs facteurs sont essentiels :</p>
+    </div>
+    <div class="hp__factors-grid">
+      <article class="hp__factor">
+        <div class="hp__factor-leaf">🌿</div>
+        <h3>La variété d'olive</h3>
+        <p>La variété Chaïbi est naturellement riche en polyphénols.</p>
+      </article>
+      <article class="hp__factor">
+        <div class="hp__factor-leaf">🌿</div>
+        <h3>Le terroir</h3>
+        <p>Un climat chaud et sec favorise leur développement.</p>
+      </article>
+      <article class="hp__factor">
+        <div class="hp__factor-leaf">🌿</div>
+        <h3>Agriculture responsable</h3>
+        <p>Pas de traitements chimiques : l'olivier développe ses défenses naturelles.</p>
+      </article>
+      <article class="hp__factor">
+        <div class="hp__factor-leaf">🌿</div>
+        <h3>Une récolte précoce</h3>
+        <p>Lorsque le niveau des polyphénols est à son maximum.</p>
+      </article>
+      <article class="hp__factor" style="grid-column:2 / 3">
+        <div class="hp__factor-leaf">🌿</div>
+        <h3>Extraction & stockage</h3>
+        <p>À basse température, à l'abri de la lumière et de la chaleur.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<div class="demo-divider">
+  <div class="demo-divider__eyebrow">Aperçu — Interface 5</div>
+  <h2 class="demo-divider__title">Recettes signatures</h2>
+</div>
+<!-- ================================================================ -->
+
+<!-- ============ RECETTES ============ -->
+<section id="recettes">
+  <div class="container">
+    <div class="section-head">
+      <span class="overline">Recettes</span>
+      <h2>Recettes signatures</h2>
+      <span class="olive-rule"></span>
+      <p>Découvrez nos recettes méditerranéennes raffinées, sublimées par nos huiles d'olive d'exception.</p>
+    </div>
+    <div class="recettes__grid">
+      <article class="recette">
+        <div class="recette__visual" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">
+          Tomates & Burrata
+          <span class="recette__badge">Cuvée Intense</span>
+        </div>
+        <div class="recette__body">
+          <h3 class="recette__title">Salade de tomates anciennes & burrata</h3>
+          <p class="recette__subtitle">L'entrée « Curubis »</p>
+          <p style="font-size:1rem!important">Tranchez des tomates de variétés différentes et déposez une burrata crémeuse au centre.</p>
+        </div>
+      </article>
+      <article class="recette">
+        <div class="recette__visual" style="background:linear-gradient(135deg,#3498db,#2c3e50)">
+          Filet de daurade
+          <span class="recette__badge">Cuvée Délicate</span>
+        </div>
+        <div class="recette__body">
+          <h3 class="recette__title">Filet de daurade à la vapeur de mer</h3>
+          <p class="recette__subtitle">Le plat « Rivage de Korba »</p>
+          <p style="font-size:1rem!important">Cuisez votre filet à la vapeur avec quelques herbes de Provence.</p>
+        </div>
+      </article>
+      <article class="recette">
+        <div class="recette__visual" style="background:linear-gradient(135deg,#0a3a1c,#14522a)">
+          Wellness Bowl
+          <span class="recette__badge">High Polyphenols</span>
+        </div>
+        <div class="recette__body">
+          <h3 class="recette__title">Wellness Bowl : quinoa & avocat</h3>
+          <p class="recette__subtitle">Le rituel santé du midi</p>
+          <p style="font-size:1rem!important">Mélangez du quinoa froid, des dés d'avocat, des pousses d'épinards et des amandes.</p>
+        </div>
+      </article>
+      <article class="recette">
+        <div class="recette__visual" style="background:linear-gradient(135deg,#f39c12,#d35400)">
+          Carpaccio d'ananas
+          <span class="recette__badge">Cuvée Balanced</span>
+        </div>
+        <div class="recette__body">
+          <h3 class="recette__title">Carpaccio d'ananas & mandarine</h3>
+          <p class="recette__subtitle">Le dessert audacieux</p>
+          <p style="font-size:1rem!important">Tranchez un ananas très finement, parsemez de zestes de citron vert et menthe.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<div class="demo-divider">
+  <div class="demo-divider__eyebrow">Aperçu — Interface 6</div>
+  <h2 class="demo-divider__title">Professionnels</h2>
+</div>
+<!-- ================================================================ -->
+
+<!-- ============ PRO ============ -->
+<section id="pro" class="bg-paper">
+  <div class="container">
+    <div class="section-head">
+      <span class="overline">Nos garanties</span>
+      <h2>Des solutions fiables pour vos besoins quotidiens</h2>
+      <span class="olive-rule"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem">
+      <article style="background:#fff;padding:2.5rem 2rem;border-radius:20px;border:1px solid var(--ink-line);text-align:center">
+        <div style="width:60px;height:60px;color:var(--olive-deep);margin:0 auto 1.4rem;font-size:2.4rem">🛡️</div>
+        <h3>Origine unique</h3>
+        <p style="font-size:1rem!important">Toutes nos huiles proviennent de notre domaine familial à Korba, garantissant une authenticité et une qualité constantes.</p>
+      </article>
+      <article style="background:#fff;padding:2.5rem 2rem;border-radius:20px;border:1px solid var(--ink-line);text-align:center">
+        <div style="width:60px;height:60px;color:var(--olive-deep);margin:0 auto 1.4rem;font-size:2.4rem">⏱️</div>
+        <h3>Qualité constante</h3>
+        <p style="font-size:1rem!important">Nos huiles sont analysées et contrôlées à chaque récolte pour garantir un profil aromatique exceptionnel.</p>
+      </article>
+      <article style="background:#fff;padding:2.5rem 2rem;border-radius:20px;border:1px solid var(--ink-line);text-align:center">
+        <div style="width:60px;height:60px;color:var(--olive-deep);margin:0 auto 1.4rem;font-size:2.4rem">📋</div>
+        <h3>Traçabilité complète</h3>
+        <p style="font-size:1rem!important">Du verger à la bouteille, chaque étape est documentée pour vous offrir une transparence totale.</p>
+      </article>
+    </div>
+
+    <div style="text-align:center;margin-top:4rem">
+      <h2>Devenons partenaires</h2>
+      <p>Épiceries fines, distributeurs, restaurateurs & chefs — parlons de votre projet.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.4rem">
+        <a href="#contact" class="btn btn--solid">Demander un devis personnalisé →</a>
+        <a href="#contact" class="btn">Contacter un conseiller</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<div class="demo-divider">
+  <div class="demo-divider__eyebrow">Aperçu — Interface 7</div>
+  <h2 class="demo-divider__title">Contact</h2>
+</div>
+<!-- ================================================================ -->
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" style="background:linear-gradient(180deg,#fff 0%,var(--paper) 60%,var(--ivory) 100%);padding:5rem 0">
+  <div class="container" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:5rem;align-items:start">
+    <aside>
+      <span class="overline" style="padding-left:44px;position:relative"><span style="position:absolute;left:0;top:50%;width:32px;height:1px;background:var(--olive);transform:translateY(-50%);opacity:.7"></span>Contact</span>
+      <h1 style="margin-top:1rem">Parlons-en</h1>
+      <p>Une question, une demande de partenariat ou simplement l'envie d'échanger ? Écrivez-nous.</p>
+      <ul style="list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:1rem">
+        <li style="display:flex;gap:.9rem;padding:.9rem 1rem;background:#fff;border:1px solid var(--ink-line);border-radius:10px"><span style="width:34px;height:34px;border-radius:50%;background:var(--ivory);color:var(--olive-deep);display:inline-flex;align-items:center;justify-content:center">📍</span> Rue Ebtikar, Zone Artisanale, Nabeul 8011, Tunisie</li>
+        <li style="display:flex;gap:.9rem;padding:.9rem 1rem;background:#fff;border:1px solid var(--ink-line);border-radius:10px"><span style="width:34px;height:34px;border-radius:50%;background:var(--ivory);color:var(--olive-deep);display:inline-flex;align-items:center;justify-content:center">✉️</span> Greenorigin.company@gmail.com</li>
+        <li style="display:flex;gap:.9rem;padding:.9rem 1rem;background:#fff;border:1px solid var(--ink-line);border-radius:10px"><span style="width:34px;height:34px;border-radius:50%;background:var(--ivory);color:var(--olive-deep);display:inline-flex;align-items:center;justify-content:center">📞</span> +216 99 909 708</li>
+      </ul>
+    </aside>
+    <form style="background:#fff;padding:2.8rem;border:1px solid var(--ink-line);border-radius:20px;box-shadow:0 24px 48px -22px rgba(31,27,21,.18);display:grid;gap:1.2rem" onsubmit="event.preventDefault(); alert('Message envoyé (aperçu — non fonctionnel)');">
+      <div><label style="font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem">Nom</label><input type="text" style="width:100%;padding:.85rem 1.05rem;border:1px solid var(--ink-line);border-radius:4px;font:inherit;background:var(--paper)"/></div>
+      <div><label style="font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem">Email</label><input type="email" style="width:100%;padding:.85rem 1.05rem;border:1px solid var(--ink-line);border-radius:4px;font:inherit;background:var(--paper)"/></div>
+      <div><label style="font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem">Sujet</label><input type="text" style="width:100%;padding:.85rem 1.05rem;border:1px solid var(--ink-line);border-radius:4px;font:inherit;background:var(--paper)"/></div>
+      <div><label style="font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem">Message</label><textarea rows="6" style="width:100%;padding:.85rem 1.05rem;border:1px solid var(--ink-line);border-radius:4px;font:inherit;background:var(--paper);resize:vertical"></textarea></div>
+      <button class="btn btn--solid" style="justify-self:start">Envoyer le message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ RÉASSURANCE ============ -->
+<section class="reassure">
+  <div class="container reassure__grid">
+    <article class="reassure__item">
+      <span class="reassure__icon">🌱</span>
+      <div><h3 class="reassure__title">Production artisanale</h3><p class="reassure__text">Cueillette à la main, pressage à froid, sans intermédiaire.</p></div>
+    </article>
+    <article class="reassure__item">
+      <span class="reassure__icon">🌳</span>
+      <div><h3 class="reassure__title">Oliviers centenaires</h3><p class="reassure__text">Variété Chaïbi cultivée sans irrigation ni pesticides.</p></div>
+    </article>
+    <article class="reassure__item">
+      <span class="reassure__icon">📍</span>
+      <div><h3 class="reassure__title">Origine tracée</h3><p class="reassure__text">Du verger de Korba à votre table, en toute transparence.</p></div>
+    </article>
+    <article class="reassure__item">
+      <span class="reassure__icon">🏆</span>
+      <div><h3 class="reassure__title">Primée à l'international</h3><p class="reassure__text">Récompensée à New York, Londres et Tokyo.</p></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <span class="footer__name">Village 1800</span>
+      <span class="footer__tag">Méditerranéen lifestyle</span>
+      <div style="display:flex;gap:.5rem;margin-top:1rem">
+        <a href="#" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--ink-line);color:var(--ink-soft)">In</a>
+        <a href="#" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--ink-line);color:var(--ink-soft)">Fb</a>
+        <a href="#" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--ink-line);color:var(--ink-soft)">Li</a>
+      </div>
+    </div>
+    <nav class="footer__col">
+      <h4 class="footer__col-title">Navigation</h4>
+      <a href="#accueil">Accueil</a>
+      <a href="#notre-monde">Notre Monde</a>
+      <a href="#tracabilite">Traçabilité</a>
+      <a href="#recettes">Recettes</a>
+      <a href="#pro">Professionnels</a>
+    </nav>
+    <nav class="footer__col">
+      <h4 class="footer__col-title">Nos Cuvées</h4>
+      <a href="#cuvees">Intense</a>
+      <a href="#cuvees">Balanced</a>
+      <a href="#cuvees">Délicate</a>
+      <a href="#hp">High Polyphenol</a>
+    </nav>
+    <address class="footer__col" style="font-style:normal">
+      <h4 class="footer__col-title">Contact</h4>
+      <span style="display:block;font-family:var(--serif);font-size:1.05rem;margin-bottom:.3rem">Rue Ebtikar, Zone Artisanale</span>
+      <span style="display:block;font-family:var(--serif);font-size:1.05rem;margin-bottom:.3rem">Dar Chaâbane El Fehri</span>
+      <span style="display:block;font-family:var(--serif);font-size:1.05rem;margin-bottom:.6rem">Nabeul 8011, Tunisie</span>
+      <a href="mailto:Greenorigin.company@gmail.com">Greenorigin.company@gmail.com</a>
+      <a href="tel:+21699909708">+216 99 909 708</a>
+    </address>
+  </div>
+  <div class="container footer__bottom">
+    <span>© 2026 Village 1800 · Aperçu client (fichier de démo)</span>
+  </div>
+</footer>
+
+<script>
+// Carrousel hero — autoplay
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hero-dot');
+let currentSlide = 0;
+function goToSlide(i) {
+  slides[currentSlide].classList.remove('is-active');
+  dots[currentSlide].classList.remove('is-active');
+  currentSlide = (i + slides.length) % slides.length;
+  slides[currentSlide].classList.add('is-active');
+  dots[currentSlide].classList.add('is-active');
+}
+setInterval(() => goToSlide(currentSlide + 1), 4500);
+dots.forEach((dot, i) => dot.addEventListener('click', () => goToSlide(i)));
+
+// Navigation active state on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav__link');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY + 200;
+  sections.forEach(section => {
+    if (section.offsetTop <= scrollY && section.offsetTop + section.offsetHeight > scrollY) {
+      const id = section.id;
+      navLinks.forEach(link => {
+        link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

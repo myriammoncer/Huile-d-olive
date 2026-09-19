@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { trackVisit, getAllVisites, getStats } = require('../controllers/trackingController');
-const auth = require('../middleware/auth');
+const { authenticate, requireAdmin } = require('../middleware/auth');
+const { trackingLimiter } = require('../middleware/rateLimits');
 
-// Route publique
-router.post('/', trackVisit);
-
-// Routes privées (admin)
-router.get('/', auth, getAllVisites);
-router.get('/stats', auth, getStats);
+router.post('/', trackingLimiter, trackVisit);
+router.get('/', authenticate, requireAdmin, getAllVisites);
+router.get('/stats', authenticate, requireAdmin, getStats);
 
 module.exports = router;

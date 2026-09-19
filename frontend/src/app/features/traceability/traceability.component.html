@@ -1,0 +1,127 @@
+<!-- ============================================================
+     1. HERO — split : éditorial + paysage olivier
+     ============================================================ -->
+<section class="tr-hero">
+  <div class="tr-hero__grid">
+    <div class="tr-hero__body">
+      <span class="tr-hero__eyebrow reveal">{{ 'traceability.hero.overline' | translate }} —</span>
+      <h1 class="tr-hero__title reveal">{{ 'traceability.hero.title' | translate }}</h1>
+      <p class="tr-hero__text reveal">{{ 'traceability.hero.text' | translate }}</p>
+
+      <div class="tr-hero__badges reveal">
+        @for (b of $any('traceability.hero.badges' | translate); track b.label) {
+          <div class="tr-badge">
+            <span class="tr-badge__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                @switch (b.icon) {
+                  @case ('leaf')   { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+                  @case ('people') { <circle cx="11" cy="12" r="3"/><circle cx="21" cy="12" r="3"/><path d="M5 24v-2a4 4 0 014-4M17 24v-2a4 4 0 014-4"/> }
+                  @case ('shield') { <path d="M16 4l10 4v9c0 6-5 10-10 11-5-1-10-5-10-11V8l10-4z"/><path d="M11 16l4 4 6-8"/> }
+                }
+              </svg>
+            </span>
+            <span class="tr-badge__label" [innerText]="b.label"></span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="tr-hero__visual reveal">
+      <img src="assets/images/Notre_Hist/olivv.jpg" alt="Paysage olivier méditerranéen" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. OUR JOURNEY — timeline horizontale 5 étapes
+     ============================================================ -->
+<section class="tr-journey" id="parcours">
+  <header class="tr-journey__head reveal">
+    <span class="tr-journey__rule" aria-hidden="true"></span>
+    <h2 class="tr-journey__title">{{ 'traceability.journey.title' | translate }}</h2>
+    <span class="tr-journey__rule" aria-hidden="true"></span>
+  </header>
+
+  <div class="tr-journey__timeline">
+    <span class="tr-journey__line" aria-hidden="true"></span>
+
+    @for (s of $any('traceability.journey.steps' | translate); track s.num; let i = $index) {
+      <article class="tr-step reveal" [class]="'tr-step--' + s.color" [style.--delay]="(i * 110) + 'ms'">
+        <span class="tr-step__num">{{ s.num }}</span>
+        <h3 class="tr-step__title">{{ s.title }}</h3>
+        <span class="tr-step__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            @switch (s.icon) {
+              @case ('sprout')     { <path d="M16 26V14M16 14c-4-2-8-1-8-6 5 0 8 3 8 6zM16 14c4-2 8-1 8-6-5 0-8 3-8 6z"/> }
+              @case ('leaf')       { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+              @case ('drop')       { <path d="M16 4c-4 6-6 10-6 14a6 6 0 0012 0c0-4-2-8-6-14z"/> }
+              @case ('microscope') { <circle cx="15" cy="12" r="4"/><path d="M15 16v6M9 26h14M12 22h6M15 6v2M13 4h4"/> }
+              @case ('bottle')     { <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/> }
+            }
+          </svg>
+        </span>
+
+        <ul class="tr-step__items">
+          @for (item of s.items; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     3. PILIERS — 4 panneaux couleurs saturées
+     ============================================================ -->
+<section class="tr-pillars" id="nos-pratiques">
+  @for (p of $any('traceability.pillars' | translate); track p.title; let i = $index) {
+    <article class="tr-pillar reveal" [class]="'tr-pillar--' + p.theme" [style.--delay]="(i * 100) + 'ms'">
+      <span class="tr-pillar__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          @switch (p.icon) {
+            @case ('drop')   { <path d="M16 4c-4 6-6 10-6 14a6 6 0 0012 0c0-4-2-8-6-14z"/> }
+            @case ('sprout') { <path d="M16 26V14M16 14c-4-2-8-1-8-6 5 0 8 3 8 6zM16 14c4-2 8-1 8-6-5 0-8 3-8 6z"/> }
+            @case ('heart')  { <path d="M16 26s-8-5-8-12a5 5 0 019-3 5 5 0 019 3c0 7-8 12-8 12z"/><path d="M12 15h2l1-2 2 4 1-2h4"/> }
+            @case ('globe')  { <circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c4 4 4 20 0 24M16 4c-4 4-4 20 0 24"/> }
+          }
+        </svg>
+      </span>
+      <h3 class="tr-pillar__title">{{ p.title }}</h3>
+      <p class="tr-pillar__text">{{ p.text }}</p>
+    </article>
+  }
+</section>
+
+<!-- ============================================================
+     4. ENGAGEMENT — intro + 4 cartes visuelles
+     ============================================================ -->
+<section class="tr-engagement" id="nos-engagements">
+  <div class="tr-engagement__grid">
+
+    <div class="tr-engagement__intro reveal">
+      <span class="tr-engagement__eyebrow">{{ 'traceability.engagement.overline' | translate }} —</span>
+      <h2 class="tr-engagement__title">{{ 'traceability.engagement.title' | translate }}</h2>
+      <p class="tr-engagement__text">{{ 'traceability.engagement.text' | translate }}</p>
+      <a class="tr-engagement__cta" routerLink="/notre-histoire">
+        {{ 'traceability.engagement.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="tr-engagement__cards">
+      @for (c of $any('traceability.engagement.cards' | translate); track c.title; let i = $index) {
+        <article class="tr-eng-card reveal" [style.--delay]="(i * 100) + 'ms'">
+          <div class="tr-eng-card__photo">
+            <img [src]="engagementImages[i]" [alt]="c.title" loading="lazy" />
+          </div>
+          <div class="tr-eng-card__body">
+            <h3 class="tr-eng-card__title">{{ c.title }}</h3>
+            <p class="tr-eng-card__text">{{ c.text }}</p>
+          </div>
+        </article>
+      }
+    </div>
+
+  </div>
+</section>

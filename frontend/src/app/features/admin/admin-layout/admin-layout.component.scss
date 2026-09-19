@@ -1,0 +1,145 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host { display: block; }
+
+.admin {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 100vh;
+  background: $paper;
+  color: $ink;
+  font-family: $font-sans;
+
+  @include until($bp-tablet) { grid-template-columns: 1fr; }
+}
+
+// --- Sidebar cream / olive ---
+.admin__sidebar {
+  display: flex;
+  flex-direction: column;
+  background: $white;
+  color: $ink;
+  padding: 1.8rem 1.4rem;
+  border-right: 1px solid $ink-line;
+
+  @include until($bp-tablet) {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-right: 0;
+    border-bottom: 1px solid $ink-line;
+  }
+}
+
+.admin__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid $ink-line;
+
+  @include until($bp-tablet) { margin: 0; padding: 0; border: 0; flex-direction: row; align-items: center; gap: 1rem; }
+
+  &-sub {
+    font-family: $font-sans;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: $olive-deep;
+  }
+}
+
+.admin__logo {
+  height: 78px; width: auto;
+  display: block;
+  @include until($bp-tablet) { height: 60px; }
+}
+
+.admin__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+
+  @include until($bp-tablet) { flex-direction: row; flex: 1 1 100%; }
+
+  a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: $radius-md;
+    color: $ink-soft;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover { background: $ivory; color: $olive-dark; }
+    &.is-active {
+      background: rgba($olive, 0.12);
+      color: $olive-dark;
+      font-weight: 500;
+      &::before {
+        content: '';
+        position: absolute; left: 0; top: 20%; bottom: 20%;
+        width: 3px; border-radius: 2px;
+        background: $olive;
+      }
+    }
+  }
+}
+.admin__nav-ico { font-size: 1.05rem; }
+
+.admin__badge {
+  margin-left: auto;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: $olive;
+  color: $white;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.admin__user {
+  margin-top: auto;
+  padding-top: 1.4rem;
+  border-top: 1px solid $ink-line;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  @include until($bp-tablet) { margin: 0; padding: 0; border: 0; flex-direction: row; align-items: center; }
+
+  &-mail { font-size: 0.78rem; color: $ink-mute; word-break: break-all; }
+}
+
+.admin__logout {
+  align-self: flex-start;
+  border: 1px solid $ink-line;
+  background: transparent;
+  color: $ink-soft;
+  padding: 0.5rem 1rem;
+  border-radius: $radius-sm;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  &:hover { background: $olive; color: $white; border-color: $olive; }
+}
+
+// --- Content ---
+.admin__content {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  overflow-x: auto;
+}

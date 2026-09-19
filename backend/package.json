@@ -3,20 +3,33 @@
   "version": "1.0.0",
   "description": "Backend API - Village 1800",
   "main": "src/index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "migrate": "node src/scripts/migrateSchema.js",
+    "create-admin": "node src/scripts/createAdmin.js",
+    "drop-unused": "node src/scripts/dropUnusedTables.js",
+    "seed-products": "node src/scripts/seedProducts.js",
+    "postinstall": "echo 'ℹ Backend prêt. Lancer: npm run migrate puis npm run create-admin'"
   },
   "keywords": [],
   "author": "Meriam Moncer",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.0.0",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.18.0",
+    "express-rate-limit": "^8.6.2",
+    "express-validator": "^7.3.2",
+    "geoip-lite": "^1.4.10",
+    "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.0",
+    "multer": "^2.2.0",
     "mysql2": "^3.0.0"
   },
   "devDependencies": {

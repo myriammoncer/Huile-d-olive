@@ -1,0 +1,30 @@
+// Style temporaire partagé par les pages placeholder (sera retiré
+// au fur et à mesure que chaque page est construite pour de vrai).
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  min-height: calc(100vh - #{$nav-height});
+  padding: clamp(6rem, 14vh, 11rem) 1.5rem 6rem;
+  text-align: center;
+}
+
+.placeholder__overline {
+  @include overline;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+.placeholder__title {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  margin-bottom: 1rem;
+}
+
+.placeholder__note {
+  max-width: 38rem;
+  margin: 0 auto;
+  color: rgba($black-deep, 0.6);
+  font-style: italic;
+}

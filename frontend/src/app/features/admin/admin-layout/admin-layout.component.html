@@ -1,0 +1,34 @@
+<div class="admin">
+  <aside class="admin__sidebar">
+    <div class="admin__brand">
+      <img class="admin__logo" src="assets/images/logo-wordmark.svg" alt="Village 1800" />
+      <span class="admin__brand-sub">Espace administration</span>
+    </div>
+
+    <nav class="admin__nav">
+      <a routerLink="produits" routerLinkActive="is-active">
+        <span class="admin__nav-ico" aria-hidden="true">🫒</span> Produits
+      </a>
+      <a routerLink="messages" routerLinkActive="is-active">
+        <span class="admin__nav-ico" aria-hidden="true">✉️</span> Messages
+        @if (state.unread() > 0) {
+          <span class="admin__badge">{{ state.unread() }}</span>
+        }
+      </a>
+      <a routerLink="statistiques" routerLinkActive="is-active">
+        <span class="admin__nav-ico" aria-hidden="true">📊</span> Statistiques
+      </a>
+    </nav>
+
+    <div class="admin__user">
+      <span class="admin__user-mail">{{ user()?.email }}</span>
+      <button type="button" class="admin__logout" (click)="logout()">Déconnexion</button>
+    </div>
+  </aside>
+
+  <main class="admin__content">
+    <router-outlet />
+  </main>
+
+  <app-toasts />
+</div>

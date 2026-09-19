@@ -1,0 +1,198 @@
+<header class="ahead">
+  <div>
+    <h1 class="ahead__title">Statistiques visiteurs</h1>
+    <p class="ahead__sub">Collecte anonyme — pays, ville, page, appareil, navigateur.</p>
+  </div>
+</header>
+
+@if (loading()) {
+  <p class="amuted">Chargement…</p>
+} @else if (stats()) {
+  @if (stats(); as s) {
+
+  <!-- ===== Hero : Total visites en chiffres géants ===== -->
+  <section class="stats-hero">
+    <div class="stats-hero__main">
+      <span class="stats-hero__eyebrow">Depuis le lancement</span>
+      <span class="stats-hero__num">{{ s.totalVisites }}</span>
+      <span class="stats-hero__label">visite{{ s.totalVisites > 1 ? 's' : '' }} enregistrée{{ s.totalVisites > 1 ? 's' : '' }}</span>
+    </div>
+
+    <div class="stats-hero__row">
+      <div class="stats-hero__stat">
+        <span class="stats-hero__stat-num">{{ s.parPays.length }}</span>
+        <span class="stats-hero__stat-label">Pays</span>
+      </div>
+      <span class="stats-hero__sep" aria-hidden="true"></span>
+      <div class="stats-hero__stat">
+        <span class="stats-hero__stat-num">{{ (s.parVille?.length) || 0 }}</span>
+        <span class="stats-hero__stat-label">Villes</span>
+      </div>
+      <span class="stats-hero__sep" aria-hidden="true"></span>
+      <div class="stats-hero__stat">
+        <span class="stats-hero__stat-num">{{ s.parPage.length }}</span>
+        <span class="stats-hero__stat-label">Pages</span>
+      </div>
+      <span class="stats-hero__sep" aria-hidden="true"></span>
+      <div class="stats-hero__stat">
+        <span class="stats-hero__stat-num">{{ (s.parAppareil[0] && s.parAppareil[0].appareil) || '—' }}</span>
+        <span class="stats-hero__stat-label">Appareil principal</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Évolution 30 jours ===== -->
+  @if (s.parJour && s.parJour.length > 0) {
+    <section class="stats-block">
+      <header class="stats-block__head">
+        <span class="stats-block__eyebrow">Tendance</span>
+        <h2 class="stats-block__title">Évolution — 30 derniers jours</h2>
+      </header>
+      <div class="stats-spark">
+        @for (d of s.parJour; track d.jour) {
+          <div class="stats-spark__col" [title]="d.jour + ' — ' + d.total + ' visite(s)'">
+            <span class="stats-spark__val">{{ d.total }}</span>
+            <span class="stats-spark__bar" [style.height.%]="pct(d.total, s.parJour)"></span>
+            <span class="stats-spark__day">{{ shortDay(d.jour) }}</span>
+          </div>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- ===== Grilles éditoriales : classements ===== -->
+  <div class="stats-grid">
+    <!-- Par pays -->
+    <section class="stats-block">
+      <header class="stats-block__head">
+        <span class="stats-block__eyebrow">Origine</span>
+        <h2 class="stats-block__title">Par pays</h2>
+      </header>
+      <ol class="stats-rank">
+        @for (row of s.parPays; track row.pays; let i = $index) {
+          <li class="stats-rank__item">
+            <span class="stats-rank__pos">{{ i + 1 }}</span>
+            <span class="stats-rank__label">{{ countryName(row.pays) }}</span>
+            <span class="stats-rank__dots" aria-hidden="true"></span>
+            <span class="stats-rank__val">{{ row.total }}</span>
+          </li>
+        }
+      </ol>
+    </section>
+
+    <!-- Par ville -->
+    <section class="stats-block">
+      <header class="stats-block__head">
+        <span class="stats-block__eyebrow">Origine</span>
+        <h2 class="stats-block__title">Par ville</h2>
+      </header>
+      @if (s.parVille && s.parVille.length > 0) {
+        <ol class="stats-rank">
+          @for (row of s.parVille; track row.ville; let i = $index) {
+            <li class="stats-rank__item">
+              <span class="stats-rank__pos">{{ i + 1 }}</span>
+              <span class="stats-rank__label">{{ row.ville }} <em class="stats-rank__sub">— {{ row.pays }}</em></span>
+              <span class="stats-rank__dots" aria-hidden="true"></span>
+              <span class="stats-rank__val">{{ row.total }}</span>
+            </li>
+          }
+        </ol>
+      } @else {
+        <p class="amuted">Aucune ville identifiée pour l'instant.</p>
+      }
+    </section>
+
+    <!-- Par page -->
+    <section class="stats-block">
+      <header class="stats-block__head">
+        <span class="stats-block__eyebrow">Contenu</span>
+        <h2 class="stats-block__title">Pages les plus vues</h2>
+      </header>
+      <ol class="stats-rank">
+        @for (row of s.parPage; track row.page; let i = $index) {
+          <li class="stats-rank__item">
+            <span class="stats-rank__pos">{{ i + 1 }}</span>
+            <span class="stats-rank__label">{{ row.page }}</span>
+            <span class="stats-rank__dots" aria-hidden="true"></span>
+            <span class="stats-rank__val">{{ row.total }}</span>
+          </li>
+        }
+      </ol>
+    </section>
+
+    <!-- Appareil + navigateur combinés -->
+    <section class="stats-block">
+      <header class="stats-block__head">
+        <span class="stats-block__eyebrow">Contexte</span>
+        <h2 class="stats-block__title">Appareil &amp; navigateur</h2>
+      </header>
+
+      <div class="stats-donut">
+        <span class="stats-donut__title">Appareils</span>
+        <ul class="stats-chips">
+          @for (row of s.parAppareil; track row.appareil) {
+            <li class="stats-chip">
+              <span class="stats-chip__label">{{ row.appareil }}</span>
+              <span class="stats-chip__val">{{ row.total }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      @if (s.parNavigateur && s.parNavigateur.length > 0) {
+        <div class="stats-donut">
+          <span class="stats-donut__title">Navigateurs</span>
+          <ul class="stats-chips">
+            @for (row of s.parNavigateur; track row.navigateur) {
+              <li class="stats-chip">
+                <span class="stats-chip__label">{{ row.navigateur }}</span>
+                <span class="stats-chip__val">{{ row.total }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </section>
+  </div>
+
+  <!-- ===== Journal : dernières visites ===== -->
+  <section class="stats-block">
+    <header class="stats-block__head">
+      <span class="stats-block__eyebrow">Journal</span>
+      <h2 class="stats-block__title">Dernières visites</h2>
+    </header>
+    @if (visites().length === 0) {
+      <p class="amuted">Aucune visite enregistrée.</p>
+    } @else {
+      <table class="stats-log">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Origine</th>
+            <th>Page</th>
+            <th>Appareil</th>
+            <th>Navigateur</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (v of visites(); track v.id) {
+            <tr>
+              <td class="stats-log__date">{{ formatDate(v.created_at) }}</td>
+              <td>
+                <span class="stats-log__place">{{ v.ville }}</span>
+                <span class="stats-log__country">{{ countryName(v.pays) }}</span>
+              </td>
+              <td>{{ v.page }}</td>
+              <td>{{ v.appareil }}</td>
+              <td>{{ v.navigateur }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+
+  }
+} @else {
+  <p class="amuted">Statistiques indisponibles.</p>
+}

@@ -1,0 +1,722 @@
+@use 'variables' as *;
+@use 'mixins'    as *;
+
+// ═══════════════════════════════════════════════════════════════
+//  PALETTE
+// ═══════════════════════════════════════════════════════════════
+$c-bordeaux:      #4A1D22;
+$c-bordeaux-deep: #2E1013;
+$c-navy:          #162637;
+$c-navy-deep:     #0E1B2B;
+$c-green:         #23412A;
+$c-green-deep:    #142611;
+$c-gold-light:    #E9C877;
+$c-gold:          #D8B15E;
+$c-cream:         #F6EBD8;
+
+:host { display: block; overflow-x: hidden; background: var(--white); }
+
+// ═══════════════════════════════════════════════════════════════
+//  1. HERO — 2 colonnes compactes
+// ═══════════════════════════════════════════════════════════════
+.hist-hero {
+  padding-top: $header-total;
+  background: var(--white);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 0.82fr 1.18fr;
+    gap: 0;
+    align-items: stretch;
+    min-height: clamp(380px, 48vh, 480px);
+
+    @include until($bp-desktop) { grid-template-columns: 1fr; }
+  }
+
+  // ── LEFT : intro éditoriale ─────────────────────────────────
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: clamp(1.25rem, 2.5vw, 2rem) clamp(2rem, 5vw, 4.5rem);
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: $c-gold;
+    letter-spacing: 0.32em !important;
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
+
+    &::after {
+      content: '';
+      width: 42px;
+      height: 1px;
+      background: $c-gold;
+      opacity: 0.75;
+    }
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(2.6rem, 5vw, 4.2rem) !important;
+    font-weight: 400 !important;
+    line-height: 0.98 !important;
+    letter-spacing: 0.005em !important;
+    color: var(--ink) !important;
+    margin: 0 !important;
+    text-wrap: balance;
+    max-width: 13ch;
+    text-transform: uppercase;
+  }
+
+  &__lead {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-width: 42ch;
+    margin-top: 0;
+
+    p {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+  }
+
+  &__cta { margin-top: 0.25rem; }
+
+  // ── RIGHT : photo pleine surface + étiquette flottante ──────
+  &__visual {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+
+    > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    // Léger dégradé pour améliorer le contraste sous l'étiquette
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; right: 0;
+      width: 45%;
+      background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+  }
+
+  // Étiquette verte « 1800 » — flottante avec retrait tout autour + ombre
+  &__badge {
+    position: absolute;
+    top: clamp(1rem, 2vw, 1.75rem);
+    right: clamp(1rem, 2vw, 1.75rem);
+    bottom: clamp(1rem, 2vw, 1.75rem);
+    z-index: 2;
+
+    width: clamp(220px, 30%, 300px);
+    background: linear-gradient(165deg, $c-green 0%, #1B3220 55%, $c-green-deep 100%);
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: clamp(1.2rem, 2.2vw, 1.8rem) clamp(1.2rem, 2vw, 1.6rem);
+
+    box-shadow: 0 30px 60px -22px rgba(0, 0, 0, 0.55);
+    border-radius: 2px;
+
+    @include until($bp-desktop) {
+      position: static;
+      width: 100%;
+      padding: 1.2rem 1.4rem;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+
+  &__badge-year {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.6rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: $c-gold-light;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  &__badge-rule {
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: rgba($c-gold-light, 0.75);
+    margin: 0.2rem 0 0.15rem;
+  }
+
+  &__badge-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: $c-cream;
+    line-height: 1.35;
+    max-width: 13ch;
+  }
+
+  &__badge-text {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: rgba($c-cream, 0.78);
+    margin: 0.2rem 0 0;
+    max-width: 30ch;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  2. NOTRE ENGAGEMENT — 3 colonnes très compactes
+// ═══════════════════════════════════════════════════════════════
+.hist-engagement {
+  background: var(--white);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1.25fr;
+    align-items: stretch;
+    gap: 0;
+    min-height: 0;
+
+    @include until($bp-desktop) { grid-template-columns: 1fr 1fr; }
+    @include until($bp-tablet)  { grid-template-columns: 1fr; }
+  }
+
+  // ── LEFT : bordeaux ─────────────────────────────────────────
+  &__intro {
+    background: linear-gradient(160deg, $c-bordeaux 0%, #3A1518 60%, $c-bordeaux-deep 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: clamp(1.6rem, 3vw, 2.6rem) clamp(1.8rem, 3.2vw, 2.8rem);
+  }
+
+  &__eyebrow-block { display: none; }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.6rem, 2.4vw, 2.15rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.01em !important;
+    color: $c-gold-light !important;
+    margin: 0 !important;
+    text-transform: uppercase;
+  }
+
+  &__lead {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba($c-cream, 0.94);
+    margin: 0;
+    max-width: 40ch;
+  }
+
+  &__body {
+    font-family: var(--font-sans);
+    font-size: 0.86rem;
+    line-height: 1.6;
+    color: rgba($c-cream, 0.82);
+    margin: 0;
+    max-width: 40ch;
+  }
+
+  // ── CENTER : portrait couleur, entièrement visible (non coupé) ──
+  //  Occupe toute la hauteur de la ligne → aligné avec la citation.
+  &__portrait {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FAF6EE;
+    overflow: hidden;
+    min-height: clamp(320px, 34vw, 460px);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    @include until($bp-tablet) { min-height: 340px; }
+  }
+
+  // ── RIGHT : citation ────────────────────────────────────────
+  &__quote {
+    position: relative;
+    background: var(--white);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: clamp(1.6rem, 3vw, 2.6rem) clamp(1.8rem, 3.2vw, 2.8rem);
+
+    p {
+      font-family: var(--font-sans);
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0 0 0.6rem 0;
+      max-width: 42ch;
+      &:last-child { margin-bottom: 0; }
+    }
+
+    &-mark {
+      position: absolute;
+      top: 0.6rem;
+      left: 1.1rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: rgba($c-gold, 0.55);
+      pointer-events: none;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  3. SAVOIR-FAIRE — 7 étapes reliées par un filet pointillé
+// ═══════════════════════════════════════════════════════════════
+.hist-savoir {
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
+  background: var(--white);
+  border-top: 1px solid rgba($c-gold, 0.25);
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+
+  &__head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1.2rem;
+    max-width: 780px;
+    margin: 0 auto clamp(0.9rem, 1.6vw, 1.4rem);
+    padding: 0 clamp(1.5rem, 5vw, 3rem);
+  }
+
+  &__rule {
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba($c-gold, 0.55), transparent);
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.7rem, 2.7vw, 2.2rem) !important;
+    font-weight: 400 !important;
+    color: var(--ink) !important;
+    letter-spacing: 0.005em !important;
+    margin: 0 !important;
+    white-space: nowrap;
+  }
+
+  &__lead {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--ink-mute);
+    text-align: center;
+    max-width: 68ch;
+    margin: 0 auto clamp(2rem, 3vw, 2.6rem);
+    padding: 0 clamp(1.5rem, 5vw, 3rem);
+  }
+
+  &__timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.3rem;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 clamp(0.8rem, 2.5vw, 2rem);
+
+    @include until($bp-desktop) { grid-template-columns: repeat(4, 1fr); gap: 2.4rem 0.4rem; }
+    @include until($bp-tablet)  { grid-template-columns: repeat(2, 1fr); gap: 2.4rem 0.4rem; }
+    @include until($bp-mobile)  { grid-template-columns: 1fr; }
+  }
+
+  // Filet pointillé horizontal reliant les cercles
+  &__line {
+    position: absolute;
+    top: 26px;
+    left: 6%;
+    right: 6%;
+    height: 0;
+    border-top: 1px dashed rgba($c-gold, 0.45);
+    z-index: 0;
+    @include until($bp-desktop) { display: none; }
+  }
+}
+
+.savoir-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  padding: 0 0.2rem;
+  min-width: 0;                 // évite tout débordement en grille
+
+  // ─── Cercle d'icône : anneau coloré alterné (olive / bordeaux / navy)
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px; height: 52px;
+    border: 1.5px solid $c-green;
+    border-radius: 50%;
+    color: $c-green;
+    background: var(--white);
+    z-index: 1;
+    position: relative;
+    transition: transform $dur-base $ease-lux, background $dur-base $ease-lux, color $dur-base $ease-lux;
+    svg { width: 22px; height: 22px; }
+  }
+
+  // Alternance des couleurs d'anneau : olive → bordeaux → navy → …
+  &:nth-child(3n+2) &__icon { border-color: $c-bordeaux; color: $c-bordeaux; }
+  &:nth-child(3n+3) &__icon { border-color: $c-navy;     color: $c-navy;     }
+
+  &__num {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    margin-top: 0.25rem;
+  }
+
+  &__title {
+    font-family: var(--font-sans) !important;
+    font-size: 0.68rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    color: var(--ink) !important;
+    margin: 0.05rem 0 0.15rem !important;
+    line-height: 1.25 !important;
+    max-width: 14ch;
+  }
+
+  &__text {
+    font-family: var(--font-sans) !important;
+    font-size: 0.68rem !important;
+    font-weight: 300 !important;
+    line-height: 1.45 !important;
+    color: var(--ink-mute) !important;
+    margin: 0 !important;
+    max-width: 18ch;
+  }
+
+  &:hover &__icon {
+    transform: scale(1.06);
+    background: currentColor;
+    svg { color: #fff; }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  4. VISION — split : panneau vert sombre · piliers blanc
+// ═══════════════════════════════════════════════════════════════
+.hist-vision {
+  background: var(--white);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 0.75fr 1.6fr;
+    align-items: stretch;
+    gap: 0;
+    min-height: clamp(240px, 30vh, 320px);   // ← plus compact
+
+    @include until($bp-tablet) { grid-template-columns: 1fr; }
+  }
+
+  // ── LEFT : panneau vert sombre ──────────────────────────────
+  &__intro {
+    background: linear-gradient(165deg, $c-green 0%, #1B3220 60%, $c-green-deep 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: clamp(1.6rem, 3vw, 2.6rem) clamp(1.6rem, 3vw, 2.6rem);
+  }
+
+  &__eyebrow {
+    color: $c-gold-light !important;
+    letter-spacing: 0.32em !important;
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.7rem, 2.6vw, 2.2rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    color: #fff !important;
+    margin: 0 !important;
+    text-transform: uppercase;
+    max-width: 14ch;
+  }
+
+  &__lead {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: rgba(#fff, 0.8);
+    margin: 0;
+    max-width: 36ch;
+  }
+
+  // ── RIGHT : 4 piliers sur fond blanc ────────────────────────
+  &__pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--white);
+
+    @include until($bp-desktop) { grid-template-columns: repeat(2, 1fr); }
+    @include until($bp-mobile)  { grid-template-columns: 1fr; }
+  }
+}
+
+.vision-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.55rem;
+  padding: clamp(1.4rem, 2.4vw, 2rem) clamp(0.8rem, 1.6vw, 1.4rem);
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    color: $c-green;
+    margin-bottom: 0.2rem;
+    svg { width: 30px; height: 30px; stroke-width: 1.3; }
+  }
+
+  // Couleurs alternées par pilier
+  &:nth-child(1) &__icon { color: $c-green; }
+  &:nth-child(2) &__icon { color: $c-bordeaux; }
+  &:nth-child(3) &__icon { color: $c-bordeaux; }
+  &:nth-child(4) &__icon { color: $c-gold; }
+
+  &__title {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0.2rem 0 0.15rem;
+    line-height: 1.3;
+    max-width: 14ch;
+  }
+
+  // Couleurs des titres pour rappel discret
+  &:nth-child(1) &__title { color: $c-green; }
+  &:nth-child(2) &__title { color: $c-bordeaux; }
+  &:nth-child(3) &__title { color: $c-bordeaux; }
+  &:nth-child(4) &__title { color: $c-gold; }
+
+  &__text {
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--ink-mute);
+    margin: 0;
+    max-width: 24ch;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  5. CTA ROW — 3 tuiles collées, bouton pilule OR
+// ═══════════════════════════════════════════════════════════════
+.hist-cta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;                                       // tuiles collées, séparées par un filet
+  background: var(--white);
+
+  @include until($bp-tablet) { grid-template-columns: 1fr; }
+}
+
+.hist-cta {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.85fr 1.5fr;
+  align-items: center;
+  gap: 0.6rem;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  min-height: 360px;
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform $dur-base $ease-lux;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    z-index: 2;
+
+    .overline {
+      color: $c-gold-light;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      font-weight: 500;
+    }
+
+    p {
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      font-weight: 300;
+      color: $c-cream;
+      margin: 0;
+      max-width: 30ch;
+    }
+  }
+
+  // Bouton pilule OR REMPLI
+  &__btn {
+    background: $c-gold-light;
+    color: $c-green-deep;
+    border-color: $c-gold-light;
+    padding: 0.75rem 1.6rem;
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+    &::before { background: #fff; }
+  }
+  &:hover &__btn { color: $c-green-deep; }
+
+  &--coffrets &__btn {
+    background: $c-gold-light;
+    color: $c-bordeaux-deep;
+    border-color: $c-gold-light;
+  }
+  &--cuvees &__btn {
+    background: $c-gold-light;
+    color: $c-navy-deep;
+    border-color: $c-gold-light;
+  }
+
+  &__visual {
+    justify-self: stretch;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    max-height: 320px;
+    min-height: 280px;
+    object-fit: contain;
+    object-position: center;
+    filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.5));
+    transition: transform 0.6s $ease-lux;
+    z-index: 1;
+  }
+
+  // Les visuels "larges" (3 bouteilles / boîte) sont agrandis pour
+  // équilibrer visuellement avec la bouteille verticale HP.
+  &--cuvees &__visual { transform: scale(1.28); }
+  // Le coffret (boîte) paraît plus petit → on le met davantage en avant.
+  &--coffrets &__visual { transform: scale(1.5); }
+
+  &:hover { transform: translateY(-2px); }
+  &:hover &__visual { transform: translateY(-4px) scale(1.30); }
+  &--cuvees:hover &__visual { transform: translateY(-4px) scale(1.33); }
+  &--coffrets:hover &__visual { transform: translateY(-4px) scale(1.55); }
+
+  &--hp       { background: linear-gradient(165deg, $c-green 0%, $c-green-deep 100%); }
+  &--cuvees   { background: linear-gradient(165deg, #1E3550 0%, $c-navy-deep 100%); }
+  &--coffrets { background: linear-gradient(165deg, $c-bordeaux 0%, $c-bordeaux-deep 100%); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SÉPARATEURS — filets fins de 2px
+//  (adapté aux fonds : encre sur clair, blanc/or sur foncé)
+// ═══════════════════════════════════════════════════════════════
+
+// ─── Entre les grandes sections ───────────────────────────────
+// Page à fond clair → un trait blanc serait invisible, on prend l'encre.
+.hist-engagement,
+.hist-savoir,
+.hist-vision,
+.hist-cta-row {
+  border-top: 2px solid rgba($ink, 0.08);
+}
+// (Si ton HTML enveloppe chaque bloc dans un <section>, tu peux
+//  remplacer les 4 sélecteurs ci-dessus par :  section + section { … } )
+
+// ─── 5. CTA ROW — 3 tuiles collées (fond foncé) → trait blanc ─
+.hist-cta + .hist-cta {
+  border-left: 2px solid rgba(#fff, 0.18);
+
+  @include until($bp-tablet) {
+    border-left: none;
+    border-top: 2px solid rgba(#fff, 0.18);
+  }
+}
+
+// ─── 2. ENGAGEMENT — bordeaux | portrait | citation ───────────
+// Fonds mixtes (foncé + clair) → hairline OR, lisible sur les deux.
+.hist-engagement__grid > * + * {
+  border-left: 2px solid rgba($c-gold, 0.30);
+
+  @include until($bp-desktop) {
+    &:nth-child(2n+1) { border-left: none; }
+  }
+  @include until($bp-tablet) {
+    border-left: none;
+    border-top: 2px solid rgba($c-gold, 0.30);
+  }
+}
+
+// ─── 4. VISION — piliers sur fond blanc → trait encre ─────────
+.vision-pillar + .vision-pillar {
+  border-left: 2px solid rgba($ink, 0.08);
+
+  @include until($bp-desktop) {
+    &:nth-child(2n+1) { border-left: none; }
+  }
+  @include until($bp-mobile) {
+    border-left: none;
+    border-top: 2px solid rgba($ink, 0.08);
+  }
+}

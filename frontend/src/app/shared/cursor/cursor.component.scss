@@ -1,0 +1,50 @@
+@use 'variables' as *;
+
+// ============================================================
+//  CUSTOM CURSOR — dot follower style Pamako
+//  Caché sur mobile / prefers-reduced-motion (via JS + @media)
+// ============================================================
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  will-change: transform;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+
+  &.is-active {
+    opacity: 1;
+  }
+
+  &__inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    transition:
+      transform 0.35s cubic-bezier(0.65, 0, 0.35, 1),
+      background 0.35s ease;
+  }
+
+  // Hover state : le dot grandit et devient outline
+  &.is-hovering &__inner {
+    transform: translate(-50%, -50%) scale(3.5);
+    background: transparent;
+    border: 1px solid #fff;
+  }
+
+  // Cache sur touch devices
+  @media (hover: none) {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}

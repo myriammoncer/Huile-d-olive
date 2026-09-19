@@ -1,0 +1,120 @@
+<header class="ahead">
+  <div>
+    <h1 class="ahead__title">Produits</h1>
+    <p class="ahead__sub">Gestion des huiles, formats et coffrets</p>
+  </div>
+  <button type="button" class="abtn abtn--primary" (click)="newProduct()">+ Nouveau produit</button>
+</header>
+
+<!-- ===== Formulaire (création / édition) ===== -->
+@if (showForm()) {
+  <form class="acard aform" [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <h2 class="aform__title">{{ editingId() ? 'Modifier le produit' : 'Nouveau produit' }}</h2>
+
+    <div class="aform__grid">
+      <label>Slug URL <small>(a-z, 0-9, -)</small><input type="text" formControlName="slug" placeholder="ex: intense" /></label>
+      <label>Variété<input type="text" formControlName="variete" placeholder="Chaïbi" /></label>
+
+      <label>Nom (FR) *<input type="text" formControlName="nom_fr" /></label>
+      <label>Nom (EN)<input type="text" formControlName="nom_en" /></label>
+
+      <label>Sous-titre (FR)<input type="text" formControlName="subtitle_fr" placeholder="ex: L'Ardente Sauvage" /></label>
+      <label>Sous-titre (EN)<input type="text" formControlName="subtitle_en" /></label>
+
+      <label>Accroche courte (FR)<input type="text" formControlName="lead_short_fr" placeholder="teaser pour les cartes" /></label>
+      <label>Accroche courte (EN)<input type="text" formControlName="lead_short_en" /></label>
+
+      <label class="full">Description (FR)<textarea rows="3" formControlName="description_fr"></textarea></label>
+      <label class="full">Description (EN)<textarea rows="3" formControlName="description_en"></textarea></label>
+
+      <label>Récolte (FR)<input type="text" formControlName="harvest_fr" placeholder="ex: Fin octobre — olives vertes" /></label>
+      <label>Récolte (EN)<input type="text" formControlName="harvest_en" /></label>
+
+      <label>Profil aromatique (FR)<input type="text" formControlName="profil_aromatique_fr" /></label>
+      <label>Profil aromatique (EN)<input type="text" formControlName="profil_aromatique_en" /></label>
+
+      <label class="full">Suggestions / Idéal sur (FR) <small>(séparer par virgules)</small><input type="text" formControlName="suggestions_fr" /></label>
+      <label class="full">Suggestions / Idéal sur (EN)<input type="text" formControlName="suggestions_en" /></label>
+
+      <label>Gamme
+        <select formControlName="gamme">
+          <option value="">—</option>
+          @for (g of gammes; track g) { <option [value]="g">{{ g }}</option> }
+        </select>
+      </label>
+
+      <label>Format
+        <select formControlName="format">
+          <option value="">—</option>
+          @for (f of formats; track f) { <option [value]="f">{{ f }}</option> }
+        </select>
+      </label>
+
+      <label>Couleur d'accent<input type="color" formControlName="accent_color" /></label>
+
+      <label class="aform__check">
+        <input type="checkbox" formControlName="actif" /> Produit actif (visible sur le site)
+      </label>
+
+      <!-- Image / Cloudinary -->
+      <div class="full aform__image">
+        <span class="aform__label">Image du produit</span>
+        <div class="aform__image-row">
+          <div class="aform__preview">
+            @if (form.value.image_url) {
+              <img [src]="form.value.image_url" alt="Aperçu" />
+            } @else {
+              <span class="aform__preview-empty">Aucune image</span>
+            }
+          </div>
+          <div class="aform__upload">
+            <input type="file" accept="image/*" (change)="onFile($event)" />
+            @if (uploading()) { <span class="aform__uploading">Upload en cours…</span> }
+            <input type="text" formControlName="image_url" placeholder="ou collez une URL d'image" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aform__actions">
+      <button type="button" class="abtn" (click)="cancel()">Annuler</button>
+      <button type="submit" class="abtn abtn--primary" [disabled]="saving() || uploading()">
+        {{ saving() ? 'Enregistrement…' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+}
+
+<!-- ===== Liste ===== -->
+<div class="acard">
+  @if (loading()) {
+    <p class="amuted">Chargement…</p>
+  } @else if (produits().length === 0) {
+    <p class="amuted">Aucun produit pour l'instant. Cliquez sur « Nouveau produit ».</p>
+  } @else {
+    <table class="atable">
+      <thead>
+        <tr><th></th><th>Nom</th><th>Gamme</th><th>Format</th><th>Statut</th><th></th></tr>
+      </thead>
+      <tbody>
+        @for (p of produits(); track p.id) {
+          <tr>
+            <td class="atable__thumb">
+              @if (p.image_url) { <img [src]="p.image_url" [alt]="p.nom_fr" /> }
+            </td>
+            <td>{{ p.nom_fr }}</td>
+            <td>{{ p.gamme || '—' }}</td>
+            <td>{{ p.format || '—' }}</td>
+            <td>
+              <span class="atag" [class.atag--off]="!p.actif">{{ p.actif ? 'Actif' : 'Masqué' }}</span>
+            </td>
+            <td class="atable__actions">
+              <button type="button" class="alink" (click)="edit(p)">Modifier</button>
+              <button type="button" class="alink alink--danger" (click)="remove(p)">Supprimer</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

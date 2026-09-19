@@ -1,0 +1,125 @@
+// ============================================================
+//  VILLAGE 1800 — Variables globales (V3 — WHITE FIRST, luxe éditorial)
+//  Palette : BLANC dominant + 3 accents cuvée
+//    #203A1D  Olive Green   (signature site + Cuvée Intense/HP)
+//    #4B1E1E  Deep Burgundy (Cuvée Mild / accents éditoriaux)
+//    #162637  Deep Navy     (Cuvée Medium / sections spécifiques)
+//  Les NOMS des tokens sont conservés (olive/ocre/...) pour compat —
+//  seules les VALEURS changent, propagation transparente.
+// ============================================================
+
+// --- Neutres (fonds & texte) ---
+// Spec V4 : FOND BLANC PUR PARTOUT — plus aucun ton écru/beige/sand visible
+$white:        #FFFFFF;   // Fond principal — dominant
+$paper:        #FFFFFF;   // Alias blanc (compat legacy .bg-paper)
+$ivory:        #FFFFFF;   // Alias blanc
+$sand:         #FFFFFF;   // Alias blanc
+$stone:        #FFFFFF;   // Alias blanc
+
+// --- Tons secondaires ---
+$beige-light:  #FFFFFF;
+$beige:        #FFFFFF;
+$ocre-light:   #6E8465;   // Olive translucide (accents, hover subtil)
+$ocre:         #4A6541;   // Olive intermédiaire
+$ocre-deep:    #203A1D;   // Olive profond (signature)
+$brown-soft:   #7A6A5C;   // Sable-brun pour texte muté sur fond olive
+$brown:        #1F2A22;   // Texte principal (nuance olive-ink)
+$brown-deep:   #0F1A12;   // Hover très foncé
+
+// --- ACCENT PRINCIPAL (mappé sur "olive" pour compat descendante) ---
+// Signature du site : Olive Green profond #203A1D.
+$olive-mist:   #EAEEE5;   // Halo très pâle (glow subtil)
+$olive-light:  #6E8465;   // Olive translucide (survol léger)
+$olive:        #203A1D;   // ★ OLIVE GREEN — signature site
+$olive-deep:   #203A1D;   // Alias signature
+$olive-dark:   #142611;   // Hover profond
+$olive-ink:    #0A1508;   // Contours signature
+
+// --- Encres (texte) — noir-olive très sombre ---
+$ink:          #1F2A22;   // Texte principal
+$ink-soft:     #34433A;   // Texte secondaire
+$ink-mute:     #6B7A70;   // Texte muté / légendes
+$ink-line:     #E6E4DE;   // Filets fins (borders neutres chauds)
+
+// --- Alias legacy (conservés pour ne rien casser) ---
+$cream:        $paper;
+$cream-soft:   $ivory;
+$cream-warm:   $stone;
+$gold-light:   $ocre-light;
+$gold-mid:     $ocre;
+$gold-deep:    $ocre-deep;
+$gold-rich:    $brown-soft;
+$black-deep:   $ink;
+$black-soft:   $ink-soft;
+
+// --- Accents par CUVÉE (spec finale) ---
+// Chaque cuvée a sa couleur signature, utilisée en rappel discret sur fond blanc.
+$accent-intense: #203A1D;       // Intense — Olive Green (récolte précoce)
+$accent-medium:  #162637;       // Balanced — Deep Navy
+$accent-mild:    #4B1E1E;       // Mild — Deep Burgundy (récolte tardive)
+$accent-hp:      #203A1D;       // High Polyphenol — Olive Green (identique à Intense)
+$accent-douce:   $accent-mild;
+$accent-legere:  $accent-mild;
+$accent-ultra:   $accent-hp;
+
+// --- Dégradés signature (adaptés à la palette bleue) ---
+$grad-olive:      linear-gradient(135deg, #{$olive-light} 0%, #{$olive} 55%, #{$olive-dark} 100%);
+$grad-olive-soft: linear-gradient(135deg, rgba($olive-light, 0.9) 0%, rgba($olive, 0.9) 100%);
+$grad-earth:      linear-gradient(135deg, #{$paper} 0%, #{$sand} 55%, #{$olive-light} 100%);
+$grad-paper:      linear-gradient(180deg, #{$white} 0%, #{$paper} 60%, #{$ivory} 100%);
+$grad-warm:       linear-gradient(180deg, #{$paper} 0%, #{$ivory} 100%);
+$grad-shine:      linear-gradient(115deg, transparent 30%, rgba(#fff, 0.35) 50%, transparent 70%);
+$grad-gold:       $grad-earth;
+$grad-gold-soft:  $grad-olive-soft;
+$grad-cream:      $grad-paper;
+$grad-dark:       linear-gradient(160deg, #{$ink} 0%, #{$olive-dark} 100%);
+
+// --- Ombres (multi-couches douces, teintées bleu) ---
+$shadow-soft:    0 10px 24px -14px rgba($ink, 0.12), 0 2px 6px rgba($ink, 0.04);
+$shadow-medium:  0 24px 48px -22px rgba($ink, 0.18), 0 4px 12px rgba($ink, 0.06);
+$shadow-deep:    0 44px 90px -34px rgba($ink, 0.28), 0 8px 24px rgba($ink, 0.08);
+$shadow-olive:   0 20px 50px -20px rgba($olive-dark, 0.30);
+$shadow-earth:   0 20px 50px -20px rgba($olive-light, 0.28);
+$shadow-inset:   inset 0 1px 0 rgba(#fff, 0.5);
+$shadow-gold:    $shadow-earth;
+
+// --- Typographies (V3 : Jost partout, style Kalios/Pamako)
+//     La hiérarchie repose sur le poids et la taille, pas sur le mélange serif/sans.
+$font-sans:    'Jost', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+$font-serif:   $font-sans;   // Legacy alias — tout se rend en Jost désormais
+$font-display: $font-sans;
+
+// --- Rythme & layout (inchangés) ---
+$max-width:    1360px;
+$nav-height:   84px;
+$nav-height-scrolled: 68px;
+$announce-h:   0px;
+$header-total: $nav-height;
+$radius-xs:    2px;
+$radius-sm:    4px;
+$radius-md:    10px;
+$radius-lg:    20px;
+$radius-xl:    32px;
+$radius-pill:  999px;
+
+// --- Transitions (inchangées) ---
+$ease-soft:    cubic-bezier(0.22, 0.61, 0.36, 1);
+$ease-elegant: cubic-bezier(0.65, 0, 0.35, 1);
+$ease-lux:     cubic-bezier(0.16, 1, 0.3, 1);
+$ease-silk:    cubic-bezier(0.7, 0, 0.2, 1);
+$dur-fast:     0.25s;
+$dur-base:     0.45s;
+$dur-slow:     0.8s;
+$dur-xslow:    1.4s;
+
+// --- Breakpoints ---
+$bp-mobile:  600px;
+$bp-tablet:  900px;
+$bp-desktop: 1200px;
+$bp-wide:    1440px;
+
+// --- Z-index ---
+$z-nav:     1000;
+$z-mega:    1050;
+$z-overlay: 1100;
+$z-modal:   1200;

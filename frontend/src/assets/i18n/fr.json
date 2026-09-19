@@ -1,0 +1,1405 @@
+{
+  "brand": {
+    "name": "Village 1800",
+    "tagline": "Méditerranéen lifestyle",
+    "company": "Village 1800 — Green Origin Company"
+  },
+  "footer": {
+    "pitch": "Huile d'olive extra-vierge de Korba, née d'une oliveraie mémoire et de gestes qui traversent les saisons.",
+    "social": "Réseaux sociaux",
+    "navTitle": "Navigation",
+    "cuveesTitle": "Nos Cuvées",
+    "contactTitle": "Contact",
+    "addressL1": "Rue Ebtikar, Zone Artisanale",
+    "addressL2": "Dar Chaâbane El Fehri",
+    "addressL3": "Nabeul 8011, Tunisie"
+  },
+  "reassurance": {
+    "items": [
+      "ENTREPRISE FAMILIALE",
+      "PRODUCTEURS PROPRIÉTAIRES",
+      "ORIGINE UNIQUE",
+      "100% CUEILLI À LA MAIN",
+      "EXTRACTION À FROID",
+      "LAVÉ, FILTRÉ & ANALYSÉ",
+      "TRÈS RICHE EN POLYPHÉNOLS",
+      "SOURCE DURABLE"
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Restez en contact",
+    "title": "-10% sur votre première commande",
+    "text": "Recevez nos recettes de chef, nos bonnes adresses et nos éditions limitées avant tout le monde.",
+    "placeholder": "Votre adresse e-mail",
+    "consent": "En vous inscrivant, vous acceptez de recevoir nos actualités.",
+    "cta": "Je m'inscris",
+    "success": "Merci ! Vous êtes bien inscrit.",
+    "error": "Une erreur est survenue, veuillez réessayer."
+  },
+  "highlights": {
+    "overline": "Nos produits phares",
+    "title": "Un terroir, trois expressions",
+    "cta": "Découvrir"
+  },
+  "quiz": {
+    "eyebrow": "Le quiz Village 1800",
+    "title": "Quelle huile d'olive êtes-vous ?",
+    "text": "Faites le test et découvrez laquelle de nos cuvées vous correspond.",
+    "cta": "C'est parti !"
+  },
+  "nav": {
+    "home": "Accueil",
+    "history": "Notre Monde",
+    "hp": "Evoo High Polyphenols",
+    "cuvees": "Nos Cuvées",
+    "traceability": "Traçabilité",
+    "pro": "Professionnels",
+    "pl": "Private Label",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Fermer",
+    "megaTitle": {
+      "home": "Bienvenue chez Village 1800",
+      "history": "Une famille, une oliveraie, un héritage",
+      "hp": "L'huile fonctionnelle santé",
+      "cuvees": "Découvrez nos trois expressions",
+      "traceability": "Du verger à la bouteille, en toute transparence",
+      "recipes": "L'art de la table méditerranéenne",
+      "pro": "Solutions professionnelles sur-mesure",
+      "pl": "Votre marque, notre huile"
+    },
+    "megaDesc": {
+      "home": "Le portail de l'univers Village 1800.",
+      "history": "Héritage, terroir et vision d'une famille.",
+      "hp": "L'alliance de la nature et de la science.",
+      "cuvees": "Une seule variété , trois expressions.",
+      "traceability": "Du verger à la bouteille, en toute transparence.",
+      "recipes": "L'art de sublimer votre table.",
+      "pro": "Un partenaire d'excellence pour votre marque.",
+      "pl": "Notre huile, votre étiquette."
+    },
+    "submenu": {
+      "home": [
+        { "label": "Notre héritage", "anchor": "notre-heritage" },
+        { "label": "High Polyphenols", "anchor": "hp-featured" },
+        { "label": "Nos cuvées", "anchor": "cuvees-showcase" },
+        { "label": "Notre savoir-faire", "anchor": "process" },
+        { "label": "Coffrets cadeaux", "anchor": "coffrets-showcase" }
+      ],
+      "history": [
+        { "label": "Notre engagement", "anchor": "notre-engagement" },
+        { "label": "Notre savoir-faire", "anchor": "notre-savoir-faire" },
+        { "label": "Notre vision", "anchor": "notre-vision" }
+      ],
+      "hp": [
+        { "label": "Les polyphénols", "anchor": "les-polyphenols" },
+        { "label": "Pourquoi sont-ils importants ?", "anchor": "pourquoi-importants" },
+        { "label": "Nos cuvées High Polyphenols", "anchor": "cuvees-hp" }
+      ],
+      "cuvees": [
+        { "label": "Cuvée Intense", "anchor": "intense" },
+        { "label": "Cuvée Balanced", "anchor": "balanced" },
+        { "label": "Cuvée Delicate", "anchor": "delicate" },
+        { "label": "La variété Chaïbi", "anchor": "variete-chaibi" }
+      ],
+      "traceability": [
+        { "label": "Le parcours", "anchor": "parcours" },
+        { "label": "Nos pratiques", "anchor": "nos-pratiques" },
+        { "label": "Nos engagements", "anchor": "nos-engagements" }
+      ],
+      "pro": [
+        { "label": "Nos formats professionnels", "anchor": "nos-formats" },
+        { "label": "Distributeurs & partenaires", "anchor": "distributeurs" },
+        { "label": "Un choix qui fait la différence", "anchor": "un-choix" }
+      ],
+      "pl": [
+        { "label": "Pourquoi nous choisir", "anchor": "pourquoi" },
+        { "label": "Nos étapes", "anchor": "nos-etapes" },
+        { "label": "Nos formats", "anchor": "nos-formats-pl" }
+      ]
+    },
+    "coffret": "Coffret Cadeau"
+  },
+  "pl": {
+    "overline": "Private Label",
+    "hero": {
+      "overline": "Private Label",
+      "title": "Votre marque.\nNotre expertise.",
+      "text": "Nous accompagnons ceux qui souhaitent créer ou conditionner leur huile d'olive sous leur propre marque. De l'aide à la création de la marque à la sélection de l'huile, au packaging, au conditionnement et à l'expédition.",
+      "badges": [
+        {
+          "icon": "brand",
+          "label": "Marque\npersonnalisée"
+        },
+        {
+          "icon": "package",
+          "label": "Packaging\nsur-mesure"
+        },
+        {
+          "icon": "world",
+          "label": "Export\nmondial"
+        },
+        {
+          "icon": "shield",
+          "label": "Qualité\ngarantie"
+        }
+      ]
+    },
+    "expertise": {
+      "title": "Notre expertise",
+      "items": [
+        {
+          "icon": "leaf",
+          "title": "Huile d'origine tunisienne",
+          "text": "Une huile d'olive extra vierge premium issue de notre domaine du Cap Bon et de partenaires sélectionnés."
+        },
+        {
+          "icon": "beaker",
+          "title": "Formules sur-mesure",
+          "text": "Nous développons avec vous le profil aromatique et les caractéristiques qui correspondent à votre positionnement."
+        },
+        {
+          "icon": "bottle",
+          "title": "Formats variés",
+          "text": "Verre, PET, bidon métallique, dose — nous adaptons le contenant à votre marché."
+        },
+        {
+          "icon": "truck",
+          "title": "Livraison mondiale",
+          "text": "Une logistique export maîtrisée pour délivrer votre commande partout dans le monde, dans les délais convenus."
+        }
+      ]
+    },
+    "process": {
+      "title": "Un accompagnement complet",
+      "text": "Nous travaillons selon les besoins de nos partenaires. Nous proposons plusieurs variétés d'huile d'olive ainsi que des huiles aromatisées.",
+      "steps": [
+        {
+          "num": "01",
+          "title": "Création de marque",
+          "text": "Aide à la création et au développement de votre marque."
+        },
+        {
+          "num": "02",
+          "title": "Sélection de l'huile",
+          "text": "Plusieurs variétés d'huile d'olive et huiles aromatisées au choix."
+        },
+        {
+          "num": "03",
+          "title": "Packaging",
+          "text": "Création du packaging et des étiquettes à votre image."
+        },
+        {
+          "num": "04",
+          "title": "Conditionnement",
+          "text": "Mise en bouteille selon les exigences et normes internationales."
+        },
+        {
+          "num": "05",
+          "title": "Expédition",
+          "text": "Livraison partout dans le monde, dans les délais convenus."
+        }
+      ]
+    },
+    "advantages": [
+      {
+        "icon": "shield",
+        "title": "Qualité constante",
+        "text": "Contrôles rigoureux à chaque étape pour garantir une qualité irréprochable."
+      },
+      {
+        "icon": "flex",
+        "title": "Grande flexibilité",
+        "text": "Petites et grandes séries, formats variés, formulations adaptées à vos exigences."
+      },
+      {
+        "icon": "handshake",
+        "title": "Accompagnement dédié",
+        "text": "Un interlocuteur unique qui suit votre projet du briefing à la livraison."
+      },
+      {
+        "icon": "trace",
+        "title": "Traçabilité complète",
+        "text": "Chaque lot est identifié et traçable de l'oliveraie jusqu'à vos rayons."
+      }
+    ],
+    "cta": {
+      "title": "Créons votre marque ensemble",
+      "text": "Discutons de votre projet et recevons votre cahier des charges pour un devis personnalisé.",
+      "phones": "+216 72 222 048\n+216 23 222 048",
+      "email": "contact@village-1800.com",
+      "button": "Nous contacter"
+    },
+    "formats": {
+      "overline": "Formats disponibles",
+      "title": "Contenances & contenants",
+      "sizesLabel": "Contenances",
+      "containersLabel": "Contenants",
+      "sizes": [
+        "250 ml",
+        "500 ml",
+        "750 ml",
+        "1 L",
+        "3 L",
+        "5 L"
+      ],
+      "containers": [
+        "Marasca",
+        "Dorica",
+        "PET",
+        "Bidons métalliques"
+      ],
+      "note": "Autres contenances et formats sur demande."
+    },
+    "quality": {
+      "title": "Qualité & conformité",
+      "text": "Nous veillons à la qualité et à la conformité de chaque produit, selon les exigences de nos partenaires et les réglementations du pays de destination."
+    }
+  },
+  "lang": {
+    "fr": "FR",
+    "en": "EN",
+    "switch": "Changer de langue"
+  },
+  "common": {
+    "discover": "Savoir plus",
+    "learnMore": "En savoir plus",
+    "back": "Retour",
+    "backTo": "Retour à",
+    "loading": "Chargement…"
+  },
+  "home": {
+    "brand": "VILLAGE 1800",
+    "tagline": "Méditerranéen lifestyle",
+    "badge": {
+      "bestseller": "Bestseller",
+      "new": "Nouveauté"
+    },
+    "hero": {
+      "slides": [
+        {
+          "id": "high-polyphenol",
+          "eyebrow": "High Polyphenols",
+          "title": "La nature rencontre la science.",
+          "text": "Early Harvest. Rich in polyphenols.",
+          "ctaLabel": "Découvrir",
+          "ctaLink": "/high-polyphenol",
+          "badge": "Limited Edition"
+        },
+        {
+          "id": "cuvees",
+          "eyebrow": "Products",
+          "title": "Trois expressions, une variété Chaïbi native.",
+          "text": "Intense · Balanced · Delicate.",
+          "ctaLabel": "Découvrir",
+          "ctaLink": "/nos-cuvees"
+        },
+        {
+          "id": "coffrets",
+          "eyebrow": "Coffrets Cadeaux",
+          "title": "L'élégance méditerranéenne à offrir.",
+          "text": "Coffrets premium, personnalisables.",
+          "ctaLabel": "Découvrir",
+          "ctaLink": "/coffrets"
+        }
+      ]
+    },
+    "mediterranean": {
+      "overline": "Notre héritage",
+      "title": "Une histoire méditerranéenne.",
+      "paragraphs": [
+        "En Tunisie, l'olivier fait partie de notre histoire depuis plus de 3 000 ans. De Curubis à Korba, notre huile d'olive a voyagé à travers la Méditerranée.",
+        "VILLAGE 1800 perpétue cet héritage familial au cœur du Cap Bon."
+      ],
+      "cta": "Découvrir notre histoire"
+    },
+    "heritage1800": {
+      "eyebrow": "L'année qui inspire notre nom",
+      "number": "1800",
+      "text": "Vers l'an 1800, nos arrière-grands-parents se sont installés dans la vallée de Korba, au cœur de l'ancienne Curubis. Aujourd'hui, cet héritage vit à travers VILLAGE 1800."
+    },
+    "hpFeatured": {
+      "eyebrow": "High Polyphenols",
+      "title": "La nature rencontre la science.",
+      "text": "Riche en hydroxytyrosol • Santé cardiovasculaire & longévité • 500 ml • Fruit de l’alliance entre la nature et la science, notre High Polyphénols est issue exclusivement de la variété autochtone Chaïbi du Cap Bon..",
+      "cta": "Découvrir High Polyphenols",
+      "features": [
+        {
+          "icon": "leaf",
+          "label": "Chaïbi Variety"
+        },
+        {
+          "icon": "harvest",
+          "label": "Early Harvest"
+        },
+        {
+          "icon": "cold",
+          "label": "Cold Extraction"
+        },
+        {
+          "icon": "bottle",
+          "label": "500 ml"
+        }
+      ]
+    },
+    "cuveesShowcase": {
+      "title": "Une variété. Trois expressions.",
+      "subtitle": "Une variété Chaïbi native. Trois moments de récolte. Trois profils uniques.",
+      "items": [
+        {
+          "slug": "intense",
+          "theme": "theme-intense",
+          "name": "Intense",
+          "harvest": "Early Harvest",
+          "notes": [
+            "Puissante · Complexe",
+            "Finale poivrée"
+          ],
+          "cta": "Découvrir Intense"
+        },
+        {
+          "slug": "balanced",
+          "theme": "theme-medium",
+          "name": "Balanced",
+          "harvest": "Mid-Season Harvest",
+          "notes": [
+            "Fluide · Équilibrée",
+            "Harmonieuse"
+          ],
+          "cta": "Découvrir Balanced"
+        },
+        {
+          "slug": "delicate",
+          "theme": "theme-mild",
+          "name": "Delicate",
+          "harvest": "Late Harvest",
+          "notes": [
+            "Florale · Délicate",
+            "Élégante"
+          ],
+          "cta": "Découvrir Delicate"
+        }
+      ]
+    },
+    "proOffer": {
+      "eyebrow": "Pour les professionnels",
+      "title": "3 L · 5 L Bidons métalliques",
+      "text": "Une huile d'olive d'origine unique pour les épiceries fines, restaurants, distributeurs et partenaires...",
+      "cta": "Découvrir notre offre pro"
+    },
+    "privateLabelPromo": {
+      "eyebrow": "Private Label",
+      "title": "Votre marque. Notre expertise.",
+      "text": "De la sélection de l'huile jusqu'à la livraison, nous développons des solutions sur-mesure adaptées à votre marque.",
+      "cta": "Private Label"
+    },
+    "coffretsPromo": {
+      "eyebrow": "Coffrets cadeaux",
+      "title": "Le cadeau méditerranéen.",
+      "text": "Nos coffrets premium sont conçus pour les cadeaux personnels et professionnels",
+      "cta": "Découvrir nos coffrets"
+    },
+    "intro": {
+      "overline": "Village 1800 — Korba, Terre de Curubis",
+      "title": "L'or vert d'un héritage millénaire",
+      "paragraphs": [
+        "En Tunisie, l'olivier fait partie de notre histoire depuis plus de 3 000 ans. Introduit par les Phéniciens, développé par les Carthaginois puis sublimé sous l'Empire romain, il est l'un des plus précieux héritages de notre terre.",
+        "À Curubis, l'actuelle Korba, des navires quittaient autrefois nos côtes chargés d'amphores d'huile d'olive à destination de Rome. Nos ancêtres avaient déjà compris la richesse unique de ce terroir méditerranéen façonné par la mer, le soleil et un climat exceptionnel.",
+        "Aujourd'hui, cet héritage continue de faire rayonner la Tunisie dans le monde."
+      ]
+    },
+    "stats": {
+      "overline": "La Tunisie en chiffres",
+      "title": "La Tunisie en chiffres",
+      "items": [
+        {
+          "value": "+107 millions",
+          "label": "D'oliviers"
+        },
+        {
+          "value": "2,2 millions",
+          "label": "D'hectares d'oliveraies"
+        },
+        {
+          "value": "2ᵉ",
+          "label": "Exportateur mondial d'huile d'olive"
+        },
+        {
+          "value": "1ᵉʳ",
+          "label": "Producteur mondial d'huile d'olive biologique"
+        },
+        {
+          "value": "★",
+          "label": "Récompensée chaque année aux compétitions mondiales"
+        }
+      ],
+      "awards": "Récompensée chaque année aux compétitions mondiales d'huile d'olive à New York, Londres, Tokyo…",
+      "awardsShort": "Récompensée chaque année aux compétitions mondiales"
+    },
+    "process": {
+      "overline": "Notre savoir-faire",
+      "title": "De notre terre à votre table.",
+      "cta": "Découvrir notre traçabilité",
+      "steps": [
+        {
+          "num": "01",
+          "title": "Cultiver",
+          "text": "Agriculture de pluie · sans irrigation ni pesticides"
+        },
+        {
+          "num": "02",
+          "title": "Récolter",
+          "text": "Récolte à la main, sélection à l'œil"
+        },
+        {
+          "num": "03",
+          "title": "Extraire",
+          "text": "Tri, Lavage, Extraction à froid, à moins de 27 °C, le jour même"
+        },
+        {
+          "num": "04",
+          "title": "Contrôler",
+          "text": "Filtration · Analyses en laboratoire"
+        },
+        {
+          "num": "05",
+          "title": "Stocker",
+          "text": "Cuves en inox alimentaires · atmosphère contrôlée · à l'abri de l'air, de la lumière et de la chaleur, conformément aux normes ISO 22000"
+        },
+        {
+          "num": "06",
+          "title": "Embouteiller",
+          "text": "Conditionnement soigné en bouteille opaque pour préserver les arômes et les polyphénols"
+        }
+      ]
+    },
+    "savoirFaire": {
+      "overline": "Notre savoir-faire",
+      "title": "Producteurs, de la racine à la bouteille.",
+      "lead": "À Korba, sur les terres de Curubis, nous cultivons, récoltons et pressons notre huile. Rien d'intermédiaire.",
+      "cta": "Découvrir notre histoire"
+    },
+    "comparison": {
+      "overline": "Ce qui nous distingue",
+      "title": "Village 1800 vs huile classique",
+      "criteria": "Critère",
+      "conventional": "Huile classique",
+      "rows": [
+        {
+          "criteria": "Teneur en polyphénols",
+          "village": "600 à 800 mg/kg",
+          "conventional": "50 à 150 mg/kg"
+        },
+        {
+          "criteria": "Récolte",
+          "village": "Précoce, à la main",
+          "conventional": "Mécanique, tardive"
+        },
+        {
+          "criteria": "Extraction",
+          "village": "À froid sous 4h, < 27 °C",
+          "conventional": "Industrielle à chaud"
+        },
+        {
+          "criteria": "Traçabilité",
+          "village": "Lot par lot, certifiée",
+          "conventional": "Origine floue"
+        },
+        {
+          "criteria": "Variété",
+          "village": "Monovariétale Chaïbi",
+          "conventional": "Mélange multi-origines"
+        }
+      ]
+    }
+  },
+  "history": {
+    "overline": "Notre histoire",
+    "hero": {
+      "title": "Un héritage qui perdure",
+      "paragraphs": [
+        "Si notre huile porte le nom VILLAGE 1800, c'est en hommage à nos origines. Vers l'an 1800, nos arrière-grands-parents se sont installés dans la vallée de Korba, au cœur de l'ancienne Curubis.",
+        "Situé sur la côte du Cap Bon, au nord-est de la Tunisie, notre domaine bénéficie d'un climat méditerranéen unique. La mer adoucit les hivers, rafraîchit les étés et permet aux olives de développer une richesse unique en arômes et en polyphénols."
+      ],
+      "cta": "Notre engagement",
+      "badge": {
+        "year": "1800",
+        "eyebrow": "L'année qui inspire notre nom",
+        "text": "Vers l'an 1800, nos arrière-grands-parents se sont installés dans la vallée de Korba, au cœur de l'ancienne Curubis. Aujourd'hui, cet héritage familial vit à travers VILLAGE 1800."
+      }
+    },
+    "engagement": {
+      "id": "notre-engagement",
+      "overline": "Notre engagement",
+      "lead": "Nous sommes Ghassen Atallah et Chiraz Mokaddem, un couple uni par la même passion pour notre terre.",
+      "body": "En 2017, nous avons repris notre domaine familial et, au fil des années, développé notre savoir-faire avant de créer VILLAGE 1800.",
+      "portraitAlt": "Ghassen Atallah et Chiraz Mokaddem, fondateurs de VILLAGE 1800",
+      "quote": [
+        "Nous avons choisi de nous distinguer par une huile issue d'une seule variété, notre variété autochtone du Cap Bon, la Chaïbi, et d'une seule origine : notre domaine.",
+        "Toute l'année, nous accordons une attention particulière à chaque étape : de l'entretien de nos oliviers à la récolte, au tri, à l'extraction, la conservation, à la mise en bouteille.",
+        "Chiraz, docteure en biologie, veille méticuleusement aux analyses, à la maîtrise du procédé et à la préservation de la qualité et de la richesse naturelle de notre huile."
+      ]
+    },
+    "savoir": {
+      "overline": "Notre savoir-faire",
+      "title": "Notre savoir-faire",
+      "lead": "Toute l'année, nous accordons une attention particulière à chaque étape.",
+      "steps": [
+        {
+          "num": "01",
+          "icon": "people",
+          "title": "Notre couple fondateur",
+          "text": "Ghassen Atallah et Chiraz Mokaddem, unis par la même passion pour notre terre."
+        },
+        {
+          "num": "02",
+          "icon": "estate",
+          "title": "Reprise du domaine",
+          "text": "En 2017, nous avons repris notre domaine familial et développé notre savoir-faire avant de créer VILLAGE 1800."
+        },
+        {
+          "num": "03",
+          "icon": "leaf",
+          "title": "Variété Chaïbi",
+          "text": "Une seule variété, notre variété autochtone du Cap Bon, la Chaïbi."
+        },
+        {
+          "num": "04",
+          "icon": "origin",
+          "title": "Origine unique",
+          "text": "Une seule origine : notre domaine familial du Cap Bon."
+        },
+        {
+          "num": "05",
+          "icon": "hand",
+          "title": "Entretien & récolte",
+          "text": "De l'entretien de nos oliviers à la récolte manuelle, chaque étape est maîtrisée."
+        },
+        {
+          "num": "06",
+          "icon": "sort",
+          "title": "Tri & extraction",
+          "text": "Tri rigoureux et extraction à froid pour préserver les arômes et polyphénols."
+        },
+        {
+          "num": "07",
+          "icon": "lab",
+          "title": "Analyses scientifiques",
+          "text": "Chiraz, docteure en biologie, veille aux analyses et à la maîtrise du procédé."
+        },
+        {
+          "num": "08",
+          "icon": "bottle",
+          "title": "Mise en bouteille",
+          "text": "Conservation optimale et mise en bouteille soignée pour préserver toute la qualité."
+        }
+      ]
+    },
+    "vision": {
+      "id": "notre-vision",
+      "overline": "Notre vision",
+      "title": "",
+      "paragraphs": [
+        "Chez VILLAGE 1800, nous pratiquons une agriculture durable qui unit le progrès à la tradition, et l'économie à l'humain.",
+        "Réussir ne signifie rien sans protéger la terre et ceux qui la font vivre."
+      ],
+      "pillars": [
+        {
+          "icon": "leaf",
+          "title": "Nature préservée",
+          "text": "Oliviers cultivés sans irrigation artificielle ni pesticides. Sols, biodiversité et équilibre naturel préservés."
+        },
+        {
+          "icon": "heart",
+          "title": "Humain au cœur",
+          "text": "Des liens durables avec notre équipe, nos partenaires, nos clients et notre région."
+        },
+        {
+          "icon": "women",
+          "title": "Femmes de notre village",
+          "text": "Nous valorisons les femmes de notre village, essentielles à la récolte et à la qualité de notre huile."
+        },
+        {
+          "icon": "handshake",
+          "title": "Partenariats durables",
+          "text": "Nous améliorons la qualité de vie de nos employés et avançons avec l'ensemble de nos collaborateurs."
+        }
+      ]
+    },
+    "cta": {
+      "hp": {
+        "overline": "High Polyphenols",
+        "text": "La nature rencontre la science. Découvrez notre gamme High Polyphenols.",
+        "label": "Découvrir"
+      },
+      "cuvees": {
+        "overline": "Nos Cuvées",
+        "text": "Trois expressions, une seule variété Chaïbi.",
+        "label": "Découvrir"
+      },
+      "coffrets": {
+        "overline": "Coffrets Cadeaux",
+        "text": "L'élégance méditerranéenne à offrir pour toutes les occasions.",
+        "label": "Découvrir"
+      }
+    }
+  },
+  "hp": {
+    "overline": "Gamme High Polyphenols",
+    "title": "La nature rencontre la science.",
+    "hero": {
+      "overline": "Gamme High Polyphenols",
+      "title": "La nature rencontre la science.",
+      "text": "Riche en hydroxytyrosol • Santé cardiovasculaire & longévité • 500 ml Fruit de l’alliance entre la nature et la science, notre High Polyphénols est issue exclusivement de la variété autochtone Chaïbi du Cap Bon. Sous la direction de notre docteur en biologie, nous sélectionnons des olives récoltées précocement (Early Harvest), au moment où leur concentration en antioxydants est maximale.",
+      "cta": "Découvrir le produit",
+      "badge": "Limited Edition",
+      "features": [
+        {
+          "icon": "leaf",
+          "label": "Chaïbi Variety"
+        },
+        {
+          "icon": "harvest",
+          "label": "Early Harvest"
+        },
+        {
+          "icon": "cold",
+          "label": "Cold Extraction"
+        },
+        {
+          "icon": "bottle",
+          "label": "500 ml"
+        }
+      ]
+    },
+    "why": {
+      "title": "Pourquoi sont-ils si importants ?",
+      "pillars": [
+        {
+          "icon": "shield",
+          "title": "Protéger les cellules",
+          "text": "Protéger les cellules contre le stress oxydatif."
+        },
+        {
+          "icon": "heart",
+          "title": "Réduire l'inflammation",
+          "text": "Réduire l'inflammation."
+        },
+        {
+          "icon": "hourglass",
+          "title": "Neutraliser les radicaux",
+          "text": "Neutraliser les radicaux libres."
+        },
+        {
+          "icon": "flask",
+          "title": "Santé cardiovasculaire",
+          "text": "Préserver la santé cardiovasculaire."
+        },
+        {
+          "icon": "leaf",
+          "title": "Vieillissement en bonne santé",
+          "text": "Soutenir le vieillissement en bonne santé."
+        }
+      ]
+    },
+    "different": {
+      "title": "Ce qui fait la différence",
+      "steps": [
+        {
+          "num": "01",
+          "title": "La variété d'olive",
+          "text": "La variété Chaïbi est naturellement riche en polyphénols."
+        },
+        {
+          "num": "02",
+          "title": "Le terroir",
+          "text": "Un climat chaud et sec favorise leur développement."
+        },
+        {
+          "num": "03",
+          "title": "Agriculture responsable",
+          "text": "Pas de traitements chimiques : l'olivier développe ses défenses naturelles."
+        },
+        {
+          "num": "04",
+          "title": "Récolte précoce",
+          "text": "Récolte lorsque le niveau des polyphénols est à son maximum."
+        },
+        {
+          "num": "05",
+          "title": "Extraction & stockage",
+          "text": "Extraction à basse température et stockage à l'abri de la lumière, de l'air et de la chaleur."
+        }
+      ]
+    },
+    "profile": {
+      "overline": "Polyphenol Profile",
+      "title": "Des analyses rigoureuses pour une qualité exceptionnelle.",
+      "cta": "En savoir plus",
+      "stats": [
+        {
+          "icon": "leaf",
+          "value": "600 – 800",
+          "unit": "mg/kg",
+          "label": "Polyphénols totaux",
+          "note": "Dosage vérifié par SGS"
+        },
+        {
+          "icon": "atom",
+          "value": "> 10",
+          "unit": "mg / 20 g",
+          "label": "Hydroxytyrosol",
+          "note": "Apporte plus de 10 mg d'hydroxytyrosol par portion de 20 g."
+        },
+        {
+          "icon": "shield",
+          "value": "> 500",
+          "unit": "mg/kg",
+          "label": "Oléocanthal",
+          "note": "Riche en oléocanthal, aux propriétés anti-inflammatoires reconnues."
+        },
+        {
+          "icon": "shield",
+          "value": "2×",
+          "unit": "",
+          "label": "Recommandation EFSA",
+          "note": "Quantité recommandée par l'EFSA pour protéger le cholestérol LDL du stress oxydatif."
+        }
+      ]
+    },
+    "process": {
+      "title": "De la récolte à la bouteille",
+      "steps": [
+        {
+          "num": "01",
+          "icon": "leaf",
+          "title": "Sélection",
+          "text": "Des olives Chaïbi saines et rigoureusement sélectionnées."
+        },
+        {
+          "num": "02",
+          "icon": "harvest",
+          "title": "Récolte",
+          "text": "Récolte précoce, à la main, avec soin."
+        },
+        {
+          "num": "03",
+          "icon": "cold",
+          "title": "Extraction",
+          "text": "À froid à moins de 27 °C pour préserver arômes et polyphénols."
+        },
+        {
+          "num": "04",
+          "icon": "lab",
+          "title": "Analyses",
+          "text": "Contrôles stricts en laboratoire pour garantir qualité et richesse."
+        },
+        {
+          "num": "05",
+          "icon": "bottle",
+          "title": "Mise en bouteille",
+          "text": "Conditionnement soigné pour préserver toute la qualité."
+        }
+      ]
+    },
+    "product": {
+      "brand": "Village 1800",
+      "title": "High Polyphenols",
+      "subtitle": "Chaïbi Variety  ·  Limited Edition",
+      "text": "Un rituel quotidien ou une huile de finition d'exception pour sublimer vos plats et prendre soin de votre santé.",
+      "specs": [
+        {
+          "icon": "bottle",
+          "label": "500 ml"
+        },
+        {
+          "icon": "flag",
+          "label": "Product of Tunisia"
+        },
+        {
+          "icon": "drop",
+          "label": "Extra Virgin Olive Oil"
+        }
+      ],
+      "cta": "Découvrir le produit"
+    },
+    "cuvees": {
+      "title": "Découvrez nos cuvées",
+      "items": [
+        {
+          "slug": "intense",
+          "theme": "intense",
+          "name": "Intense",
+          "harvest": "Early Harvest",
+          "text": "Puissante, complexe et riche en polyphénols.",
+          "cta": "Découvrir Intense"
+        },
+        {
+          "slug": "balanced",
+          "theme": "balanced",
+          "name": "Balanced",
+          "harvest": "Mid-Season Harvest",
+          "text": "Fluide, équilibrée et harmonieuse.",
+          "cta": "Découvrir Balanced"
+        },
+        {
+          "slug": "delicate",
+          "theme": "delicate",
+          "name": "Delicate",
+          "harvest": "Late Harvest",
+          "text": "Soyeuse, délicate et élégante.",
+          "cta": "Découvrir Delicate"
+        }
+      ]
+    }
+  },
+  "cuvees": {
+    "overline": "Nos Cuvées",
+    "hero": {
+      "overline": "Nos Cuvées",
+      "title": "Une seule variété.\nTrois expressions.",
+      "text": "Toutes nos huiles d'olive sont monovariétales issues de la variété Chaibi. C'est le période de la récolte qui fait toute la différence. Selon leur degré de maturité, les olives révèlent des différents profils aromatiques, donnant naissance à nos trois cuvées : Intense, Blanaced, Delicate .",
+      "badges": [
+        {
+          "icon": "leaf",
+          "label": "Single Variety",
+          "value": "Chaïbi"
+        },
+        {
+          "icon": "pin",
+          "label": "Single Origin",
+          "value": "Cap Bon, Tunisia"
+        },
+        {
+          "icon": "estate",
+          "label": "Family Estate",
+          "value": "Since 1800"
+        }
+      ]
+    },
+    "labels": {
+      "harvest": "Récolte",
+      "profile": "Profil",
+      "idealFor": "Idéale pour",
+      "signature": "Signature",
+      "pairings": "Idéale sur / avec"
+    },
+    "products": [
+      {
+        "slug": "intense",
+        "theme": "intense",
+        "num": "01",
+        "name": "Intense",
+        "subtitle": "L'Éveil de Curubis",
+        "harvest": "Récolte précoce — Début novembre",
+        "description": "Notre huile d'olive extra vierge monovariétale l'INTENSE est issue d'une récolte précoce, réalisée début novembre. Les olives vertes, cueillies à la main avant leur pleine maturité, sont pressées immédiatement afin de préserver toute la richesse du fruit.",
+        "profile": "Herbe fraîche, artichaut, feuilles d'oliviers, finale poivrée.",
+        "signature": "Puissante, complexe, riche en polyphénols.",
+        "tags": [
+          {
+            "icon": "grass",
+            "label": "Herbe fraîche"
+          },
+          {
+            "icon": "artichoke",
+            "label": "Artichaut"
+          },
+          {
+            "icon": "pepper",
+            "label": "Poivrée"
+          }
+        ],
+        "pairings": [
+          "Salades assaisonnées",
+          "Légumes grillés",
+          "Viandes rouges",
+          "Pâtes, sauces relevées",
+          "Bruschettas"
+        ],
+        "cta": "Découvrir Intense",
+        "meta": {
+          "harvestWhen": "Précoce\nDébut novembre",
+          "profile": "Fruité vert intense",
+          "idealFor": "Assaisonnements\net plats de caractère"
+        }
+      },
+      {
+        "slug": "balanced",
+        "theme": "balanced",
+        "num": "02",
+        "name": "Balanced",
+        "subtitle": "L'Équilibre Absolu",
+        "harvest": "Récolte de mi-saison — Fin novembre",
+        "description": "Notre huile d'olive extra vierge monovariétale la MEDIUM est issue d'une récolte de fruits verts et violets — cueillis délicatement à la main à la mi-saison, fin novembre. Elle révèle une texture soyeuse et une palette aromatique parfaitement équilibrée.",
+        "profile": "Fruité rond, notes douces, herbes fraîches.",
+        "signature": "Fluide, équilibrée, harmonieuse.",
+        "tags": [
+          {
+            "icon": "grass",
+            "label": "Fruité rond"
+          },
+          {
+            "icon": "tomato",
+            "label": "Notes douces"
+          },
+          {
+            "icon": "almond",
+            "label": "Herbes fraîches"
+          }
+        ],
+        "pairings": [
+          "Poulet rôti ou grillé",
+          "Poissons blancs",
+          "Légumes vapeur",
+          "Pâtes légères",
+          "Salades composées"
+        ],
+        "cta": "Découvrir Balanced",
+        "meta": {
+          "harvestWhen": "Mi-saison\nFin novembre",
+          "profile": "Fruité rond, notes douces",
+          "idealFor": "Cuisine quotidienne,\ntous usages"
+        }
+      },
+      {
+        "slug": "delicate",
+        "theme": "delicate",
+        "num": "03",
+        "name": "Delicate",
+        "subtitle": "La Sérénité Florale",
+        "harvest": "Récolte tardive — Fin décembre",
+        "description": "Notre huile d'olive extra vierge monovariétale la DOUCE est le fruit d'une récolte tardive, en fin du mois de décembre. Les olives mûres, cueillies à la main lorsqu'elles prennent leur belle robe violette.",
+        "profile": "Floral, doux, subtil et aérien.",
+        "signature": "Soyeuse, délicate, élégante.",
+        "tags": [
+          {
+            "icon": "flower",
+            "label": "Floral"
+          },
+          {
+            "icon": "apple",
+            "label": "Doux et subtil"
+          },
+          {
+            "icon": "nut",
+            "label": "Aérien"
+          }
+        ],
+        "pairings": [
+          "Fromages frais",
+          "Fruits et desserts",
+          "Poissons délicats",
+          "Purées et légumes vapeur",
+          "Cuisine fine et légère"
+        ],
+        "cta": "Découvrir Delicate",
+        "meta": {
+          "harvestWhen": "Tardive\nFin décembre",
+          "profile": "Floral, doux et subtil",
+          "idealFor": "Finitions, desserts\net plats délicats"
+        }
+      }
+    ],
+    "variety": {
+      "title": "La variété Chaïbi",
+      "subtitle": "Un trésor du Cap Bon",
+      "text": "Variété autochtone du Cap Bon, la Chaïbi se distingue par un fruité vert généreux et une grande richesse aromatique. Elle exprime tout le caractère de notre terroir méditerranéen.",
+      "features": [
+        {
+          "icon": "aroma",
+          "label": "Profil aromatique",
+          "text": "Fruité vert, herbe fraîche, artichaut, tomate verte, amande et épices douces."
+        },
+        {
+          "icon": "origin",
+          "label": "Origine",
+          "text": "Cap Bon, Korba (anciennement Curubis) - Tunisie"
+        },
+        {
+          "icon": "terroir",
+          "label": "Terroir",
+          "text": "Climat méditerranéen, influence marine, sols fertiles."
+        },
+        {
+          "icon": "culture",
+          "label": "Culture",
+          "text": "Sans irrigation artificielle, sans pesticides, respect de la nature."
+        }
+      ]
+    },
+    "detail": {
+      "othersTitle": "Autres cuvées à découvrir",
+      "otherCta": "Découvrir",
+      "brandEyebrow": "Nos Cuvées",
+      "specHarvest": "Récolte",
+      "specVariete": "Variété",
+      "specFormat": "Format",
+      "specOrigine": "Origine",
+      "specOrigineValue": "Cap Bon, Tunisie",
+      "profileEyebrow": "Profil aromatique",
+      "profileSignature": "L'expression de la Chaïbi",
+      "methodTitle": "Notre méthode",
+      "step1Title": "Culture",
+      "step1Text": "Agriculture de pluie, sans pesticides ni irrigation.",
+      "step2Title": "Récolte",
+      "step2Text": "Cueillette à la main, plusieurs passages selon la maturité.",
+      "step3Title": "Extraction",
+      "step3Text": "Pressée à froid à moins de 27 °C pour préserver arômes et polyphénols.",
+      "step4Title": "Mise en bouteille",
+      "step4Text": "Conditionnée en bouteille opaque pour préserver toute sa qualité.",
+      "pairingsEyebrow": "Accords culinaires",
+      "pairingsTitle": "Idéale sur / avec",
+      "pairingsLead": "Une sélection de mets où cette cuvée exprime toute sa personnalité.",
+      "rangeEyebrow": "Notre gamme",
+      "loadError": "Impossible de charger cette cuvée."
+    }
+  },
+  "traceability": {
+    "overline": "Traçabilité & Durabilité",
+    "hero": {
+      "overline": "Traçabilité & Durabilité",
+      "title": "From our land\nto your table.",
+      "text": "Chez VILLAGE 1800, nous respectons totalement le rythme de la nature.",
+      "badges": [
+        {
+          "icon": "leaf",
+          "label": "Nature\npréservée"
+        },
+        {
+          "icon": "people",
+          "label": "Humain\nau cœur"
+        },
+        {
+          "icon": "shield",
+          "label": "Qualité\nmaîtrisée"
+        }
+      ]
+    },
+    "journey": {
+      "title": "Our Journey",
+      "steps": [
+        {
+          "num": "01",
+          "title": "Cultivation",
+          "icon": "sprout",
+          "color": "green",
+          "items": [
+            "Agriculture sans irrigation artificielle",
+            "Eau de pluie uniquement",
+            "Sans pesticides",
+            "Sols préservés",
+            "Biodiversité protégée"
+          ]
+        },
+        {
+          "num": "02",
+          "title": "Récolte",
+          "icon": "leaf",
+          "color": "navy",
+          "items": [
+            "Récolte à la main",
+            "Olives soigneusement sélectionnées",
+            "Plusieurs passages à la maturité idéale"
+          ]
+        },
+        {
+          "num": "03",
+          "title": "Extraction",
+          "icon": "drop",
+          "color": "bordeaux",
+          "items": [
+            "Extraction à froid",
+            "À moins de 27 °C",
+            "Préservation des arômes et des polyphénols",
+            "Process maîtrisé"
+          ]
+        },
+        {
+          "num": "04",
+          "title": "Contrôle",
+          "icon": "microscope",
+          "color": "navy",
+          "items": [
+            "Lavage et tri rigoureux",
+            "Filtration douce",
+            "Analyses en laboratoire",
+            "Traçabilité à chaque étape"
+          ]
+        },
+        {
+          "num": "05",
+          "title": "Mise en Bouteille",
+          "icon": "bottle",
+          "color": "gold",
+          "items": [
+            "Conditionnement sous atmosphère contrôlée",
+            "Conservation optimale",
+            "Qualité préservée jusqu'à votre table"
+          ]
+        }
+      ]
+    },
+    "pillars": [
+      {
+        "theme": "green",
+        "icon": "drop",
+        "title": "Qualité",
+        "text": "Un savoir-faire rigoureux pour une huile d'olive extra vierge d'exception, riche en arômes et en polyphénols."
+      },
+      {
+        "theme": "navy",
+        "icon": "sprout",
+        "title": "Durabilité",
+        "text": "Nous cultivons dans le respect de la nature pour transmettre un terroir vivant aux générations futures."
+      },
+      {
+        "theme": "bordeaux",
+        "icon": "heart",
+        "title": "Humain",
+        "text": "Des liens durables avec notre équipe, nos partenaires et notre région. Les femmes de notre village sont au cœur de notre récolte."
+      },
+      {
+        "theme": "deep-green",
+        "icon": "globe",
+        "title": "Transparence",
+        "text": "De l'olivier à la bouteille, chaque étape est maîtrisée, contrôlée et traçable."
+      }
+    ],
+    "engagement": {
+      "overline": "Notre engagement",
+      "title": "Protéger la terre.\nValoriser les hommes.",
+      "text": "Réussir ne signifie rien sans protéger la terre et ceux qui la font vivre. C'est pourquoi nous œuvrons chaque jour pour une huile d'olive excellente, responsable et porteuse de sens.",
+      "cta": "Découvrir notre histoire",
+      "cards": [
+        {
+          "title": "Eau de pluie uniquement",
+          "text": "Nos oliviers se nourrissent exclusivement de l'eau de pluie, pour un équilibre naturel préservé."
+        },
+        {
+          "title": "Sans pesticides",
+          "text": "Nous cultivons sans pesticides ni produits chimiques pour protéger la santé de nos sols, de notre équipe et de nos consommateurs."
+        },
+        {
+          "title": "Femmes de notre village",
+          "text": "Elles jouent un rôle essentiel dans notre récolte et contribuent à la valeur humaine de VILLAGE 1800."
+        },
+        {
+          "title": "Excellence au quotidien",
+          "text": "Chaque détail compte pour vous offrir une huile d'olive extra vierge d'une qualité irréprochable."
+        }
+      ]
+    }
+  },
+  "recipes": {
+    "overline": "Recettes",
+    "title": "Recettes signatures",
+    "intro": "Découvrez nos recettes méditerranéennes raffinées, sublimées par nos huiles d'olive d'exception.",
+    "oilLabel": "Ingrédient clé",
+    "prepLabel": "Préparation",
+    "finishLabel": "Le geste final",
+    "ctaTitle": "Sublimer votre table avec Village 1800",
+    "ctaText": "Découvrez toutes nos cuvées pour trouver l'huile qui accompagnera vos meilleures recettes.",
+    "items": [
+      {
+        "title": "Salade de tomates anciennes & burrata",
+        "subtitle": "L'entrée « Curubis » — le secret est dans l'ardence.",
+        "oil": "Cuvée Intense",
+        "preparation": "Tranchez des tomates de variétés différentes et déposez une burrata crémeuse au centre. Ajoutez quelques feuilles de basilic frais et une pincée de fleur de sel.",
+        "finish": "Versez généreusement la Cuvée Intense. Son arôme d'artichaut sauvage tranche avec la sucrosité de la tomate et le gras du fromage."
+      },
+      {
+        "title": "Filet de daurade à la vapeur de mer",
+        "subtitle": "Le plat « Rivage de Korba » — la pureté en bouche.",
+        "oil": "Cuvée Délicate",
+        "preparation": "Cuisez votre filet de poisson à la vapeur (ou en papillote) avec quelques herbes de Provence.",
+        "finish": "À la sortie du feu, nappez le poisson d'un filet de Cuvée Délicate relevé de quelques zestes de citron frais, pour une fraîcheur vive qui sublime la chair du poisson."
+      },
+      {
+        "title": "Wellness Bowl : quinoa, avocat & graines de courge",
+        "subtitle": "Le rituel santé du midi.",
+        "oil": "High Polyphenols",
+        "preparation": "Mélangez du quinoa froid, des dés d'avocat, des pousses d'épinards et des amandes effilées.",
+        "finish": "Arrosez de High Polyphenols. Ce plat devient une véritable ordonnance de santé grâce à la synergie entre les bons gras de l'avocat et l'hydroxytyrosol de l'huile."
+      },
+      {
+        "title": "Carpaccio d'ananas & mandarine",
+        "subtitle": "Le dessert audacieux — l'huile d'olive en pâtisserie fine.",
+        "oil": "Cuvée Balanced",
+        "preparation": "Tranchez un ananas très finement. Parsemez de quelques zestes de citron vert et de menthe ciselée.",
+        "finish": "Un filet de Cuvée Balanced. L'huile enveloppe l'acidité du fruit pour créer une longueur en bouche digne d'un grand restaurant."
+      }
+    ]
+  },
+  "pro": {
+    "overline": "Pour les professionnels",
+    "hero": {
+      "overline": "Pour les professionnels",
+      "title": "L'excellence\npour votre métier.",
+      "text": "Une huile d'olive d'exception, conditionnée pour répondre aux exigences des professionnels : qualité constante, formats adaptés et traçabilité totale.",
+      "badges": [
+        {
+          "icon": "chef",
+          "label": "Restaurants\n& chefs"
+        },
+        {
+          "icon": "shop",
+          "label": "Épiceries fines\n& distributeurs"
+        },
+        {
+          "icon": "building",
+          "label": "Grossistes\n& importateurs"
+        },
+        {
+          "icon": "hotel",
+          "label": "Hôtels\n& collectivités"
+        }
+      ]
+    },
+    "formats": {
+      "title": "Nos formats professionnels",
+      "items": [
+        {
+          "theme": "green",
+          "size": "3L",
+          "label": "Bidon métallique",
+          "features": [
+            "Huile d'olive extra vierge premium",
+            "Protection optimale de l'huile",
+            "Conservation parfaite des arômes",
+            "Format pratique et résistant"
+          ],
+          "cta": "En savoir plus"
+        },
+        {
+          "theme": "bordeaux",
+          "size": "5L",
+          "label": "Bidon métallique",
+          "features": [
+            "Idéal pour un usage intensif",
+            "Fraîcheur et qualité préservées",
+            "Manipulation et stockage facilités",
+            "Conçu pour les professionnels exigeants"
+          ],
+          "cta": "En savoir plus"
+        }
+      ],
+      "sharedFeatures": [
+        "Huile d'olive extra vierge premium",
+        "Protection optimale de l'huile",
+        "Conservation parfaite des arômes",
+        "Format pratique et résistant"
+      ]
+    },
+    "pillars": [
+      {
+        "icon": "shield",
+        "title": "Qualité constante",
+        "text": "Un contrôle rigoureux à chaque étape pour garantir une qualité irréprochable."
+      },
+      {
+        "icon": "drop",
+        "title": "Traçabilité totale",
+        "text": "De l'oliveraie à votre cuisine, chaque lot est identifié et traçable."
+      },
+      {
+        "icon": "thermometer",
+        "title": "Conservation optimale",
+        "text": "Nos bidons métalliques protègent l'huile de la lumière et de l'oxygène pour une fraîcheur durable."
+      },
+      {
+        "icon": "handshake",
+        "title": "Partenariat durable",
+        "text": "Une relation de confiance et un accompagnement dédié pour votre réussite."
+      }
+    ],
+    "offer": {
+      "overline": "Un choix qui fait la différence",
+      "title": "Sublimez vos créations.",
+      "text": "Conçue pour les professionnels de la gastronomie et de la distribution, VILLAGE 1800 apporte une touche d'exception à vos plats et à vos rayons.",
+      "cta": "Demander notre offre pro"
+    },
+    "contact": {
+      "title": "Devenez notre partenaire",
+      "text": "Contactez notre équipe pour recevoir notre catalogue professionnel et nos conditions dédiées.",
+      "phones": "+216 72 222 048\n+216 23 222 048",
+      "email": "contact@village-1800.com",
+      "cta": "Nous contacter"
+    },
+    "partners": {
+      "overline": "Distributeurs & partenaires",
+      "title": "Un partenariat de confiance",
+      "text": "Chez VILLAGE 1800, nous privilégions des partenariats durables fondés sur la confiance, la qualité et la traçabilité. Nous proposons une huile d'olive d'origine unique, issue de notre domaine familial, avec une qualité maîtrisée et un savoir-faire authentique."
+    }
+  },
+  "contact": {
+    "overline": "Contact",
+    "title": "Parlons-en.",
+    "intro": "Une question, une demande de partenariat ou simplement l'envie d'échanger ? Écrivez-nous, nous vous répondrons avec plaisir.",
+    "form": {
+      "name": "Nom",
+      "email": "E-mail",
+      "subject": "Sujet",
+      "message": "Message",
+      "send": "Envoyer",
+      "sending": "Envoi en cours…",
+      "success": "Merci ! Votre message a bien été envoyé.",
+      "error": "Une erreur est survenue. Merci de réessayer."
+    },
+    "company": "Village 1800 — Green Origin Company",
+    "address": "Rue Ebtikar, Zone Artisanale, Dar Chaâbane El Fehri, Nabeul 8011, Tunisie",
+    "email": "Greenorigin.company@gmail.com",
+    "phone1": "+216 99 909 708",
+    "phone2": "+216 55 666 839",
+    "text": "Une question, une demande de partenariat ou l'envie d'échanger ? Écrivez-nous, nous vous répondrons rapidement.",
+    "headline": "Nous écrire",
+    "headlineText": "Remplissez ce formulaire et nous reviendrons vers vous sous 48h.",
+    "infoTitle": "Nos coordonnées",
+    "addressLabel": "Adresse",
+    "phoneLabel": "Téléphone",
+    "emailLabel": "Email",
+    "hoursLabel": "Horaires",
+    "hoursValue": "Lundi–Vendredi\n9h00 – 18h00"
+  },
+  "coffret": {
+    "eyebrow": "L'art d'offrir",
+    "title": "Coffrets Cadeaux",
+    "lead": "<p>Nos coffrets premium sont conçus pour les <strong>cadeaux personnels et professionnels</strong>.</p><p>Élégants et personnalisables, ils incarnent l'excellence et l'authenticité de <strong>VILLAGE 1800</strong>.</p><p>Offrir un coffret, c'est offrir une expérience du terroir.</p>",
+    "contentLabel": "Contenu",
+    "variantsLabel": "Cuvées",
+    "cta": {
+      "eyebrow": "Sur mesure",
+      "title": "Un coffret personnalisé ?",
+      "text": "Nous créons des coffrets sur mesure pour vos cadeaux d'entreprise, événements et occasions spéciales. Parlons de votre projet.",
+      "button": "Nous contacter"
+    },
+    "boxes": [
+      {
+        "slug": "signature",
+        "eyebrow": "Édition raffinée",
+        "name": "Coffret Signature",
+        "chip": "1 bouteille",
+        "text": "Un coffret raffiné mettant à l'honneur notre cuvée phare : High Polyphenols.",
+        "content": "1 bouteille High Polyphenols — 500 ml",
+        "variants": null
+      },
+      {
+        "slug": "curubis",
+        "eyebrow": "Édition élégante",
+        "name": "Coffret Curubis",
+        "chip": "1 bouteille",
+        "text": "Un coffret élégant contenant une bouteille de 500 ml, au choix parmi nos trois cuvées.",
+        "content": "1 bouteille — 500 ml",
+        "variants": "Intense, Balanced ou Delicate"
+      },
+      {
+        "slug": "neapolis",
+        "eyebrow": "Édition dégustation",
+        "name": "Coffret Neapolis",
+        "chip": "3 bouteilles",
+        "text": "Un coffret de dégustation réunissant nos trois cuvées emblématiques, pour découvrir toute la diversité de leurs profils aromatiques et apprécier les différentes expressions de la variété Chaïbi.",
+        "content": "3 bouteilles × 250 ml",
+        "variants": "Intense • Balanced • Delicate"
+      }
+    ]
+  }
+}

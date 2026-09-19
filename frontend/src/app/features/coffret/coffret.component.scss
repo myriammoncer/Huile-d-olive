@@ -1,0 +1,365 @@
+@use 'variables' as *;
+@use 'mixins'    as *;
+
+// ═══════════════════════════════════════════════════════════════
+//  COFFRET CADEAU — Design system éditorial (v3)
+//  Beige clair · titres Cormorant · accent or #B08D57
+//  Zéro animation d'entrée : composition statique, hover subtils.
+// ═══════════════════════════════════════════════════════════════
+
+$cf-bg:         #FAF5E9;   // Beige clair uniforme (un ton plus clair)
+$cf-surface:    #FBF6EA;   // Cards / surfaces
+$cf-line:       #E8DFC6;   // Séparateurs discrets
+$cf-ink:        #1F1B12;   // Texte principal
+$cf-ink-soft:   #4A4437;   // Texte secondaire (body)
+$cf-ink-mute:   #7A7365;   // Texte discret
+$cf-olive:      #203A1D;   // Signature olive
+$cf-olive-soft: #4A6541;   // Olive intermédiaire
+$cf-gold:       #B08D57;   // Or éditorial
+$cf-gold-soft:  #C9B285;   // Or clair (halo)
+
+$cf-max: 1280px;
+$cf-radius: 4px;
+
+:host {
+  display: block;
+  overflow-x: hidden;
+  background: $cf-bg;
+  color: $cf-ink;
+}
+
+.cf {
+  display: block;
+  background: $cf-bg;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  1. HERO — split éditorial (aligné aux autres heros du site)
+// ═══════════════════════════════════════════════════════════════
+.cf-hero {
+  padding-top: $header-total;
+  background: $cf-bg;
+  color: $cf-ink;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 0;
+    align-items: stretch;
+    min-height: clamp(420px, 60vh, 600px);
+
+    @include until($bp-desktop) { grid-template-columns: 1fr; }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(0.9rem, 1.4vw, 1.2rem);
+    padding: clamp(2rem, 4vw, 3.6rem) clamp(1.5rem, 5vw, 4.5rem);
+  }
+
+  &__eyebrow {
+    font-family: $font-sans !important;
+    font-size: 12px !important;
+    letter-spacing: 0.36em !important;
+    text-transform: uppercase;
+    color: $cf-gold !important;
+    font-weight: 600 !important;
+  }
+
+  &__title {
+    margin: 0 !important;
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif !important;
+    font-size: clamp(2.8rem, 5.6vw, 4.6rem) !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: uppercase;
+    color: $cf-olive !important;
+  }
+
+  &__lead {
+    color: $cf-ink-soft;
+    font-family: $font-sans !important;
+    font-size: clamp(15px, 1.05vw, 16.5px) !important;
+    line-height: 1.72 !important;
+    font-weight: 400 !important;
+    max-width: 52ch;
+    margin-top: 0.4rem;
+
+    ::ng-deep p {
+      margin: 0 0 0.75em !important;
+      color: $cf-ink-soft !important;
+      font-family: $font-sans !important;
+      font-size: clamp(15px, 1.05vw, 16.5px) !important;
+      line-height: 1.72 !important;
+      font-weight: 400 !important;
+      letter-spacing: 0 !important;
+    }
+    ::ng-deep p:last-child { margin-bottom: 0 !important; }
+    ::ng-deep strong { color: $cf-ink !important; font-weight: 600 !important; }
+  }
+
+  &__visual {
+    position: relative;
+    overflow: hidden;
+    background: $cf-surface;
+    min-height: 100%;
+
+    @include until($bp-desktop) { min-height: 340px; }
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  2. LES 3 COFFRETS — cards showcase (grille)
+// ═══════════════════════════════════════════════════════════════
+.cf-boxes {
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem);
+  background: $cf-bg;
+
+  &__inner {
+    max-width: $cf-max;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.2rem, 2vw, 2rem);
+
+    @include until($bp-desktop) { grid-template-columns: repeat(2, 1fr); }
+    @include until($bp-tablet)  { grid-template-columns: 1fr; gap: 1.6rem; }
+  }
+}
+
+// ── Card individuelle ──
+.cf-card {
+  background: $cf-surface;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $cf-line;
+  border-radius: $cf-radius;
+  overflow: hidden;
+  transition: transform 0.35s $ease-lux, box-shadow 0.35s $ease-lux, border-color 0.35s $ease-lux;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $cf-gold-soft;
+    box-shadow: 0 30px 60px -28px rgba($cf-ink, 0.25);
+  }
+
+  &__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: linear-gradient(150deg, #EFE7D0, #E5DBBB);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  // Petit chip or en haut-droite ("1 bouteille", "3 bouteilles")
+  &__chip {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    background: rgba(#fff, 0.95);
+    color: $cf-olive;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid $cf-gold-soft;
+    border-radius: 999px;
+    font-family: $font-sans;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1;
+    backdrop-filter: blur(6px);
+  }
+
+  &__body {
+    padding: clamp(1.4rem, 2vw, 2rem) clamp(1.3rem, 2vw, 1.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  &__eyebrow {
+    font-family: $font-sans !important;
+    font-size: 10.5px !important;
+    letter-spacing: 0.42em !important;
+    text-transform: uppercase;
+    color: $cf-gold !important;
+    font-weight: 600 !important;
+  }
+
+  &__name {
+    margin: 0 !important;
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif !important;
+    font-size: clamp(1.9rem, 2.4vw, 2.4rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.01em !important;
+    color: $cf-olive !important;
+    text-transform: uppercase;
+  }
+
+  &__rule {
+    display: block;
+    width: 44px;
+    height: 1.5px;
+    background: $cf-gold;
+    margin: 0.2rem 0 0.6rem;
+  }
+
+  &__text {
+    color: $cf-ink-soft !important;
+    font-family: $font-sans !important;
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+    letter-spacing: 0 !important;
+  }
+
+  &__specs {
+    margin: 0.6rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid $cf-line;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__spec {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0.8rem;
+    align-items: baseline;
+
+    dt {
+      font-family: $font-sans !important;
+      font-size: 10px !important;
+      letter-spacing: 0.34em !important;
+      text-transform: uppercase;
+      color: $cf-ink-mute !important;
+      font-weight: 500 !important;
+      margin: 0 !important;
+      line-height: 1.4 !important;
+    }
+
+    dd {
+      margin: 0 !important;
+      font-family: $font-sans !important;
+      font-size: 13.5px !important;
+      line-height: 1.5 !important;
+      color: $cf-ink !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.005em !important;
+    }
+  }
+
+  &__variants {
+    color: $cf-olive !important;
+    font-weight: 600 !important;
+  }
+
+  @include until($bp-mobile) {
+    &__spec {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  3. CTA — petite bande horizontale compacte (contenue, pas pleine largeur)
+// ═══════════════════════════════════════════════════════════════
+.cf-cta {
+  background: $cf-bg;
+  padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem);
+
+  &__inner {
+    max-width: 620px;
+    margin: 0 auto;
+    background: linear-gradient(120deg, #203A1D 0%, #172E14 100%);
+    border-radius: 12px;
+    padding: clamp(1rem, 1.8vw, 1.3rem) clamp(1.3rem, 2.4vw, 1.8rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1rem, 2.5vw, 1.6rem);
+
+    @include until($bp-mobile) {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.9rem;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__eyebrow {
+    font-family: $font-sans !important;
+    font-size: 10px !important;
+    letter-spacing: 0.36em !important;
+    text-transform: uppercase;
+    color: $cf-gold-soft !important;
+    font-weight: 600 !important;
+  }
+
+  &__title {
+    margin: 0 !important;
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif !important;
+    font-size: clamp(1.3rem, 2vw, 1.65rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: uppercase;
+    color: #F4EDDD !important;
+  }
+
+  // Bouton CTA — pilule or plein
+  &__btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.9rem;
+    background: $cf-gold;
+    color: #12240F;
+    border: 1px solid $cf-gold;
+    border-radius: 999px;
+    font-family: $font-sans;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: gap 0.3s $ease-lux, background 0.3s $ease-lux, transform 0.3s $ease-lux;
+
+    &:hover {
+      background: #C9B285;
+      gap: 0.95rem;
+      transform: translateY(-2px);
+    }
+  }
+}

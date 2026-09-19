@@ -1,0 +1,103 @@
+@use 'variables' as *;
+
+:host { display: block; }
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(60% 55% at 50% 20%, rgba($olive-mist, 0.6), transparent 65%),
+    linear-gradient(180deg, $white 0%, $paper 60%, $ivory 100%);
+  font-family: $font-sans;
+  color: $ink;
+}
+
+.login__card {
+  width: 100%;
+  max-width: 28rem;
+  background: $white;
+  padding: clamp(2.2rem, 5vw, 3rem);
+  border: 1px solid $ink-line;
+  border-radius: $radius-md;
+  box-shadow: $shadow-deep;
+  display: grid;
+  gap: 1.3rem;
+}
+
+.login__brand {
+  text-align: center;
+  margin-bottom: 0.8rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid $ink-line;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.login__logo {
+  height: 96px;
+  width: auto;
+  display: block;
+}
+
+.login__sub {
+  font-family: $font-sans;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: $olive-deep;
+}
+
+.login__field {
+  display: grid;
+  gap: 0.45rem;
+
+  label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $ink-mute;
+  }
+  input {
+    font-family: $font-sans;
+    font-size: 1rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid $ink-line;
+    border-radius: $radius-sm;
+    background: $white;
+    color: $ink;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    &:focus { outline: none; border-color: $olive; box-shadow: 0 0 0 3px rgba($olive-light, 0.3); }
+  }
+}
+
+.login__error {
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: $radius-sm;
+  background: #fbeaea;
+  border: 1px solid #f0c6c1;
+  color: #b3261e;
+  font-size: 0.88rem;
+}
+
+.login__btn {
+  margin-top: 0.6rem;
+  padding: 0.95rem 1rem;
+  border: 0;
+  border-radius: $radius-sm;
+  background: $olive;
+  color: $white;
+  font-family: $font-sans;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  &:hover { background: $olive-dark; }
+  &:disabled { opacity: 0.6; cursor: progress; }
+}

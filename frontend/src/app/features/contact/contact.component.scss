@@ -1,0 +1,326 @@
+@use 'variables' as *;
+@use 'mixins'    as *;
+
+// ═══════════════════════════════════════════════════════════════
+//  CONTACT — version minimaliste claire
+//  Base blanc/crème · texte ink · accents olive + or discrets
+//  Peu de couleur, quelques détails décoratifs fins.
+// ═══════════════════════════════════════════════════════════════
+$ct-bg:      #FBF8F1;   // Fond principal très clair
+$ct-line:    #E7E0CF;   // Filets fins discrets
+$ct-ink:     #1F1B12;   // Texte principal
+$ct-soft:    #5C5447;   // Texte secondaire
+$ct-mute:    #8A8172;   // Texte discret / labels
+$ct-olive:   #203A1D;   // Accent signature (icônes, titres)
+$ct-gold:    #B48953;   // Accent or (filets, détails)
+
+$ct-max: 1120px;
+
+:host {
+  display: block;
+  overflow-x: hidden;
+  background: $ct-bg;
+  color: $ct-ink;
+}
+
+.ct { display: block; background: $ct-bg; }
+
+// ═══════════════════════════════════════════════════════════════
+//  HERO — en-tête sobre, centré
+// ═══════════════════════════════════════════════════════════════
+.ct-hero {
+  padding: calc(#{$header-total} + clamp(2.4rem, 6vw, 5rem)) clamp(1.25rem, 5vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+
+  &__inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  &__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: $ct-gold;
+    font-weight: 600;
+    padding-left: 0.42em;
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(2.6rem, 5vw, 4rem) !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.01em !important;
+    color: $ct-olive !important;
+    margin: 0 !important;
+    text-transform: uppercase;
+  }
+
+  // Détail décoratif : fin trait or centré
+  &__rule {
+    display: block;
+    width: 54px;
+    height: 1.5px;
+    background: $ct-gold;
+    margin: 0.2rem 0 0.3rem;
+  }
+
+  &__text {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 1.05vw, 15.5px);
+    line-height: 1.7;
+    color: $ct-soft;
+    margin: 0;
+    max-width: 48ch;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  CONTENU — coordonnées (gauche) + formulaire (droite)
+// ═══════════════════════════════════════════════════════════════
+.ct-main {
+  padding: clamp(1rem, 2vw, 2rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem);
+
+  &__grid {
+    max-width: $ct-max;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+
+    @include until($bp-desktop) { grid-template-columns: 1fr; gap: 2.4rem; }
+  }
+}
+
+// ─── Coordonnées ─────────────────────────────────────────────
+.ct-info {
+  &__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(1.4rem, 2vw, 1.7rem) !important;
+    font-weight: 500 !important;
+    color: $ct-ink !important;
+    margin: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  &__rule {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: $ct-gold;
+    margin: 0.7rem 0 1.6rem;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+}
+
+.ct-info-row {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 0.9rem;
+  align-items: start;
+
+  &__icon {
+    color: $ct-olive;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    svg { width: 22px; height: 22px; }
+  }
+
+  div { display: flex; flex-direction: column; gap: 0.25rem; }
+
+  &__label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: $ct-mute;
+    font-weight: 600;
+  }
+
+  &__value {
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: $ct-ink;
+    text-decoration: none;
+    white-space: pre-line;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      &:hover { color: $ct-gold; }
+    }
+    &:is(a):hover { color: $ct-gold; }
+  }
+}
+
+// ─── Formulaire ──────────────────────────────────────────────
+.ct-form {
+  position: relative;
+  background: #fff;
+  border: 1px solid $ct-line;
+  border-radius: 16px;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
+  // Détail décoratif : fin liseré or en haut de la carte
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: clamp(1.6rem, 3vw, 2.6rem);
+    right: clamp(1.6rem, 3vw, 2.6rem);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba($ct-gold, 0.6), transparent);
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: $ct-gold;
+    font-weight: 600;
+  }
+
+  &__text {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.6;
+    color: $ct-soft;
+    margin: 0;
+    max-width: 52ch;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.2rem;
+
+    @include until($bp-mobile) { grid-template-columns: 1fr; }
+  }
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  &__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.85rem 1.9rem;
+    background: $ct-olive;
+    color: #fff;
+    border: 1px solid $ct-olive;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: gap 0.3s ease, background 0.3s ease;
+
+    &:hover:not(:disabled) { background: #142611; gap: 1rem; }
+    &:disabled { opacity: 0.6; cursor: not-allowed; }
+  }
+
+  &__msg {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+
+    &--ok  { color: $ct-olive; }
+    &--err { color: #A2332B; }
+  }
+}
+
+// ─── Champ ───────────────────────────────────────────────────
+.ct-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &--full { grid-column: 1 / -1; }
+
+  label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: $ct-mute;
+    font-weight: 600;
+
+    span { color: $ct-gold; margin-left: 0.15rem; }
+  }
+
+  input,
+  textarea {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    color: $ct-ink;
+    background: $ct-bg;
+    border: 1px solid $ct-line;
+    padding: 0.75rem 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    border-radius: 12px;
+    resize: vertical;
+
+    &::placeholder { color: rgba($ct-soft, 0.45); }
+    &:focus {
+      border-color: $ct-olive;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba($ct-olive, 0.08);
+    }
+    &.is-invalid {
+      border-color: rgba(#A2332B, 0.6);
+      box-shadow: 0 0 0 2px rgba(#A2332B, 0.08);
+    }
+  }
+}
+
+// ─── Honeypot invisible ──────────────────────────────────────
+.ct-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

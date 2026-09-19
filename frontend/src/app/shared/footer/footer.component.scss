@@ -1,0 +1,394 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ============================================================
+//  BANDEAU RÉASSURANCE (style Kalios)
+//  4 items icône + titre + texte, bandeau clair sur fond papier
+// ============================================================
+.reassure {
+  background: var(--paper);
+  border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+  padding: clamp(1.4rem, 2.5vw, 2rem) 0;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem 1rem;
+    text-align: center;
+  }
+
+  &__tag {
+    font-family: var(--font-sans);
+    font-size: clamp(0.72rem, 1.05vw, 0.85rem);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  &__sep {
+    color: var(--olive);
+    font-size: 0.85rem;
+    line-height: 1;
+    opacity: 0.75;
+  }
+
+}
+
+// ============================================================
+//  NEWSLETTER (-10% — style Kalios)
+//  Bandeau généreux, olive foncé, titre serif fort
+// ============================================================
+.newsletter {
+  position: relative;
+  background:
+    radial-gradient(60% 100% at 20% 0%, rgba($olive-light, 0.12), transparent 70%),
+    linear-gradient(160deg, #{$olive-deep} 0%, #{$olive-dark} 100%);
+  color: rgba(#fff, 0.94);
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  overflow: hidden;
+  isolation: isolate;
+
+  // Voile décoratif — olives stylisées en fond
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><g fill='none' stroke='%23fff' stroke-width='0.8'><circle cx='40' cy='60' r='16'/><circle cx='150' cy='120' r='22'/><circle cx='90' cy='170' r='12'/></g></svg>");
+  }
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 2.5rem;
+
+    @include from($bp-tablet) {
+      grid-template-columns: 1.1fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  &__eyebrow {
+    color: rgba($ocre-light, 0.9) !important;
+    letter-spacing: 0.34em;
+  }
+
+  &__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0.6rem 0 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  &__text {
+    color: rgba(#fff, 0.75);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0;
+  }
+
+  &__form { width: 100%; max-width: 520px; justify-self: end; }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.4rem 0.4rem 1.4rem;
+    background: rgba(#fff, 0.08);
+    border: 1px solid rgba(#fff, 0.22);
+    border-radius: $radius-pill;
+    transition: border-color $dur-base $ease-lux, background $dur-base $ease-lux;
+
+    &:focus-within {
+      border-color: rgba($ocre-light, 0.6);
+      background: rgba(#fff, 0.12);
+    }
+
+    input {
+      flex: 1;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      padding: 0.7rem 0.2rem;
+      outline: none;
+
+      &::placeholder { color: rgba(#fff, 0.55); }
+    }
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.4rem;
+    background: $ocre-light;
+    color: $ink;
+    border: none;
+    border-radius: $radius-pill;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background $dur-base $ease-lux, transform $dur-base $ease-lux, box-shadow $dur-base $ease-lux;
+
+    &:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px -10px rgba(#000, 0.35);
+    }
+  }
+
+  &__consent {
+    color: rgba(#fff, 0.55);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    margin: 0.9rem 0 0;
+    letter-spacing: 0.02em;
+  }
+
+  &__feedback {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    &--ok  { color: #cfe4a8; }
+    &--err { color: #f2c4b0; }
+  }
+}
+
+// SR-only helper (label lecteur d'écran)
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ============================================================
+//  FOOTER — Noir profond #16100B, tons or, 4 colonnes
+// ============================================================
+
+.footer {
+  position: relative;
+  background: $white;
+  color: var(--ink-soft);
+  // Padding réduit — trop d'espace vide avant (spec client)
+  padding-block: clamp(2.5rem, 4vw, 3.5rem) 1.25rem;
+  overflow: hidden;
+  isolation: isolate;
+  border-top: 1px solid rgba($ink-line, 0.5);
+
+  // Filet olive fin décoratif en haut du footer
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: clamp(60px, 8vw, 90px);
+    height: 2px;
+    background: var(--olive);
+    opacity: 0.55;
+  }
+
+  // Filet olive discret en haut
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba($olive-deep, 0.4) 30%,
+      rgba($olive-deep, 0.6) 50%,
+      rgba($olive-deep, 0.4) 70%,
+      transparent 100%);
+  }
+}
+
+// ============ FOOTER LAYOUT (mockup) ============
+// Logo · Nav1 · Nav2 · Nav3 · Contact · Social — sur une seule ligne
+.footer__inner {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: 1fr;
+
+  @include from($bp-tablet) {
+    grid-template-columns:
+      auto                              // logo
+      auto auto auto                    // 3 nav columns
+      1fr                               // contact (fills remaining)
+      auto;                             // social
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+}
+
+// ============ Marque ============
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  position: relative;
+}
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 0;
+  transition: opacity $dur-base $ease-lux, transform $dur-base $ease-lux;
+
+  img {
+    // Logo réduit — évite le vide autour
+    height: clamp(96px, 10vw, 130px);
+    width: auto;
+    max-width: 100%;
+    display: block;
+    transition: transform $dur-base $ease-lux;
+  }
+
+  &:hover { transform: translateY(-2px); }
+}
+
+// Alias legacy (au cas où d'anciens templates référencent encore la classe)
+.footer__name { display: none; }
+.footer__tag {
+  color: var(--olive-deep);
+  letter-spacing: 0.3em;
+  position: relative;
+  padding-left: 42px;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 32px;
+    height: 1px;
+    background: var(--olive);
+    transform: translateY(-50%);
+    opacity: 0.6;
+  }
+}
+.footer__pitch {
+  color: rgba(#fff, 0.55);
+  font-family: $font-serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 320px;
+  margin: 0.4rem 0 0.4rem;
+}
+
+// ============ FOOTER MOCKUP — single row layout ============
+
+// Colonnes de nav : liens uppercase fins, verticaux, discrets
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+
+  a {
+    color: var(--ink);
+    font-family: $font-sans;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color $dur-base $ease-lux;
+
+    &:hover { color: var(--olive-deep); }
+  }
+}
+
+// Bloc contact à droite : compact, texte fin, alignement start
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-family: $font-sans;
+  font-size: 0.78rem;
+  font-style: normal;
+  color: var(--ink-soft);
+  line-height: 1.45;
+
+  a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color $dur-base $ease-lux;
+    &:hover { color: var(--olive-deep); }
+  }
+}
+
+.footer__company {
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.footer__phones {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  color: var(--ink-soft);
+}
+
+// Réseaux sociaux : petits cercles fins à l'extrême droite
+.footer__social {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.4rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba($ink, 0.2);
+    color: var(--ink-soft);
+    transition: color $dur-base $ease-lux, border-color $dur-base $ease-lux,
+                background $dur-base $ease-lux, transform $dur-base $ease-lux;
+
+    &:hover {
+      color: #fff;
+      background: var(--olive);
+      border-color: var(--olive);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// ============ Classes legacy neutralisées (plus dans le HTML) ============
+.footer__col-title,
+.footer__links,
+.footer__cuvees,
+.footer__dot,
+.footer__cuvee,
+.footer__contact-cta,
+.footer__bottom,
+.footer__tag,
+.footer__pitch { display: none; }

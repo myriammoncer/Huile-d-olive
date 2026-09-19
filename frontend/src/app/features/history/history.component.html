@@ -1,0 +1,176 @@
+<!-- ============================================================
+     1. HERO — split : intro éditoriale + paysage olivier + carte 1800
+     ============================================================ -->
+<section class="hist-hero">
+  <div class="hist-hero__grid">
+    <div class="hist-hero__body">
+      <span class="overline hist-hero__eyebrow reveal">{{ 'history.overline' | translate }}</span>
+      <h1 class="hist-hero__title reveal">{{ 'history.hero.title' | translate }}</h1>
+
+      <div class="hist-hero__lead reveal">
+        @for (p of $any('history.hero.paragraphs' | translate); track $index) {
+          <p>{{ p }}</p>
+        }
+      </div>
+
+      <a class="btn hist-hero__cta reveal"
+         href="#notre-engagement"
+         (click)="$event.preventDefault(); scrollTo('notre-engagement')">
+        {{ 'history.hero.cta' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="hist-hero__visual reveal">
+      <img src="assets/images/Notre_Hist/olivv.jpg"
+           [alt]="'history.hero.title' | translate" loading="lazy" />
+      <aside class="hist-hero__badge">
+        <span class="hist-hero__badge-year">{{ 'history.hero.badge.year' | translate }}</span>
+        <span class="hist-hero__badge-rule" aria-hidden="true"></span>
+        <span class="hist-hero__badge-eyebrow">{{ 'history.hero.badge.eyebrow' | translate }}</span>
+        <p class="hist-hero__badge-text">{{ 'history.hero.badge.text' | translate }}</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. NOTRE ENGAGEMENT — bandeau bordeaux : intro / portrait / quote
+     ============================================================ -->
+<section class="hist-engagement" [id]="'notre-engagement'">
+  <div class="hist-engagement__grid">
+
+    <div class="hist-engagement__intro reveal">
+      <h2 class="hist-engagement__title">{{ 'history.engagement.overline' | translate }}</h2>
+      <p class="hist-engagement__lead">{{ 'history.engagement.lead' | translate }}</p>
+      <p class="hist-engagement__body">{{ 'history.engagement.body' | translate }}</p>
+    </div>
+
+    <figure class="hist-engagement__portrait reveal">
+      <img src="assets/images/Notre_Hist/couple.jpeg"
+           [alt]="'history.engagement.portraitAlt' | translate" loading="lazy" />
+    </figure>
+
+    <blockquote class="hist-engagement__quote reveal">
+      <span class="hist-engagement__quote-mark" aria-hidden="true">“</span>
+      @for (p of $any('history.engagement.quote' | translate); track $index) {
+        <p>{{ p }}</p>
+      }
+    </blockquote>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     3. NOTRE SAVOIR-FAIRE — 7 étapes reliées par un filet fin
+     ============================================================ -->
+ <section class="hist-savoir" id="notre-savoir-faire">
+  <header class="hist-savoir__head reveal">
+    <span class="hist-savoir__rule" aria-hidden="true"></span>
+    <h2 class="hist-savoir__title">{{ 'history.savoir.title' | translate }}</h2>
+    <span class="hist-savoir__rule" aria-hidden="true"></span>
+  </header>
+
+  <p class="hist-savoir__lead reveal">{{ 'history.savoir.lead' | translate }}</p>
+
+  <div class="hist-savoir__timeline">
+    <span class="hist-savoir__line" aria-hidden="true"></span>
+
+    @for (s of $any('history.savoir.steps' | translate); track s.num; let i = $index) {
+      <article class="savoir-step reveal" [style.--delay]="(i * 100) + 'ms'">
+        <span class="savoir-step__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor"
+               stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            @switch (s.icon) {
+              @case ('people') { <circle cx="12" cy="11" r="3.2"/><circle cx="20" cy="11" r="3.2"/><path d="M5 24v-1.5a5 5 0 015-5h1M27 24v-1.5a5 5 0 00-5-5h-1M12 24v-1a4 4 0 018 0v1"/> }
+              @case ('estate') { <path d="M4 26V14l12-8 12 8v12"/><path d="M4 26h24"/><path d="M13 26v-6h6v6"/><path d="M9 18h2M21 18h2"/> }
+              @case ('leaf')   { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+              @case ('origin') { <path d="M16 4a8 8 0 018 8c0 6-8 16-8 16S8 18 8 12a8 8 0 018-8z"/><circle cx="16" cy="12" r="3"/> }
+              @case ('hand')   { <path d="M10 20V10a2 2 0 114 0v6M14 16V8a2 2 0 114 0v8M18 16v-4a2 2 0 114 0v10a6 6 0 01-12 0v-2"/> }
+              @case ('sort')   { <circle cx="12" cy="14" r="3"/><circle cx="20" cy="18" r="3"/><circle cx="14" cy="22" r="2.5"/><path d="M8 8h16"/> }
+              @case ('lab')    { <path d="M12 4v9L6 24a2 2 0 001.8 3h16.4a2 2 0 001.8-3L20 13V4"/><path d="M10 4h12M9 18h14"/> }
+              @case ('bottle') { <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/><path d="M11 16h10"/> }
+            }
+          </svg>
+        </span>
+        <span class="savoir-step__num">{{ s.num }}</span>
+        <h3 class="savoir-step__title">{{ s.title }}</h3>
+        <p class="savoir-step__text">{{ s.text }}</p>
+      </article>
+    }
+  </div>
+</section> 
+
+<!-- ============================================================
+     4. NOTRE VISION — bandeau vert sombre, intro + 4 piliers
+     ============================================================ -->
+<section class="hist-vision" [id]="'notre-vision'">
+  <div class="hist-vision__grid">
+
+    <div class="hist-vision__intro reveal">
+      <span class="overline hist-vision__eyebrow">{{ 'history.vision.overline' | translate }}</span>
+      @for (p of $any('history.vision.paragraphs' | translate); track $index) {
+        <p class="hist-vision__lead">{{ p }}</p>
+      }
+    </div>
+
+    <div class="hist-vision__pillars">
+      @for (p of $any('history.vision.pillars' | translate); track p.title; let i = $index) {
+        <article class="vision-pillar reveal" [style.--delay]="(i * 110) + 'ms'">
+          <span class="vision-pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor"
+                 stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              @switch (p.icon) {
+                @case ('leaf')      { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+                @case ('heart')     { <path d="M16 26s-8-5-8-12a5 5 0 019-3 5 5 0 019 3c0 7-8 12-8 12H16z"/> }
+                @case ('women')     { <circle cx="11" cy="10" r="3"/><circle cx="21" cy="10" r="3"/><path d="M6 26v-3a5 5 0 015-5M16 26v-3a5 5 0 015-5"/> }
+                @case ('handshake') { <path d="M4 16l6-6 4 4M28 16l-6-6-4 4"/><path d="M4 16l6 6 4-4M28 16l-6 6-4-4"/> }
+              }
+            </svg>
+          </span>
+          <h3 class="vision-pillar__title">{{ p.title }}</h3>
+          <p class="vision-pillar__text">{{ p.text }}</p>
+        </article>
+      }
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     5. CTA ROW — 3 univers produits (HP · Cuvées · Coffrets)
+     ============================================================ -->
+<section class="hist-cta-row">
+  <a class="hist-cta hist-cta--hp reveal" routerLink="/high-polyphenol">
+    <div class="hist-cta__body">
+      <span class="overline">{{ 'history.cta.hp.overline' | translate }}</span>
+      <p>{{ 'history.cta.hp.text' | translate }}</p>
+      <span class="btn hist-cta__btn">
+        {{ 'history.cta.hp.label' | translate }} <span aria-hidden="true">→</span>
+      </span>
+    </div>
+    <img class="hist-cta__visual" src="assets/images/Noshuiles/hprmvv.png" alt="" loading="lazy" />
+  </a>
+
+  <a class="hist-cta hist-cta--cuvees reveal" routerLink="/nos-cuvees">
+    <div class="hist-cta__body">
+      <span class="overline">{{ 'history.cta.cuvees.overline' | translate }}</span>
+      <p>{{ 'history.cta.cuvees.text' | translate }}</p>
+      <span class="btn hist-cta__btn">
+        {{ 'history.cta.cuvees.label' | translate }} <span aria-hidden="true">→</span>
+      </span>
+    </div>
+    <img class="hist-cta__visual" src="assets/images/Noshuiles/3cuvrmv.png" alt="" loading="lazy" />
+  </a>
+
+  <a class="hist-cta hist-cta--coffrets reveal" routerLink="/coffrets">
+    <div class="hist-cta__body">
+      <span class="overline">{{ 'history.cta.coffrets.overline' | translate }}</span>
+      <p>{{ 'history.cta.coffrets.text' | translate }}</p>
+      <span class="btn hist-cta__btn">
+        {{ 'history.cta.coffrets.label' | translate }} <span aria-hidden="true">→</span>
+      </span>
+    </div>
+    <img class="hist-cta__visual" src="assets/images/Noshuiles/cofcadrmv.png" alt="" loading="lazy" />
+  </a>
+</section>

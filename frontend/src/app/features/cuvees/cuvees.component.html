@@ -1,0 +1,152 @@
+
+
+<!-- ============================================================
+     1. HERO — 60/40 : texte gauche · triptyque bouteilles droite
+     ============================================================ -->
+<section class="cv-hero">
+  <div class="cv-hero__grid">
+
+    <div class="cv-hero__body">
+      <span class="cv-hero__eyebrow reveal">— {{ 'cuvees.hero.overline' | translate }}</span>
+      <h1 class="cv-hero__title reveal">{{ 'cuvees.hero.title' | translate }}</h1>
+      <span class="cv-hero__rule reveal" aria-hidden="true"></span>
+      <p class="cv-hero__text reveal">{{ 'cuvees.hero.text' | translate }}</p>
+
+      <div class="cv-hero__badges reveal">
+        @for (b of $any('cuvees.hero.badges' | translate); track b.label) {
+          <div class="cv-badge">
+            <span class="cv-badge__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                @switch (b.icon) {
+                  @case ('leaf')   { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+                  @case ('pin')    { <path d="M16 4a8 8 0 018 8c0 6-8 16-8 16S8 18 8 12a8 8 0 018-8z"/><circle cx="16" cy="12" r="3"/> }
+                  @case ('estate') { <circle cx="16" cy="16" r="4"/><path d="M16 2v4M16 26v4M2 16h4M26 16h4M6 6l3 3M23 23l3 3M26 6l-3 3M9 23l-3 3"/> }
+                }
+              </svg>
+            </span>
+            <div class="cv-badge__body">
+              <span class="cv-badge__label">{{ b.label }}</span>
+              <span class="cv-badge__value">{{ b.value }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="cv-hero__visual reveal">
+      <img [src]="heroImage" alt="Three Village 1800 cuvées" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. CUVÉES — split éditorial : bouteille + panneau couleur
+        Alternance : Intense = bouteille GAUCHE / Balanced = bouteille DROITE
+                    Delicate = bouteille GAUCHE
+     ============================================================ -->
+@for (p of $any('cuvees.products' | translate); track p.slug; let i = $index) {
+  <section class="cv-item"
+           [class]="'cv-item cv-item--' + p.theme"
+           [class.cv-item--reverse]="p.theme === 'balanced'"
+           [id]="p.slug">
+
+    <!-- ─── BOUTEILLE — fond cream avec léger halo ─────────── -->
+    <div class="cv-item__stage">
+      <div class="cv-item__glow" aria-hidden="true"></div>
+      <img class="cv-item__bottle" [src]="bottleImage(p.slug)" [alt]="p.name" loading="lazy" />
+    </div>
+
+    <!-- ─── PANNEAU CUVÉE — couleur saturée avec motif ──────── -->
+    <div class="cv-item__panel">
+      <div class="cv-item__pattern" aria-hidden="true"></div>
+
+      <div class="cv-item__content reveal">
+        <!-- Numéro géant + nom + tagline -->
+        <div class="cv-item__header">
+          <span class="cv-item__num">{{ p.num }}</span>
+          <div class="cv-item__name-wrap">
+            <h2 class="cv-item__name">{{ p.name }}</h2>
+            <span class="cv-item__tagline">{{ p.subtitle }}</span>
+          </div>
+        </div>
+
+        <!-- Harvest label -->
+        <span class="cv-item__harvest">{{ p.harvest }}</span>
+
+        <!-- Description -->
+        <p class="cv-item__text">{{ p.description }}</p>
+
+        <!-- PROFIL + SIGNATURE -->
+        <div class="cv-item__attrs">
+          <div class="cv-item__attr">
+            <span class="cv-item__attr-label">{{ 'cuvees.labels.profile' | translate }}</span>
+            <span class="cv-item__attr-value">{{ p.profile }}</span>
+          </div>
+          <div class="cv-item__attr">
+            <span class="cv-item__attr-label">{{ 'cuvees.labels.signature' | translate }}</span>
+            <span class="cv-item__attr-value">{{ p.signature }}</span>
+          </div>
+        </div>
+
+        <!-- IDÉALE SUR / AVEC : chips modernes -->
+        <div class="cv-item__pairings">
+          <span class="cv-item__pairings-label">{{ 'cuvees.labels.pairings' | translate }}</span>
+          <div class="cv-item__pairings-list">
+            @for (item of p.pairings; track item) {
+              <span class="cv-item__chip">{{ item }}</span>
+            }
+          </div>
+        </div>
+
+        <!-- CTA underline gold -->
+        <a class="cv-item__cta" [routerLink]="['/nos-cuvees', p.slug]">
+          {{ p.cta }}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+  </section>
+}
+
+<!-- ============================================================
+     3. VARIÉTÉ CHAÏBI — cream-card, 4 colonnes en bas
+     ============================================================ -->
+<section class="cv-variety" id="variete-chaibi">
+  <div class="cv-variety__inner">
+
+    <div class="cv-variety__head">
+      <div class="cv-variety__intro">
+        <h2 class="cv-variety__title">{{ 'cuvees.variety.title' | translate }}</h2>
+        <p class="cv-variety__subtitle">{{ 'cuvees.variety.subtitle' | translate }}</p>
+      </div>
+      <div class="cv-variety__lead">
+        <span class="cv-variety__rule" aria-hidden="true"></span>
+        <p>{{ 'cuvees.variety.text' | translate }}</p>
+      </div>
+    </div>
+
+    
+
+  </div>
+</section>
+
+    <!-- <div class="cv-variety__features">
+      @for (f of $any('cuvees.variety.features' | translate); track f.label; let i = $index) {
+        <article class="cv-feature reveal" [style.--delay]="(i * 90) + 'ms'">
+          <span class="cv-feature__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              @switch (f.icon) {
+                @case ('aroma')   { <path d="M6 22c2-4 6-6 10-6s8 2 10 6"/><path d="M8 14c0-4 3-7 8-7s8 3 8 7"/><path d="M16 4v4"/> }
+                @case ('origin')  { <path d="M16 4a8 8 0 018 8c0 6-8 16-8 16S8 18 8 12a8 8 0 018-8z"/><circle cx="16" cy="12" r="3"/> }
+                @case ('terroir') { <circle cx="16" cy="12" r="4"/><path d="M4 22h24M8 22c0-2 2-4 4-4M20 22c0-2 2-4 4-4"/> }
+                @case ('culture') { <path d="M16 4c-4 6-6 10-6 14a6 6 0 0012 0c0-4-2-8-6-14z"/> }
+              }
+            </svg>
+          </span>
+          <h3 class="cv-feature__label">{{ f.label }}</h3>
+          <p class="cv-feature__text">{{ f.text }}</p>
+        </article>
+      }
+    </div> -->
+

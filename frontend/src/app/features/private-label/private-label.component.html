@@ -1,0 +1,180 @@
+<!-- ============================================================
+     1. HERO — bandeau vert sombre : éditorial + photo
+     ============================================================ -->
+<section class="pl-hero">
+  <div class="pl-hero__grid">
+
+    <div class="pl-hero__body">
+      <span class="pl-hero__eyebrow reveal">{{ 'pl.hero.overline' | translate }} —</span>
+      <h1 class="pl-hero__title reveal">{{ 'pl.hero.title' | translate }}</h1>
+      <p class="pl-hero__text reveal">{{ 'pl.hero.text' | translate }}</p>
+
+      <div class="pl-hero__badges reveal">
+        @for (b of $any('pl.hero.badges' | translate); track b.label) {
+          <div class="pl-badge">
+            <span class="pl-badge__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                @switch (b.icon) {
+                  @case ('brand')   { <circle cx="16" cy="16" r="10"/><path d="M11 13h10M11 17h6M11 21h10"/> }
+                  @case ('package') { <path d="M6 10l10-6 10 6v12l-10 6-10-6z"/><path d="M6 10l10 6 10-6M16 16v12"/> }
+                  @case ('world')   { <circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c4 4 4 20 0 24M16 4c-4 4-4 20 0 24"/> }
+                  @case ('shield')  { <path d="M16 4l10 4v9c0 6-5 10-10 11-5-1-10-5-10-11V8l10-4z"/><path d="M11 16l4 4 6-8"/> }
+                }
+              </svg>
+            </span>
+            <span class="pl-badge__label" [innerText]="b.label"></span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="pl-hero__visual reveal">
+      <img [src]="heroImage" alt="Private Label Village 1800" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. NOTRE EXPERTISE — 4 blocs cream
+     ============================================================ -->
+<section class="pl-expertise" id="pourquoi">
+  <header class="pl-expertise__head reveal">
+    <span class="pl-expertise__rule" aria-hidden="true"></span>
+    <h2 class="pl-expertise__title">{{ 'pl.expertise.title' | translate }}</h2>
+    <span class="pl-expertise__rule" aria-hidden="true"></span>
+  </header>
+
+  <div class="pl-expertise__grid">
+    @for (e of $any('pl.expertise.items' | translate); track e.title; let i = $index) {
+      <article class="pl-exp reveal" [style.--delay]="(i * 100) + 'ms'">
+        <span class="pl-exp__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            @switch (e.icon) {
+              @case ('leaf')   { <path d="M6 26c0-12 8-20 20-20-1 12-8 20-20 20z"/><path d="M6 26c6-6 12-8 18-12"/> }
+              @case ('beaker') { <path d="M12 4v9L6 24a2 2 0 001.8 3h16.4a2 2 0 001.8-3L20 13V4"/><path d="M10 4h12M9 18h14"/> }
+              @case ('bottle') { <path d="M13 4h6v4l2 3v14a2 2 0 01-2 2h-6a2 2 0 01-2-2V11l2-3V4z"/> }
+              @case ('truck')  { <rect x="2" y="10" width="16" height="12" rx="1"/><path d="M18 14h6l4 4v4h-10z"/><circle cx="8" cy="24" r="2.5"/><circle cx="22" cy="24" r="2.5"/> }
+            }
+          </svg>
+        </span>
+        <h3 class="pl-exp__title">{{ e.title }}</h3>
+        <p class="pl-exp__text">{{ e.text }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     3. PROCESS — bandeau vert profond, timeline 5 étapes
+     ============================================================ -->
+<section class="pl-process" id="nos-etapes">
+  <header class="pl-process__head reveal">
+    <h2 class="pl-process__title">{{ 'pl.process.title' | translate }}</h2>
+    <p class="pl-process__text">{{ 'pl.process.text' | translate }}</p>
+  </header>
+
+  <div class="pl-process__timeline">
+    <span class="pl-process__line" aria-hidden="true"></span>
+
+    @for (s of $any('pl.process.steps' | translate); track s.num; let i = $index) {
+      <article class="pl-step reveal" [style.--delay]="(i * 110) + 'ms'">
+        <span class="pl-step__num">{{ s.num }}</span>
+        <h3 class="pl-step__title">{{ s.title }}</h3>
+        <p class="pl-step__text">{{ s.text }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     4. AVANTAGES — 4 blocs cream avec icônes
+     ============================================================ -->
+<section class="pl-advantages">
+  <div class="pl-advantages__grid">
+    @for (a of $any('pl.advantages' | translate); track a.title; let i = $index) {
+      <article class="pl-adv reveal" [style.--delay]="(i * 100) + 'ms'">
+        <span class="pl-adv__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            @switch (a.icon) {
+              @case ('shield')    { <path d="M16 4l10 4v9c0 6-5 10-10 11-5-1-10-5-10-11V8l10-4z"/><path d="M11 16l4 4 6-8"/> }
+              @case ('flex')      { <path d="M4 24l8-8-4-4 8-8M20 8h8v8"/> }
+              @case ('handshake') { <path d="M4 16l6-6 4 4M28 16l-6-6-4 4"/><path d="M4 16l6 6 4-4M28 16l-6 6-4-4"/> }
+              @case ('trace')     { <path d="M4 24V8h6l4 4h14v12z"/><path d="M4 12h20"/> }
+            }
+          </svg>
+        </span>
+        <div class="pl-adv__body">
+          <h3 class="pl-adv__title">{{ a.title }}</h3>
+          <p class="pl-adv__text">{{ a.text }}</p>
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     4 bis. FORMATS DISPONIBLES — cream, tailles + contenants
+     ============================================================ -->
+<section class="pl-formats" id="nos-formats-pl">
+  <div class="pl-formats__inner">
+    <header class="pl-formats__head reveal">
+      <span class="pl-formats__eyebrow">— {{ 'pl.formats.overline' | translate }}</span>
+      <h2 class="pl-formats__title">{{ 'pl.formats.title' | translate }}</h2>
+      <span class="pl-formats__rule" aria-hidden="true"></span>
+    </header>
+
+    <div class="pl-formats__grid">
+      <div class="pl-formats__block">
+        <span class="pl-formats__label">{{ 'pl.formats.sizesLabel' | translate }}</span>
+        <div class="pl-formats__chips">
+          @for (s of $any('pl.formats.sizes' | translate); track s) {
+            <span class="pl-chip">{{ s }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="pl-formats__block">
+        <span class="pl-formats__label">{{ 'pl.formats.containersLabel' | translate }}</span>
+        <div class="pl-formats__chips">
+          @for (c of $any('pl.formats.containers' | translate); track c) {
+            <span class="pl-chip">{{ c }}</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <p class="pl-formats__note reveal">{{ 'pl.formats.note' | translate }}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     4 ter. QUALITÉ & CONFORMITÉ — bandeau vert sombre éditorial
+     ============================================================ -->
+<section class="pl-quality">
+  <div class="pl-quality__inner reveal">
+    <span class="pl-quality__icon" aria-hidden="true">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 4l10 4v9c0 6-5 10-10 11-5-1-10-5-10-11V8l10-4z"/><path d="M11 16l4 4 6-8"/>
+      </svg>
+    </span>
+    <h2 class="pl-quality__title">{{ 'pl.quality.title' | translate }}</h2>
+    <p class="pl-quality__text">{{ 'pl.quality.text' | translate }}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. CTA CONTACT — bandeau bordeaux, éditorial + bouton unique
+     ============================================================ -->
+<section class="pl-cta">
+  <div class="pl-cta__inner reveal">
+    <span class="pl-cta__eyebrow">— Contact</span>
+    <h2 class="pl-cta__title">{{ 'pl.cta.title' | translate }}</h2>
+    <span class="pl-cta__rule" aria-hidden="true"></span>
+    <p class="pl-cta__text">{{ 'pl.cta.text' | translate }}</p>
+
+    <a class="pl-cta__button" routerLink="/contact">
+      {{ 'pl.cta.button' | translate }}
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>

@@ -1,0 +1,107 @@
+<!-- ============ NEWSLETTER (style Kalios -10%) ============ -->
+<!-- <section class="newsletter" aria-label="Newsletter">
+  <div class="container newsletter__inner">
+    <div class="newsletter__copy">
+      <span class="overline newsletter__eyebrow">{{ 'newsletter.eyebrow' | translate }}</span>
+      <h2 class="newsletter__title">{{ 'newsletter.title' | translate }}</h2>
+      <p class="newsletter__text">{{ 'newsletter.text' | translate }}</p>
+    </div>
+
+    <form class="newsletter__form" (ngSubmit)="submitNewsletter()" novalidate>
+      <label class="newsletter__field">
+        <span class="sr-only">{{ 'newsletter.placeholder' | translate }}</span>
+        <input type="email" required
+               [(ngModel)]="email"
+               [ngModelOptions]="{ standalone: true }"
+               [placeholder]="'newsletter.placeholder' | translate"
+               autocomplete="email" />
+        <button type="submit" class="newsletter__cta">
+          {{ 'newsletter.cta' | translate }}
+          <span aria-hidden="true">→</span>
+        </button>
+      </label>
+      <p class="newsletter__consent">{{ 'newsletter.consent' | translate }}</p>
+      @if (newsletterState() === 'success') {
+        <p class="newsletter__feedback newsletter__feedback--ok">
+          {{ 'newsletter.success' | translate }}
+        </p>
+      } @else if (newsletterState() === 'error') {
+        <p class="newsletter__feedback newsletter__feedback--err">
+          {{ 'newsletter.error' | translate }}
+        </p>
+      }
+    </form>
+  </div>
+</section> -->
+
+<footer class="footer">
+  <div class="footer__inner">
+
+    <!-- Logo à gauche -->
+    <div class="footer__brand">
+      <a routerLink="/" class="footer__logo" aria-label="Village 1800">
+        <img src="assets/images/logo-wordmark.svg" alt="Village 1800" />
+      </a>
+    </div>
+
+    <!-- Nav col 1 : Accueil · Notre Histoire · High Polyphenols -->
+    <nav class="footer__col" aria-label="Navigation principale">
+      <a routerLink="/">{{ 'nav.home' | translate }}</a>
+      <a routerLink="/notre-histoire">{{ 'nav.history' | translate }}</a>
+      <a routerLink="/high-polyphenol">{{ 'nav.hp' | translate }}</a>
+    </nav>
+
+    <!-- Nav col 2 : Nos Cuvées · Traçabilité · Professionnels -->
+    <nav class="footer__col" aria-label="Navigation secondaire">
+      <a routerLink="/nos-cuvees">{{ 'nav.cuvees' | translate }}</a>
+      <a routerLink="/tracabilite">{{ 'nav.traceability' | translate }}</a>
+      <a routerLink="/professionnels">{{ 'nav.pro' | translate }}</a>
+    </nav>
+
+    <!-- Nav col 3 : Private Label -->
+    <nav class="footer__col" aria-label="Private Label">
+      <a routerLink="/private-label">{{ 'nav.pl' | translate }}</a>
+    </nav>
+
+    <!-- Contact (droite) -->
+    <address class="footer__contact">
+      <span class="footer__company">VILLAGE 1800 – GREEN ORIGIN COMPANY</span>
+      <span>{{ 'footer.addressL2' | translate }}, {{ 'footer.addressL3' | translate }}</span>
+      <a href="mailto:contact@village-1800.com">contact&#64;village-1800.com</a>
+      <span class="footer__phones">
+        <a href="tel:+21672222048">+216 55 666 839</a>
+        <span aria-hidden="true">·</span>
+        <a href="tel:+21623222048">+216 99 909 708</a>
+      </span>
+    </address>
+
+    <!-- Réseaux sociaux (extrême droite) -->
+    <ul class="footer__social" role="list" [attr.aria-label]="'footer.social' | translate">
+      <li>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3h-3a4 4 0 0 0-4 4v3H7v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M8 10v7M8 7v.01M12 17v-4a3 3 0 0 1 6 0v4"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</footer>
