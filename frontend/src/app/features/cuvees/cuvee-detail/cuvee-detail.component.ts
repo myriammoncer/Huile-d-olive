@@ -18,10 +18,10 @@ import { Produit } from '../../../core/models/produit.model';
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGE_BY_GAMME: Record<string, string> = {
-  intense:  'assets/images/Noshuiles/cuvintense.png',
-  balanced: 'assets/images/Noshuiles/cuvbalanced.png',
-  delicate: 'assets/images/Noshuiles/cuvdelicate.png',
-  hp:       'assets/images/photos/highplyy.png',
+  intense:  'assets/images/Noshuiles/intrmvv.png',
+  balanced: 'assets/images/Noshuiles/balrmvv.png',
+  delicate: 'assets/images/Noshuiles/delrmvv.png',
+  hp:       'assets/images/accueil/highplyy.jpg',
 };
 const THEME_BY_GAMME: Record<string, string> = {
   intense:  'theme-intense',

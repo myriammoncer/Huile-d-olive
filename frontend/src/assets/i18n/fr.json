@@ -105,7 +105,7 @@
       "traceability": [
         { "label": "Le parcours", "anchor": "parcours" },
         { "label": "Nos pratiques", "anchor": "nos-pratiques" },
-        { "label": "Nos engagements", "anchor": "nos-engagements" }
+        { "label": "Notre engagements", "anchor": "nos-engagements" }
       ],
       "pro": [
         { "label": "Nos formats professionnels", "anchor": "nos-formats" },
@@ -537,7 +537,7 @@
       "quote": [
         "Nous avons choisi de nous distinguer par une huile issue d'une seule variété, notre variété autochtone du Cap Bon, la Chaïbi, et d'une seule origine : notre domaine.",
         "Toute l'année, nous accordons une attention particulière à chaque étape : de l'entretien de nos oliviers à la récolte, au tri, à l'extraction, la conservation, à la mise en bouteille.",
-        "Chiraz, docteure en biologie, veille méticuleusement aux analyses, à la maîtrise du procédé et à la préservation de la qualité et de la richesse naturelle de notre huile."
+        "Chiraz, docteur en biologie, veille méticuleusement aux analyses, à la maîtrise du procédé et à la préservation de la qualité et de la richesse naturelle de notre huile."
       ]
     },
     "savoir": {
@@ -584,8 +584,8 @@
         {
           "num": "07",
           "icon": "lab",
-          "title": "Analyses scientifiques",
-          "text": "Chiraz, docteure en biologie, veille aux analyses et à la maîtrise du procédé."
+          "title": "ANALYSES PHYSICO-Chimiques",
+          "text": "Chiraz, docteur en biologie, veille aux analyses et à la maîtrise du procédé."
         },
         {
           "num": "08",
@@ -753,7 +753,7 @@
         },
         {
           "icon": "shield",
-          "value": "> 500",
+          "value": "> 100",
           "unit": "mg/kg",
           "label": "Oléocanthal",
           "note": "Riche en oléocanthal, aux propriétés anti-inflammatoires reconnues."
@@ -1058,7 +1058,7 @@
     "overline": "Traçabilité & Durabilité",
     "hero": {
       "overline": "Traçabilité & Durabilité",
-      "title": "From our land\nto your table.",
+      "title": "De notre terre à votre table.",
       "text": "Chez VILLAGE 1800, nous respectons totalement le rythme de la nature.",
       "badges": [
         {
@@ -1076,7 +1076,7 @@
       ]
     },
     "journey": {
-      "title": "Our Journey",
+      "title": "Nos pratiques",
       "steps": [
         {
           "num": "01",
@@ -1321,7 +1321,7 @@
     "contact": {
       "title": "Devenez notre partenaire",
       "text": "Contactez notre équipe pour recevoir notre catalogue professionnel et nos conditions dédiées.",
-      "phones": "+216 72 222 048\n+216 23 222 048",
+      "phones": "+216 55 666 839\n+216 99 909 708",
       "email": "contact@village-1800.com",
       "cta": "Nous contacter"
     },
@@ -1347,7 +1347,7 @@
     },
     "company": "Village 1800 — Green Origin Company",
     "address": "Rue Ebtikar, Zone Artisanale, Dar Chaâbane El Fehri, Nabeul 8011, Tunisie",
-    "email": "Greenorigin.company@gmail.com",
+    "email": "contact@village-1800.com",
     "phone1": "+216 99 909 708",
     "phone2": "+216 55 666 839",
     "text": "Une question, une demande de partenariat ou l'envie d'échanger ? Écrivez-nous, nous vous répondrons rapidement.",
@@ -1358,7 +1358,7 @@
     "phoneLabel": "Téléphone",
     "emailLabel": "Email",
     "hoursLabel": "Horaires",
-    "hoursValue": "Lundi–Vendredi\n9h00 – 18h00"
+    "hoursValue": "tous les jours\n9h00 – 22h00"
   },
   "coffret": {
     "eyebrow": "L'art d'offrir",

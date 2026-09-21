@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Association slide → média (image ou vidéo). Utilise les vraies photos assets/images/. */
   private readonly slideMedia: Record<string, string> = {
     'cuvees':          'assets/images/accueil/3cuv.jpg',
-    'high-polyphenol': 'assets/images/accueil/highplyy.jpg',
+    'high-polyphenol': 'assets/images/Noshuiles/hprmvv.png',
     'private-label':   'assets/images/photos/pro2.png',
     // Legacy (au cas où) — anciens IDs
     'notre-histoire':  'assets/images/Notre_Hist/bandeau.png',
