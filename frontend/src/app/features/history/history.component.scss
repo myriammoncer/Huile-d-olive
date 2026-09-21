@@ -335,7 +335,7 @@ $c-cream:         #F6EBD8;
     color: var(--ink) !important;
     letter-spacing: 0.005em !important;
     margin: 0 !important;
-    white-space: nowrap;
+    white-space: nowrap; @include until($bp-mobile) { white-space: normal; }
   }
 
   &__lead {
@@ -662,6 +662,16 @@ $c-cream:         #F6EBD8;
   &:hover &__visual { transform: translateY(-4px) scale(1.30); }
   &--cuvees:hover &__visual { transform: translateY(-4px) scale(1.33); }
   &--coffrets:hover &__visual { transform: translateY(-4px) scale(1.55); }
+
+  // Mobile : plus d'agrandissement (évite le débordement des images larges)
+  @include until($bp-tablet) {
+    grid-template-columns: 1fr;
+    text-align: center;
+    &__visual,
+    &--cuvees &__visual,
+    &--coffrets &__visual { transform: none; max-height: 260px; }
+    &__body { align-items: center; }
+  }
 
   &--hp       { background: linear-gradient(165deg, $c-green 0%, $c-green-deep 100%); }
   &--cuvees   { background: linear-gradient(165deg, #1E3550 0%, $c-navy-deep 100%); }

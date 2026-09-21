@@ -163,7 +163,7 @@ $container-max: 1320px;
     color: $gold !important;
     letter-spacing: 0.02em !important;
     margin: 0 !important;
-    white-space: nowrap;
+    white-space: nowrap; @include until($bp-mobile) { white-space: normal; }
     text-transform: uppercase;
   }
 

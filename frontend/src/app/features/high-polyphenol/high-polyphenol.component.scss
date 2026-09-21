@@ -771,7 +771,7 @@ $c-cream-bg:     #F5EFE1;
     color: var(--ink) !important;
     letter-spacing: 0.005em !important;
     margin: 0 !important;
-    white-space: nowrap;
+    white-space: nowrap; @include until($bp-mobile) { white-space: normal; }
     text-transform: uppercase;
   }
 
